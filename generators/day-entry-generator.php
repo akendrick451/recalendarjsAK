@@ -45,7 +45,7 @@ class DayEntryGenerator extends Generator {
 								<td class="day-entry__special-items">
 <?php
 									foreach ( $special_items as $index => $special_item ) {
-										echo "<span class=\"day-entry__special-item\">» $special_item</span>";
+										echo "<span class=\"day-entry__special-item\">» $special_item AK2</span>";
 										if ( $index < ( count( $special_items ) - 1 ) ) {
 											echo '<br />';
 										}

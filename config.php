@@ -64,7 +64,8 @@ class Config {
 			],
 			// A list of habits that triggers generating a table on the month's overview
 			// to help tracking those habits
-			self::HABITS => [
+			self::HABITS => [ 'Plan Day', 
+			'Review Day'
 			],
 			// Title for the habits table on month overview
 			self::HABITS_TITLE => 'Habits',

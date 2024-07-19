@@ -39,7 +39,7 @@ abstract class Generator {
 			}
 			$item_name = $item[1];
 
-			echo "<tr><td class=\"content-box-line\">$item_name</td></tr>";
+			echo "<tr><td class=\"content-box-line\">$item_name AK1</td></tr>";
 			$number_of_rows--;
 			echo str_repeat( '<tr><td class="content-box-line"></td></tr>', $number_of_rows );
 		}

@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+// ATK May 2024 - change date output
+// 1. Change date - done
+// 2. Can I set my own sections on the day print?
+
+
 namespace ReCalendar;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -52,7 +57,13 @@ class ReCalendar {
 			$this->write_html();
 		}
 
-		$this->mpdf->Output( __DIR__ . '/ReCalendar.pdf', \Mpdf\Output\Destination::FILE );
+
+		//ak change filename to include date and time
+		$dateNow   = new \DateTime(); //this returns the current date time
+        $dateNowString = $dateNow->format('Y-m-d-H-i-s');
+		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
+
+		$this->mpdf->Output( __DIR__ . '/' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
 	}
 
 	private function generate_title_page() : void {

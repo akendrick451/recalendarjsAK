@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ReCalendar;
 
+//ATK Modified a fair bit to add my own page in months - 29/05/2024 see comment re table "open atk table"
+
 require_once __DIR__ . '/generator.php';
 require_once __DIR__ . '/calendar-generator.php';
 
@@ -20,6 +22,43 @@ class DayEntryGenerator extends Generator {
 		return self::get_day_entry_anchor( $this->day );
 	}
 
+	protected function get_random_quote() : ?string {
+		// AK 7/6/2024 ------------===========================================================>
+		// AK 7/6/2024 ------------===========================================================>
+	
+		$strQuotesArr = array("Men fall in love with their eyes and women fall in love with their ears");
+		$strQuotesArr[] = "Do you want to be a slave to your whims? Jordan Peterson. Compare this with an idea of freedom which means to do whatever we feel. Different to whatever we choose. Implying choice might not be always what we feel like. It struck me at the time Dec 7, 2023";
+		$strQuotesArr[] = "Not all those who wander are lost. JRR Tolkien";
+		$strQuotesArr[] = "The slower you go, the further you get (re counselling session). Nigel Polak";
+		$strQuotesArr[] = "There is no try";
+		$strQuotesArr[] = "The unexamined life is not worth living. Aurelius";
+		$strQuotesArr[] = "'The secret of getting ahead is getting started' – Mark Twain";
+		$strQuotesArr[] = "Go confidently in the direction of your dreams. Live the life you have imagined – Henry David Thoreau";
+		$strQuotesArr[] = "Take action. An inch of movement will bring you closer to your goals than a mile of intention” – Steve Maraboli";
+		$strQuotesArr[] = "We generate fears while we sit. We overcome them by action” – Dr. Henry Link";
+		$strQuotesArr[] = "Imagine your life is perfect in every respect; what would it look like?” – Brian Tracy";
+		$strQuotesArr[] = "Decide upon your major definite purpose in life and then organize all your activities around it.” – Brain Tracy";
+		$strQuotesArr[] = "It is not the critic who counts; not the man who points out how the strong man stumbles, or where the doer of deeds could have done them better. The credit belongs to the man who is actually in the arena... Theodore Roosevelt";
+		$strQuotesArr[] = "'Stay away from those people who try to disparage your ambitions. Small minds will always do that, but great minds will give you a feeling that you can become great too.' — Mark Twain";
+		$strQuotesArr[] = "'It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest. —Walter Anderson";
+		$strQuotesArr[] = "Success is not final; failure is not fatal: It is the courage to continue that counts. — Winston S. Churchill";
+		$strQuotesArr[] = "'Develop success from failures. Discouragement and failure are two of the surest stepping stones to success.' —Dale Carnegie";
+		$strQuotesArr[] = "'Don’t let yesterday take up too much of today.' — Will Rogers";
+		$strQuotesArr[] = "Tomorrow is a new day with no mistakes in it yet - Anne Shirley";
+		$strQuotesArr[] = "'Concentrate all your thoughts upon the work in hand. The sun's rays do not burn until brought to a focus. ' — Alexander Graham Bell";
+		$strQuotesArr[] = "'Either you run the day or the day runs you.' — Jim Rohn";
+		$strQuotesArr[] = "'I’m a greater believer in luck, and I find the harder I work the more I have of it.' — Thomas Jefferson";
+		$strQuotesArr[] = "'When we strive to become better than we are, everything around us becomes better too.' — Paulo Coelho";
+		$strQuotesArr[] = "'Opportunity is missed by most people because it is dressed in overalls and looks like work.' — Thomas Edison";
+
+		$intRandomNumber = rand(0,count($strQuotesArr)-1);
+        return $strQuotesArr[$intRandomNumber];
+
+	} //get_random_quote
+    
+
+	
+	// called from parent class generate()
 	protected function generate_content() : void {
 		$day_number = $this->day->format( 'd' );
 		$month_name = self::get_localized_month_name( $this->day, $this->config->get( Config::MONTHS ) );
@@ -28,9 +67,10 @@ class DayEntryGenerator extends Generator {
 		$special_items = self::get_matching_special_items( $this->day, $this->config->get( Config::SPECIAL_DATES ) );
 		$previous_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'yesterday' ) );
 		$next_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'tomorrow' ) );
+		$random_quote = self::get_random_quote();
 ?>
-		<table width="100%">
-			<tr>
+		<table width="95%" align="center">
+		<tr>
 				<td class="day-entry__month-name"><a href="#<?php echo $month_overview_anchor; ?>"><?php echo $month_name; ?></a></td>
 				<td class="day-entry__previous-day"><a href="#<?php echo $previous_day_anchor; ?>">«</a></td>
 				<td class="day-entry__day-number"><?php echo $day_number; ?></td>
@@ -45,7 +85,7 @@ class DayEntryGenerator extends Generator {
 								<td class="day-entry__special-items">
 <?php
 									foreach ( $special_items as $index => $special_item ) {
-										echo "<span class=\"day-entry__special-item\">» $special_item AK2</span>";
+										echo "<span class=\"day-entry__special-item\">» $special_item</span>";
 										if ( $index < ( count( $special_items ) - 1 ) ) {
 											echo '<br />';
 										}
@@ -58,11 +98,56 @@ class DayEntryGenerator extends Generator {
 					</table>
 				</td>
 			</tr>
-		</table>
-<?php
-		$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
-		$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
-		self::generate_content_box( $itinerary_items );
+			</table> 
+			<table width="95%" align="center">
+			<!-- ============================ open ATK table ============================ -->
+			<tr><td colspan="4"><br>What can I ask God for help with, or thank Him for? How are things?</td></tr>
+<?php			
+			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
+			
+?>
+
+<tr><td colspan="5"><br>Current Emotions? _______________________________________________ </td></tr>
+<tr><td colspan="5"><br>What I'm grateful for (consider emotionally impactful things)? </td></tr>
+<?php			
+			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 3 );
+			
+?>
+<tr><td colspan="5"><br>Mastery Priorities/To do Today</td></tr>
+<?php			
+			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
+			
+?>
+
+<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
+	<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
+
+								</table><!--  ============================ close ATK table ============================ -->
+
+								<pagebreak />					<!--	//atk added 29/05/2024				-->
+<?php		
+		echo '<table width="100%"><!-- start of table for day plan and july things and bucket list -->';
+			echo '<Tr><Td width="70%" rowspan="4">';
+				$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
+				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
+				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
+			echo '</td>';
+			echo '<Td width="30%" valign=top>';			
+			$month_notes_in_day = $this->config->get( Config::MONTHLY_NOTES );
+			$month_notes_in_day[0] = $month_name. " " . $month_notes_in_day[0]; // add month name to first item in month list
+			self::generate_content_box2($month_notes_in_day);
+		echo "</td></tr>";
+		echo "<tr><td>";
+		echo '<tr><td valign=middle>';
+		$current_reading = $this->config->get( Config::CURRENT_READING );
+			self::generate_content_box_justified($current_reading);
+		echo "</td></tr>";
+		echo '<tr><td valign=bottom>';
+		$bucket_list = $this->config->get( Config::BUCKET_LIST );
+			self::generate_content_box2($bucket_list);
+		echo '</td></tr>"';
+		echo '</table><!-- end of table for day plan and july things and bucket list -->';
+
 ?>
 <?php
 	}

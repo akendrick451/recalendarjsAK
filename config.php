@@ -5,6 +5,9 @@ namespace ReCalendar;
 class Config {
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const DAY_ITINERARY_ITEMS = 'day_itinerary_items';
+	public const MONTHLY_NOTES = "monthly_notes";
+	public const BUCKET_LIST = "bucket_list";
+	public const CURRENT_READING = "current_reading";
 	public const DAY_ITINERARY_COMMON = 'day_itinerary_common';
 	public const DAY_ITINERARY_WEEK_RETRO = 'day_itinerary_week_retro';
 	public const DAY_ITINERARY_MONTH_OVERVIEW = 'day_itinerary_month_overview';
@@ -45,27 +48,54 @@ class Config {
 				'Sa',
 				'Su',
 			],
+			self::MONTHLY_NOTES => [
+				'Monthly Notes',
+				'Big Shoulders',
+				'Pistol Squat',
+				'Measure Weight',
+				'Raise Bed',
+				'Build Inner Wall',				
+			],
+			self::BUCKET_LIST => [
+				'Bucket List',
+				'Dance class',
+				'Sing in choir',
+				'Another cooking class',
+				'Try Amsterdam',
+				'Try England',				
+				'Love?',				
+			],
+			self::CURRENT_READING => [
+				'Current Reading',
+				'Models - Attract Woment Through Honesty, 5%',
+				'Why zebras dont get ulcerss, 10%',
+				'The explosive child, 20%',	
+				'Dare to Connect, 20%',
+				'The Mindful Emotions Workbook, 20%',
+				"The Inflamed Mind, 1%",
+				"The Well of Ascension, 10%",		
+			],
 			// Items for each page type
 			// The format is: [ NUMBER OF LINES, NAME (optional) ]
 			// You might need to adjust the number of lines depending on your config (locale, font size, etc.)
 			self::DAY_ITINERARY_ITEMS => [
 				// Common itinerary used if nothing more specific was defined
 				self::DAY_ITINERARY_COMMON => [
-					[ 23, '', ],
+					[ 27, 'Day Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
 				],
 				// Itinerary for the weekly retrospective
 				self::DAY_ITINERARY_WEEK_RETRO => [
-					[ 24, '' ],
+					[ 6, 'Week Review Notes' ],
 				],
 				// Itinerary for the month's overview
 				self::DAY_ITINERARY_MONTH_OVERVIEW => [
-					[ 16, '' ],
+					[ 20, 'Coming Month Goals' ],
 				],
 			],
 			// A list of habits that triggers generating a table on the month's overview
 			// to help tracking those habits
-			self::HABITS => [ 'Plan Day', 
-			'Review Day'
+			self::HABITS => [ 'Pistol Squat in May, June',
+			 'Celebrate others'
 			],
 			// Title for the habits table on month overview
 			self::HABITS_TITLE => 'Habits',
@@ -95,27 +125,27 @@ class Config {
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar
 			// would then be generated for 12 months starting from October.
-			self::MONTH => 1,
+			self::MONTH => 6, //start month
 			// The number of months you want this calendar to be for.
 			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
-			self::MONTH_COUNT => 12,
+			self::MONTH_COUNT => 2,
 			// Title of the Week overview page
 			self::WEEK_NAME => 'Week',
 			// A short version of "Week Number" used in the header of the small calendar in upper right corner of the page
 			self::WEEK_NUMBER => 'W#',
 			// Used for the bookmark of the weekly retrospective pages
-			self::WEEKLY_RETROSPECTIVE_BOOKMARK => 'Retrospective',
+			self::WEEKLY_RETROSPECTIVE_BOOKMARK => 'Week Review',
 			// Used for the title of the weekly retrospective pages
-			self::WEEKLY_RETROSPECTIVE_TITLE => 'Weekly retrospective',
+			self::WEEKLY_RETROSPECTIVE_TITLE => 'Weekly Review',
 			// A list of items you'd like to be listed in the notes of the weekly overview
 			self::WEEKLY_TODOS => [
 			],
 			// A list of special dates (anniversaries, birthdays, holidays) that will be highlighted throughout the calendar:
 			// in the small calendar, on weekly overviews and daily entries.
-			self::SPECIAL_DATES => [
-				// Example:
-				// '01-01' => "New Year!",
-				// '01-04' => "April Fools' Day",
+			self::SPECIAL_DATES => [			
+				 //'01-01' => 'New Year!',
+				 //'01-04' => 'April Fools Day',
+				 //'06-06' => 'AKs Bday!',
 			],
 			// Stylesheet filename
 			self::STYLE_SHEET => 'style.css',

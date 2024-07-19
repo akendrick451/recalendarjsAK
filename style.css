@@ -89,6 +89,13 @@ th.calendar__week-retrospective {
 	border-bottom: 1px solid black;
 }
 
+div.akwr td {
+	border: 1px solid rgb(80, 80, 80);	
+	border-left: none;
+	border-right: none;
+	border-collapse: collapse;
+}
+
 td.calendar__week-number,
 td.calendar__week-retrospective {
 	color: #888;
@@ -255,8 +262,14 @@ td.calendar__week-number {
 	padding-right: 10px;
 }
 
-.content-box {
-	width: 100%;
+.content-box { 
+	background-color: rgb(239, 244, 244);
+	width: 95%; /* ak changed 15/06/2024 */
+	vertical-align: middle;
+}
+
+.monthplan tr {
+   line-height:24pt;
 }
 
 .content-box-line {
@@ -267,6 +280,34 @@ td.calendar__week-number {
 	font-size: 12pt;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+.content-box-line-ak {
+	width: 100%;
+	border-bottom: 1px solid #AAA;
+	height: 20pt;
+	padding: 0 0 0 10px;
+	font-size: 9pt;
+	
+}
+
+.content-box-line-justified {
+	width: 100%;
+	border-bottom: 1px solid #AAA;
+	height: 20pt;
+	padding: 0 0 0 10px;
+	font-size: 9pt;
+	text-align: justify;
+
+}
+s
+.content-box-line-ak-strong {
+	width: 100%;
+	border-bottom: 1px solid #AAA;
+	height: 20pt;
+	padding: 0 0 0 10px;
+	font-size: 11pt;
+	font-weight: bold;
 }
 
 .week-overview__day-entry {

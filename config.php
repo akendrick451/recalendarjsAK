@@ -2,6 +2,9 @@
 
 namespace ReCalendar;
 
+// update start month if not doing 12 months from jan. 
+// self::MONTH => 8, //start month eg Aug
+
 class Config {
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const DAY_ITINERARY_ITEMS = 'day_itinerary_items';
@@ -94,7 +97,7 @@ class Config {
 			],
 			// A list of habits that triggers generating a table on the month's overview
 			// to help tracking those habits
-			self::HABITS => [ 'Pistol Squat in May, June',
+			self::HABITS => [ 'Pistol Squat in May, June, July, Aug',
 			 'Celebrate others'
 			],
 			// Title for the habits table on month overview
@@ -125,10 +128,10 @@ class Config {
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar
 			// would then be generated for 12 months starting from October.
-			self::MONTH => 6, //start month
+			self::MONTH => 8, //start month
 			// The number of months you want this calendar to be for.
 			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
-			self::MONTH_COUNT => 2,
+			self::MONTH_COUNT => 5,
 			// Title of the Week overview page
 			self::WEEK_NAME => 'Week',
 			// A short version of "Week Number" used in the header of the small calendar in upper right corner of the page

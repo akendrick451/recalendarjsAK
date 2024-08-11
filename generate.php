@@ -2,7 +2,22 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/config.php';
+error_reporting(E_ERROR); ini_set('display_errors', '1');
+
+echo "Start now";
+
+
+try {
+	echo "require config.php";
+   require_once __DIR__ . '/config.php';
+   echo "... require vendor autoload.";
+   require_once __DIR__ . '/vendor/autoload.php';
+} catch (\Throwable $e) {
+    echo "This was caught: " . $e->getMessage();
+}
+
+
+echo "Check Arguments";
 
 if ( $argc > 1 && $argv[1] === '-c' ) {
 	if ( empty( $argv[2] ) ) {
@@ -18,16 +33,30 @@ if ( $argc > 1 && $argv[1] === '-c' ) {
 	require_once __DIR__ . '/local.config.php';
 }
 
+echo "Check if class exists...";
+
+
 if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
 	$config = new \Recalendar\LocalConfig();
 } else {
 	$config = new \Recalendar\Config();
 }
 
+echo "Set Locale...";
+
 setlocale( LC_TIME, $config->get( \ReCalendar\Config::LOCALE ) );
 
-require_once __DIR__ . '/recalendar.php';
+echo "Get recalendar.php";
 
+try {
+	require_once __DIR__ . '/recalendar.php';;
+ } catch (\Throwable $e) {
+	 echo "\nThis was caught: " . $e->getMessage();
+	 echo $e;
+ }
+
+
+echo "l function";
 function l( $stuff ) : void {
 	if ( is_string( $stuff ) ) {
 		echo $stuff . "\n";
@@ -37,30 +66,47 @@ function l( $stuff ) : void {
 	}
 }
 
-$defaultConfig = ( new \Mpdf\Config\ConfigVariables() )->getDefaults();
-$fontDirs = $defaultConfig['fontDir'];
+try {
+	echo "Setup done.. get config1...";
 
-$defaultFontConfig = ( new \Mpdf\Config\FontVariables() )->getDefaults();
-$fontData = $defaultFontConfig['fontdata'];
 
-$mpdf = new \Mpdf\Mpdf( [
-    'fontDir' => array_merge( $fontDirs, [
-        __DIR__ . $config->get( \ReCalendar\Config::FONT_DIR ),
-    ] ),
-    'fontdata' => $fontData + $config->get( \ReCalendar\Config::FONT_DATA ),
-	'mode' => 'utf-8',
-	'format' => $config->get( \ReCalendar\Config::FORMAT ),
-	'default_font' => $config->get( \ReCalendar\Config::FONT_DEFAULT ),
-	'margin_left' => 0,
-	'margin_right' => 0,
-	'margin_top' => 0,
-	'margin_bottom' => 0,
-	'margin_header' => 0,
-	'margin_footer' => 0,
-] );
+	$defaultConfig = ( new \Mpdf\Config\ConfigVariables() )->getDefaults();
+	$fontDirs = $defaultConfig['fontDir'];
 
-$mpdf->useSubstitutions = false;
+	echo "Setup done.. get config2...";
 
-$recalendar = new \ReCalendar\ReCalendar( $mpdf, $config );
+	$defaultFontConfig = ( new \Mpdf\Config\FontVariables() )->getDefaults();
+	$fontData = $defaultFontConfig['fontdata'];
 
-$recalendar->generate();
+	echo "\nSetup done.. create new mpdf...";
+	// creates a calendar and saves it in ReCalendar.pdf
+	$mpdf = new \Mpdf\Mpdf( [
+		'tempDir' =>  "C:\\temp\\",
+		'fontDir' => array_merge( $fontDirs, [
+			__DIR__ . $config->get( \ReCalendar\Config::FONT_DIR ),
+		] ),
+		'fontdata' => $fontData + $config->get( \ReCalendar\Config::FONT_DATA ),
+		'mode' => 'utf-8',
+		'format' => $config->get( \ReCalendar\Config::FORMAT ),
+		'default_font' => $config->get( \ReCalendar\Config::FONT_DEFAULT ),
+		'margin_left' => 0,
+		'margin_right' => 0,
+		'margin_top' => 0,
+		'margin_bottom' => 0,
+		'margin_header' => 0,
+		'margin_footer' => 0, 
+		
+	] );
+
+	$mpdf->useSubstitutions = false;
+
+	$recalendar = new \ReCalendar\ReCalendar( $mpdf, $config );
+
+	echo "trying to generate now...";
+	$recalendar->generate();
+
+} catch (\Throwable $e) {
+    echo "\nAK Error - This was caught: " . $e->getMessage();
+	echo $e;
+}
+

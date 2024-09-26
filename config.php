@@ -56,7 +56,9 @@ class Config {
 				'Big Shoulders',
 				'Pistol Squat',
 				'Measure Weight',
-				'Buy wardrobe',			
+				'Buy wardrobe',	
+			        'Gottman Quiz - Do', 
+			        'PBSP - 20%',
 			],
 			self::BUCKET_LIST => [
 				'Bucket List',

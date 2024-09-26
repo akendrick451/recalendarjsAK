@@ -56,8 +56,7 @@ class Config {
 				'Big Shoulders',
 				'Pistol Squat',
 				'Measure Weight',
-				'Raise Bed',
-				'Build Inner Wall',				
+				'Buy wardrobe',			
 			],
 			self::BUCKET_LIST => [
 				'Bucket List',
@@ -70,13 +69,13 @@ class Config {
 			],
 			self::CURRENT_READING => [
 				'Current Reading',
-				'Models - Attract Woment Through Honesty, 5%',
+				'Models - Attract Woment Through Honesty, 100%',
 				'Why zebras dont get ulcerss, 10%',
 				'The explosive child, 20%',	
 				'Dare to Connect, 20%',
 				'The Mindful Emotions Workbook, 20%',
 				"The Inflamed Mind, 1%",
-				"The Well of Ascension, 10%",		
+				"The Well of Ascension, 100%",		
 			],
 			// Items for each page type
 			// The format is: [ NUMBER OF LINES, NAME (optional) ]

@@ -71,6 +71,8 @@ class Config {
 			],
 			self::CURRENT_READING => [
 				'Current Reading',
+			        'Facing Codependence - 1%',
+			         'Adult children of Emotionally Immature Parents, 50%',
 				'Models - Attract Woment Through Honesty, 100%',
 				'Why zebras dont get ulcerss, 10%',
 				'The explosive child, 20%',	

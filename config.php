@@ -57,16 +57,16 @@ class Config {
 				'Su',
 			],
 			//ak changed on 07/12/2024 11:30am 
-			self::MONTHLY_NOTES_2 => [
-				 12 => ['Monthly Notes', 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
-				 11 => [ 'Monthly Notes', 'Big Shoulders', 'Pistol Squat', 'Measure Weight', 'Raise Bed', 'Build Inner Wall'	] ,
-				 1 => ['Monthly Notes', 'Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
-				 2 => [ 'Monthly Notes', 'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
-				 3 => ['Monthly Notes', 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
+			self::MONTHLY_NOTES_2 => [ // bit like a todo list
+				 12 => ['Be More social', '2x Climbing', 'Book Jan Holiday'] , 
+				 11 => [ 'Big Shoulders', 'Pistol Squat', 'Measure Weight', 'Raise Bed', 'Build Inner Wall'	] ,
+				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
+				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
+				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
 				 
 			],
-			self::MONTHLY_NOTES_COMMON => [
-				'Monthly Notes','Be Good',				
+			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank?
+				'Monthly Notes','Palouse Mindfulness Week 5',				
 			],
 			/*self::MONTHLY_NOTES => [
 				'Monthly Notes',

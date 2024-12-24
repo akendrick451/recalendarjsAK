@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 error_reporting(E_ERROR); ini_set('display_errors', '1');
 
-echo "Start now";
 
+//place this before any script you want to calculate time
+date_default_timezone_set('Australia/Melbourne');
+$time_start = microtime(true); 
+echo "Start now " .  (new \DateTime())->format( 'Y-m-d H:i:s' );
 
 try {
 	echo "require config.php";
@@ -104,7 +107,12 @@ try {
 
 	echo "trying to generate now...";
 	$recalendar->generate();
-
+	$time_end = microtime(true);
+	echo 'Finish at '.  (new \DateTime())->format( 'Y-m-d H:i:s' );
+	//dividing with 60 will give the execution time in minutes otherwise seconds
+	$execution_time = ($time_end - $time_start)/60;   //execution time of the script
+	echo '<b>Total Execution Time:</b> '. number_format((float) $execution_time, 10).' Mins';
+	// if you get weird results, use number_format((float) $execution_time, 10)
 } catch (\Throwable $e) {
     echo "\nAK Error - This was caught: " . $e->getMessage();
 	echo $e;

@@ -11,9 +11,13 @@ abstract class Generator {
 	}
 
 	public function generate() : string {
+
+		
 		ob_start();
 		$this->generate_anchor();
 		$this->generate_content();
+		$time_end = microtime(true);
+		
 		return ob_get_clean();
 	}
 

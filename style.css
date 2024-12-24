@@ -18,6 +18,7 @@ a {
 .title-page__year {
 	font-weight: bold;
 	font-size: 90pt;
+	color:rgb(100, 4, 4)
 }
 
 .title-page__recalendar {

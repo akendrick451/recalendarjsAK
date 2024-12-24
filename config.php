@@ -73,6 +73,10 @@ class Config {
 				'Big Shoulders',
 				'Pistol Squat',
 				'Measure Weight',
+				'Buy wardrobe',	
+			        'Gottman Quiz - Do', 
+			        'PBSP - 20%',
+			
 				'Raise Bed',
 				'Build Inner Wall',				
 			],*/

@@ -14,7 +14,9 @@ class TitlePageGenerator extends Generator {
 		$year = (int) $this->config->get( Config::YEAR );
 		$subtitle = $this->config->get( Config::SUBTITLE );
 ?>
+		
 		<div class="title-page">
+			<div align=center><img src="title_image.png"></img></div>
 			<div class="title-page__year"><?php echo $year; ?></div>
 			<div class="title-page__recalendar"><?php echo $subtitle ?></div>
 		</div>

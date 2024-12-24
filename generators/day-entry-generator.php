@@ -101,7 +101,7 @@ class DayEntryGenerator extends Generator {
 			</table> 
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
-			<tr><td colspan="4"><br>What can I ask God for help with, or thank Him for? How are things?</td></tr>
+			<tr><td colspan="4"><br>How are things?</td></tr>
 <?php			
 			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
 			
@@ -132,15 +132,28 @@ class DayEntryGenerator extends Generator {
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
 				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
 			echo '</td>';
-			echo '<Td width="30%" valign=top>';			
+			echo '<Td width="30%" valign=top>';
+			/*			
 			$month_notes_in_day = $this->config->get( Config::MONTHLY_NOTES );
 			$month_notes_in_day[0] = $month_name. " " . $month_notes_in_day[0]; // add month name to first item in month list
 			self::generate_content_box2($month_notes_in_day);
+*/
+			// AK NEW TEXT DEC 2024. TRYING TO MAKE MONTHLY NOTES SPECIFIC TO MONTH
+			$month_notes_in_day_all = $this->config->get( Config::MONTHLY_NOTES_2 );
+			$month_notes_in_day = $month_notes_in_day_all[ (int) $this->day->format( 'n' ) ] ?? $this->config->get( Config::MONTHLY_NOTES_COMMON ); // lowecase n for month number
+			$month_notes_in_day[0] = $month_name. " " . $month_notes_in_day[0]; // add month name to first item in month list
+			self::generate_content_box2( $month_notes_in_day ); 
+
 		echo "</td></tr>";
 		echo "<tr><td>";
 		echo '<tr><td valign=middle>';
-		$current_reading = $this->config->get( Config::CURRENT_READING );
-			self::generate_content_box_justified($current_reading);
+
+		$current_reading_all = $this->config->get( Config::CURRENT_READING );
+		$current_reading = $current_reading_all[ (int) $this->day->format( 'n' ) ] ?? $this->config->get( Config::CURRENT_READING_COMMON ); 
+		self::generate_content_box_justified($current_reading);
+
+
+
 		echo "</td></tr>";
 		echo '<tr><td valign=bottom>';
 		$bucket_list = $this->config->get( Config::BUCKET_LIST );

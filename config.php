@@ -4,11 +4,15 @@ namespace ReCalendar;
 
 // update start month if not doing 12 months from jan. 
 // self::MONTH => 8, //start month eg Aug
+// also can update self::YEAR
 
 class Config {
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const DAY_ITINERARY_ITEMS = 'day_itinerary_items';
-	public const MONTHLY_NOTES = "monthly_notes";
+	//public const MONTHLY_NOTES = "monthly_notes";
+	public const MONTHLY_NOTES_2 = "monthly_notes_2";
+	public const MONTHLY_NOTES_COMMON = "monthly_notes_common";
+	public const CURRENT_READING_COMMON = "current_reading_common";
 	public const BUCKET_LIST = "bucket_list";
 	public const CURRENT_READING = "current_reading";
 	public const DAY_ITINERARY_COMMON = 'day_itinerary_common';
@@ -19,6 +23,7 @@ class Config {
 	public const FONT_DIR = 'font_directory';
 	public const FORMAT = 'format';
 	public const HABITS = 'habits';
+	public const HABITS_COMMON = 'habits_common'; 
 	public const HABITS_TITLE = 'habits_title';
 	public const LOCALE = 'locale';
 	public const MONTH = 'month';
@@ -51,14 +56,26 @@ class Config {
 				'Sa',
 				'Su',
 			],
-			self::MONTHLY_NOTES => [
+			//ak changed on 07/12/2024 11:30am 
+			self::MONTHLY_NOTES_2 => [
+				 12 => ['Monthly Notes', 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
+				 11 => [ 'Monthly Notes', 'Big Shoulders', 'Pistol Squat', 'Measure Weight', 'Raise Bed', 'Build Inner Wall'	] ,
+				 1 => ['Monthly Notes', 'Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
+				 2 => [ 'Monthly Notes', 'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
+				 3 => ['Monthly Notes', 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
+				 
+			],
+			self::MONTHLY_NOTES_COMMON => [
+				'Monthly Notes','Be Good',				
+			],
+			/*self::MONTHLY_NOTES => [
 				'Monthly Notes',
 				'Big Shoulders',
 				'Pistol Squat',
 				'Measure Weight',
 				'Raise Bed',
 				'Build Inner Wall',				
-			],
+			],*/
 			self::BUCKET_LIST => [
 				'Bucket List',
 				'Dance class',
@@ -68,15 +85,25 @@ class Config {
 				'Try England',				
 				'Love?',				
 			],
+
+			self::CURRENT_READING_COMMON => [
+				'Current Reading','End of the Affair?', 
+				'Watership Down',				
+			],
+
 			self::CURRENT_READING => [
-				'Current Reading',
-				'Models - Attract Woment Through Honesty, 5%',
-				'Why zebras dont get ulcerss, 10%',
-				'The explosive child, 20%',	
-				'Dare to Connect, 20%',
-				'The Mindful Emotions Workbook, 20%',
-				"The Inflamed Mind, 1%",
-				"The Well of Ascension, 10%",		
+				10 => ['Current Reading', 'Models - Attract Woment Through Honesty, 5%', 'Why zebras dont get ulcerss, 10%', 
+				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
+				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
+				11 => ['Current Reading', 'Models - Attract Woment Through Honesty, 100%', 'Why zebras dont get ulcerss, 10%', 
+				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
+				"The Inflamed Mind, 1%", "The Well of Ascension, 100%",	],
+				12 => ['Current Reading', 'No Bad Parts, Schwarz', 'Why zebras dont get ulcerss, 10%', 
+				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
+				"The Inflamed Mind, 1%", "Alloy of Law, 10%",	],
+				1 => ['Current Reading', 'No Bad Parts, Schwarz', 'Why zebras dont get ulcerss, 10%', 
+				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
+				"The Inflamed Mind, 1%", "Alloy of Law, 10%",	],
 			],
 			// Items for each page type
 			// The format is: [ NUMBER OF LINES, NAME (optional) ]
@@ -97,8 +124,22 @@ class Config {
 			],
 			// A list of habits that triggers generating a table on the month's overview
 			// to help tracking those habits
-			self::HABITS => [ 'Pistol Squat in May, June, July, Aug',
-			 'Celebrate others'
+
+			self::HABITS_COMMON => [
+				 'Shoulders workout', 'Self-compassion',
+				'Celebrate others',
+			],
+			self::HABITS => [
+				10 => [ 'Pistol Squat in May, June, July, Aug',
+			            'Celebrate others'],
+			    11 => [ 'Pistol Squat in May, June, July, Aug',
+			            'Celebrate others'],
+				12 => [ 'Shoulders workout Oct, Nov, Dec, Jan', 'Self-compassion',
+			            'Give time to others'],
+				1 => [ 'Shoulders workout Oct, Nov, Dec, Jan', 'Self-compassion',
+			            'Celebrate others'],
+				2 => [ 'Shoulders workout Oct, Nov, Dec, Jan', 'Self-compassion',
+			            'Celebrate others'],
 			],
 			// Title for the habits table on month overview
 			self::HABITS_TITLE => 'Habits',
@@ -128,10 +169,14 @@ class Config {
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar
 			// would then be generated for 12 months starting from October.
-			self::MONTH => 8, //start month
+			self::MONTH => 1, //start month
 			// The number of months you want this calendar to be for.
 			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
-			self::MONTH_COUNT => 5,
+			self::MONTH_COUNT => 6,
+			// The year for which to generate this calendar.
+			// Defaults to the current year.
+			self::YEAR => 2025,
+			//self::YEAR => (int) date( 'Y' ),
 			// Title of the Week overview page
 			self::WEEK_NAME => 'Week',
 			// A short version of "Week Number" used in the header of the small calendar in upper right corner of the page
@@ -146,17 +191,14 @@ class Config {
 			// A list of special dates (anniversaries, birthdays, holidays) that will be highlighted throughout the calendar:
 			// in the small calendar, on weekly overviews and daily entries.
 			self::SPECIAL_DATES => [			
-				 //'01-01' => 'New Year!',
-				 //'01-04' => 'April Fools Day',
-				 //'06-06' => 'AKs Bday!',
+				 '01-01' => 'New Year!',
+				 '01-04' => 'April Fools Day',
+				 '06-06' => 'AKs Bday!',
 			],
 			// Stylesheet filename
 			self::STYLE_SHEET => 'style.css',
 			// Used on the title page of the calendar
 			self::SUBTITLE => 'ReCalendar',
-			// The year for which to generate this calendar.
-			// Defaults to the current year.
-			self::YEAR => (int) date( 'Y' ),
 		];
 
 		// Get the names of the months in the set locale.

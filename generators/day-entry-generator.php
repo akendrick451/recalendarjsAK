@@ -101,26 +101,26 @@ class DayEntryGenerator extends Generator {
 			</table> 
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
-			<tr><td colspan="4"><br>How are things?</td></tr>
-<?php			
-			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
-			
-?>
+			<tr><td colspan="4"><br></td></tr>
+				<?php			
+							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
+							
+				?>
+				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
+				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
+				</td></tr>
+				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5"><br></td></tr>
+				<tr><td colspan="5"><br>Mastery Priorities/To do Today</td></tr>
+				<?php			
+							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
+							
+				?>
 
-<tr><td colspan="5"><br>Current Emotions? _______________________________________________ </td></tr>
-<tr><td colspan="5"><br>What I'm grateful for (consider emotionally impactful things)? </td></tr>
-<?php			
-			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 3 );
-			
-?>
-<tr><td colspan="5"><br>Mastery Priorities/To do Today</td></tr>
-<?php			
-			echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
-			
-?>
-
-<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
-	<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
+				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
+					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
 
 								</table><!--  ============================ close ATK table ============================ -->
 
@@ -130,6 +130,11 @@ class DayEntryGenerator extends Generator {
 			echo '<Tr><Td width="70%" rowspan="4">';
 				$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
+			    
+				// add actual date to itinerary items second entry
+				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
+				//echo "Itinerary dayplan name= ". $itinerary_items[0][1];
+											// ?? It returns its first operand if it exists and is not NULL; otherwise it returns its second operand.
 				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
 			echo '</td>';
 			echo '<Td width="30%" valign=top>';

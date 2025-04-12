@@ -21,6 +21,8 @@ class ReCalendar {
 	private $mpdf = null;
 	private $config = null;
 	private $html = '';
+	private $all_html_ak = '';
+	private $blDebugPrintedHTMLOnce = false;
 
 	private $month_overview_links = [];
 
@@ -35,6 +37,8 @@ class ReCalendar {
 			exit( 'The provided stylesheet does not exist: ' . $stylesheet_filename . PHP_EOL );
 		}
 		$stylesheet = file_get_contents( $stylesheet_filename );
+
+		$this->all_html_ak = "<!DOCTYPE html><html lang='en-US'><head><style>" . $stylesheet . "</style></head><body> ";
 		$this->mpdf->WriteHTML( $stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS );
 		$this->generate_title_page();
 
@@ -63,7 +67,19 @@ class ReCalendar {
         $dateNowString = $dateNow->format('Y-m-d-H-i-s');
 		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
 
+
+			// ==============================================================================================================================
+		// ==============================================================================================================================
+		echo '.... AK trying to save html for debugging......';
+		file_put_contents("recalendarForPDF.html", $this->all_html_ak);
+		
+
 		$this->mpdf->Output( __DIR__ . '/' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
+
+		// ==============================================================================================================================
+		// ==============================================================================================================================
+		echo '.... AK trying to save html for debugging......';
+		file_put_contents("recalendarForPDF2.html", $this->$html);
 	}
 
 	private function generate_title_page() : void {
@@ -150,7 +166,25 @@ class ReCalendar {
 		if ( empty( $this->html ) ) {
 			return;
 		}
+		$dateNow   = new \DateTime(); //this returns the current date time
+		
+		if ( $this->blDebugPrintedHTMLOnce == false ) {
+			$this->all_html_ak  = $this->all_html_ak . " " . $this->html;
+			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
+			
+		}
 		$this->mpdf->WriteHTML( $this->html );
+		
+		//echo $this->html;
+		// only do this for a small size		
+		if ((strlen($this->all_html_ak) > 46137) && $this->blDebugPrintedHTMLOnce == false) {
+			// print it once and no more. 
+			$this->blDebugPrintedHTMLOnce = true;
+			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
+			file_put_contents("recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
+
+		}
+
 		$this->html = '';
 	}
 }

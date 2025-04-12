@@ -273,6 +273,35 @@ td.calendar__week-number {
    line-height:24pt;
 }
 
+
+.allborders {
+    border: 1px dashed red;
+}
+
+.allborders td {
+    border: 1px dashed red;
+}
+
+.allborders tr td{
+    border: 1px dashed red;
+}
+
+
+.allborders {
+    border: 1px dashed red;
+}
+
+.content-box-height {
+
+	
+	height: 20pt;
+	vertical-align: bottom;
+	font-size: 10pt;
+	
+	
+
+}
+
 .content-box-line {
 	width: 100%;
 	border-bottom: 1px solid #AAA;

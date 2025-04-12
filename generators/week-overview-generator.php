@@ -76,8 +76,7 @@ class WeekOverviewGenerator extends Generator {
 				</td>
 			</tr>
 		</table>
-				<!-- AK emotions -->		 
-				
+		<!-- AK emotions -->
 				<?php include "emotions.html";?> 
 		<!-- -- end emotions -->
 <?php

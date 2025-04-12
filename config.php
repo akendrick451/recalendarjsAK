@@ -63,6 +63,12 @@ class Config {
 				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
 				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
 				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
+				 4 => [ 'Chess Openings 80%', 'Queens Pawn 1%', 'Pacing ME 30%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+
+				 5 =>[ 'Chess Openings 80%l', 'Queens Pawn 1%', 'Pacing ME 35%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+				 6 =>[ 'Chess Openings 80%l', 'Queens Pawn 1%', 'Pacing ME 40%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+				 7 =>[ 'Chess Openings 80%l', 'Queens Pawn 1%', 'Pacing ME 45%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank?

@@ -71,15 +71,15 @@ class ReCalendar {
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("recalendarForPDF.html", $this->all_html_ak);
+		file_put_contents("//output//recalendarForPDF.html", $this->all_html_ak);
 		
 
-		$this->mpdf->Output( __DIR__ . '/' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
+		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
 
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("recalendarForPDF2.html", $this->$html);
+		file_put_contents("output//recalendarForPDF2.html", $this->$html);
 	}
 
 	private function generate_title_page() : void {
@@ -181,7 +181,7 @@ class ReCalendar {
 			// print it once and no more. 
 			$this->blDebugPrintedHTMLOnce = true;
 			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
-			file_put_contents("recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
+			file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
 
 		}
 

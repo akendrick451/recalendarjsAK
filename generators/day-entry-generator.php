@@ -101,24 +101,31 @@ class DayEntryGenerator extends Generator {
 			</table> 
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
-			<tr><td colspan="4"><br></td></tr>
-				<?php			
-							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
-							
-				?>
+			<tr><td colspan="5"><i>Do not let your hearts be troubled. You believe in God[a]; believe also in me. 2 My Father’s house has many rooms; if that were not so, would I have told you that I am going there to prepare a place for you? John 14</i></b></td></tr>
 				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="5"><br></td></tr>
-				<tr><td colspan="5"><br>Mastery Priorities/To do Today</td></tr>
+				<tr><td colspan="2" class="content-box-height">What I'm doing for others this week?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<?php			
-							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 4 );
+							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
 							
 				?>
-
+				<tr><td colspan="2" class="content-box-height">Recent Successes</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
+				<?php			
+							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
+							
+				?>
+						<tr><td colspan="2" class="content-box-height">Next Sucess</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
+				<?php			
+							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
+							
+				?>
+				<tr><td colspan="5"><br></td></tr>
+				<tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
+				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr>
 				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
 					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
 

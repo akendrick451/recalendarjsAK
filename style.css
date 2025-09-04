@@ -15,6 +15,10 @@ a {
 	line-height: 30px;
 }
 
+.akyearlyplan { width:100%; }
+.akyearlyplan td { border:1px solid #aaa; padding:2px ;vertical-align:top; height: 150px; }
+    .akyearlyplan td { width: 20%; }
+
 .title-page__year {
 	font-weight: bold;
 	font-size: 90pt;
@@ -135,7 +139,7 @@ td.calendar__week-number {
 
 .year-overview__title {
 	text-align: center;
-	font-size: 60pt;
+	font-size: 30pt;
 	padding-top: 30px;
 	margin-bottom: 20px;
 }
@@ -378,3 +382,34 @@ s
 	font-size: 18pt;
 	border-bottom: 1px solid black;
 }
+
+
+
+  
+  .ruledLines td {
+   border-bottom: solid #ccc 1px;
+   width:100%
+  }
+  div.b {
+	
+	border: solid black 1px;
+	display: inline-block;	
+	margin: 5px;
+	background: green;
+	
+	border: 1px solid #ccc;
+  
+  }
+  #row1Eis {
+   height:50pt;
+  }
+  
+  
+  .eisenWide {
+	width:45%;
+	
+  }
+  .ruledLines {
+   
+   width:100%
+  }

@@ -56,7 +56,24 @@ class DayEntryGenerator extends Generator {
 
 	} //get_random_quote
     
+	protected function get_random_affirmation() : ?string {
 
+		$all_affirmations = $this->config->get( Config::AFFIRMATIONS );
+		$intRandomNumber = rand(0,count($all_affirmations)-1);
+
+		return $all_affirmations[$intRandomNumber];
+
+	} // get random function
+
+	protected function get_random_bible_verse() : ?string {
+
+		$all_bible_verses = $this->config->get( Config::BIBLE_VERSES );
+		$intRandomNumber = rand(0,count($all_bible_verses)-1);
+
+		return $all_bible_verses[$intRandomNumber];
+
+	} // get random get_random_bible_verse
+	
 	
 	// called from parent class generate()
 	protected function generate_content() : void {
@@ -68,6 +85,8 @@ class DayEntryGenerator extends Generator {
 		$previous_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'yesterday' ) );
 		$next_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'tomorrow' ) );
 		$random_quote = self::get_random_quote();
+		$random_affirmation = self::get_random_affirmation();
+		$random_bible_verse = self::get_random_bible_verse();
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -101,7 +120,8 @@ class DayEntryGenerator extends Generator {
 			</table> 
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
-			<tr><td colspan="5"><i>Do not let your hearts be troubled. You believe in God[a]; believe also in me. 2 My Father’s house has many rooms; if that were not so, would I have told you that I am going there to prepare a place for you? John 14</i></b></td></tr>
+			 <!-- bible verse first --> 
+			<tr><td colspan="5"><i><?php echo $random_bible_verse?></i></b></td></tr>
 				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
@@ -124,10 +144,13 @@ class DayEntryGenerator extends Generator {
 							
 				?>
 				<tr><td colspan="5"><br></td></tr>
-				<tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
-				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr>
-				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
-					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
+				<!-- <tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
+				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr> -->
+				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
+					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table>
+					<br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
+					<br><?php echo $random_affirmation ?><br>&nbsp;<br></td></tr></table>
+				</td></tr>
 
 								</table><!--  ============================ close ATK table ============================ -->
 
@@ -139,10 +162,21 @@ class DayEntryGenerator extends Generator {
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
 			    
 				// add actual date to itinerary items second entry
-				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
+				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' ) . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#year-overview'>Links</a>"; 
 				//echo "Itinerary dayplan name= ". $itinerary_items[0][1];
 											// ?? It returns its first operand if it exists and is not NULL; otherwise it returns its second operand.
 				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
+
+
+		   // echo $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
+
+		//	echo '<table class="ruledLines">';
+		//	echo str_repeat( '<tr><td class="content-box-line" style="border-bottom:1px solid #ccc">&nbsp;</td></tr>', 22 );
+		//	echo '    	</table></td>';
+						
+			
+
+
 			echo '</td>';
 			echo '<Td width="30%" valign=top>';
 			/*			
@@ -172,7 +206,7 @@ class DayEntryGenerator extends Generator {
 		echo '<tr><td valign=bottom>';
 		$bucket_list = $this->config->get( Config::BUCKET_LIST );
 			self::generate_content_box2($bucket_list);
-		echo '</td></tr>"';
+		echo '</td></tr>';
 		echo '</table><!-- end of table for day plan and july things and bucket list -->';
 
 ?>

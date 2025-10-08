@@ -170,7 +170,7 @@ class DayEntryGenerator extends Generator {
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
 			    
 				// add actual date to itinerary items second entry
-				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' ) . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#year-overview'>Links</a>"; 
+				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' ) . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#year-overview'>Links</a>"; 
 				//echo "Itinerary dayplan name= ". $itinerary_items[0][1];
 											// ?? It returns its first operand if it exists and is not NULL; otherwise it returns its second operand.
 				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings

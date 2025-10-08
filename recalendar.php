@@ -14,6 +14,7 @@ require_once __DIR__ . '/generators/day-entry-generator.php';
 require_once __DIR__ . '/generators/month-overview-generator.php';
 require_once __DIR__ . '/generators/title-page-generator.php';
 require_once __DIR__ . '/generators/year-overview-generator.php';
+require_once __DIR__ . '/generators/year-overview-generator2.php';
 require_once __DIR__ . '/generators/week-overview-generator.php';
 require_once __DIR__ . '/generators/week-retrospective-generator.php';
 
@@ -48,9 +49,12 @@ class ReCalendar {
 		$month_count = (int) $this->config->get( Config::MONTH_COUNT );
 		$end = $start->modify( "$month_count months" );
 		$year_overview_generator = new YearOverviewGenerator( $start, $end, $this->config );
+		$year_overview_generator2 = new YearOverviewGenerator2( $start, $end, $this->config );
+		//$this->add_page();
+		//$this->append_html( $year_overview_generator->generate() );
 		$this->add_page();
-		$this->append_html( $year_overview_generator->generate() );
-
+		$this->append_html( $year_overview_generator2->generate() );
+		
 		$start = $start->modify( 'monday this week' );
 		$interval = new \DateInterval( 'P1W' );
 		$period = new \DatePeriod( $start, $interval, $end );
@@ -71,16 +75,17 @@ class ReCalendar {
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("recalendarForPDF.html", $this->all_html_ak);
+		file_put_contents("//output//recalendarForPDF.html", $this->all_html_ak);
 		
 
-		$this->mpdf->Output( __DIR__ . '/' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
+		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
 
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("recalendarForPDF2.html", $this->$html);
+		file_put_contents("output//recalendarForPDF2.html", $this->$html);
 	}
+
 
 	private function generate_title_page() : void {
 		$title_page_generator = new TitlePageGenerator( $this->config );
@@ -177,11 +182,11 @@ class ReCalendar {
 		
 		//echo $this->html;
 		// only do this for a small size		
-		if ((strlen($this->all_html_ak) > 46137) && $this->blDebugPrintedHTMLOnce == false) {
+		if ((strlen($this->all_html_ak) > 4137) && $this->blDebugPrintedHTMLOnce == false) {
 			// print it once and no more. 
 			$this->blDebugPrintedHTMLOnce = true;
 			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
-			file_put_contents("recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
+			file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
 
 		}
 

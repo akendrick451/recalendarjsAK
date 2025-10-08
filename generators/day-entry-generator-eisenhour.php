@@ -56,24 +56,10 @@ class DayEntryGenerator extends Generator {
 
 	} //get_random_quote
     
-	protected function get_random_affirmation() : ?string {
+     protected function get_random_affirmation() : ?string {
+		// this should be set up in one main outside thing. 
 
-		$all_affirmations = $this->config->get( Config::AFFIRMATIONS );
-		$intRandomNumber = rand(0,count($all_affirmations)-1);
-
-		return $all_affirmations[$intRandomNumber];
-
-	} // get random function
-
-	protected function get_random_bible_verse() : ?string {
-
-		$all_bible_verses = $this->config->get( Config::BIBLE_VERSES );
-		$intRandomNumber = rand(0,count($all_bible_verses)-1);
-
-		return $all_bible_verses[$intRandomNumber];
-
-	} // get random get_random_bible_verse
-	
+	 } // end function get random affirmation
 	
 	// called from parent class generate()
 	protected function generate_content() : void {
@@ -85,8 +71,6 @@ class DayEntryGenerator extends Generator {
 		$previous_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'yesterday' ) );
 		$next_day_anchor = self::get_day_entry_anchor( $this->day->modify( 'tomorrow' ) );
 		$random_quote = self::get_random_quote();
-		$random_affirmation = self::get_random_affirmation();
-		$random_bible_verse = self::get_random_bible_verse();
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -106,7 +90,7 @@ class DayEntryGenerator extends Generator {
 									foreach ( $special_items as $index => $special_item ) {
 										echo "<span class=\"day-entry__special-item\">» $special_item</span>";
 										if ( $index < ( count( $special_items ) - 1 ) ) {
-											echo 'akdebug my special item<br />';
+											echo '<br />';
 										}
 									}
 ?>
@@ -120,8 +104,7 @@ class DayEntryGenerator extends Generator {
 			</table> 
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
-			 <!-- bible verse first --> 
-			<tr><td colspan="5"><i><?php echo $random_bible_verse?></i></b></td></tr>
+			<tr><td colspan="5"><i>Do not let your hearts be troubled. You believe in God[a]; believe also in me. 2 My Father’s house has many rooms; if that were not so, would I have told you that I am going there to prepare a place for you? John 14</i></b></td></tr>
 				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
@@ -144,44 +127,89 @@ class DayEntryGenerator extends Generator {
 							
 				?>
 				<tr><td colspan="5"><br></td></tr>
-				<!-- <tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
-				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr> -->
-				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
-					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table>
-					<br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
-					<br><?php echo $random_affirmation ?><br>&nbsp;<br></td></tr></table>
-				</td></tr>
+				<tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
+				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr>
+				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;">
+					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table></td></tr>
 
 								</table><!--  ============================ close ATK table ============================ -->
 
 								<pagebreak />					<!--	//atk added 29/05/2024				-->
-
-
-		
-	
-
-		 <table width="100%"><!-- start of table for day plan and july things and bucket list -->
-		
-			<Tr><Td width="70%" rowspan="4">
-<?php
-				/*ITINERARY ITEMS ARE STORED AS NUMBER OF ROWS REQUIRED, TITLE OF SECTION 
-				AK WILL CHANGE THIS TO CHECK IF THE WORD EISENHOWER OCCURS IN THE TEXT*/
+<?php		
+		echo '<table width="100%"><!-- start of table for day plan and july things and bucket list -->';
+			echo '<Tr><Td width="70%" rowspan="4">';
 				$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
 			    
 				// add actual date to itinerary items second entry
-				$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' ) . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#year-overview'>Links</a>"; 
+			//	$itinerary_items[0][1] = $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
 				//echo "Itinerary dayplan name= ". $itinerary_items[0][1];
 											// ?? It returns its first operand if it exists and is not NULL; otherwise it returns its second operand.
-				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
+			//	self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
 
 
-		   // echo $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
+		    echo $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
 
-		//	echo '<table class="ruledLines">';
-		//	echo str_repeat( '<tr><td class="content-box-line" style="border-bottom:1px solid #ccc">&nbsp;</td></tr>', 22 );
-		//	echo '    	</table></td>';
-						
+			echo '<!-- outside table for two rows for eisenhower matrix -->';
+			echo '<table class="eisenTables" width=100% style="border:1px dashed orange">';
+			echo '	<tr id="row1Eis">';
+			echo '		<td rowspan=2 valing=top><div class="b">I<br>
+			M<br>
+			P<br>
+			O<br>
+			R<br>
+			T<br>
+			A<br>
+			N<br>
+			T</div></td>';
+			echo '    	<td class="eisenWide">URGENT</td>';
+			echo '        <td class="eisenWide">NOT URGENT</td>';
+			echo '    </tr>';
+			echo '    <tr class="eisTablesRow">';
+			echo '    	<td class="eisenWide"><table class="ruledLines">';
+			echo str_repeat( '<tr><td class="content-box-line" style="border-right:1px solid #ccc">&nbsp;</td></tr>', 12 );
+			echo '      	</table><br>&nbsp;<table style="border:solid 1px #ccc; background:#eee;" class="dayPlanHours">';
+			echo '      				<tr><td>9-10</td><td class="content-box-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
+			echo '      				<tr><td>10-11</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>11-12</td><td class="content-box-line"></td></tr>';						
+			echo '      				<tr><td>12-13</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>13-14</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>14-15</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>15-16</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>16-17</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>17-18</td><td class="content-box-line"></td></tr>';			
+			echo '      				<tr><td>18-19</td><td class="content-box-line"></td></tr>';					
+			echo '    	</table></td>';
+			echo '    	<td class="eisenWide"><table class="ruledLines">';
+			echo str_repeat( '<tr><td class="content-box-line">&nbsp;</td></tr>', 20 );
+			echo '    	</table></td>';
+			echo '    </tr>    ';
+			echo '	<tr id="row2Eis"><td></td><tr>';
+			echo '    	<td valign=top><div class="b">
+			N<br>
+			O<br>
+			T<br>
+			&nbsp;<br>
+			I<br>
+			M<br>
+			P<br>
+			O<br>
+			R<br>
+			T<br>
+			A<br>
+			N<br>
+			T<br>
+			</div></td>   ';
+			echo '    	<td class="eisenWide"><table class="ruledLines">';
+			echo str_repeat( '<tr><td class="content-box-line" style="border-right:1px solid #ccc">&nbsp;</td></tr>', 7 );
+			echo '    	</table></td>';
+			echo '    	<td class="eisenWide"><table class="ruledLines">';
+			echo str_repeat( '<tr><td class="content-box-line">&nbsp;</td></tr>', 7 );
+			echo '    	</table></td>';
+			echo '	</tr> <!-- end row2 eisenhower -->   ';
+			echo '</table>';
+			echo '<!-- // END outside table for two rows for eisenhower matrix -->';
+			
 			
 
 

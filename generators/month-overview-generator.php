@@ -8,12 +8,18 @@ require_once __DIR__ . '/calendar-generator.php';
 
 class MonthOverviewGenerator extends Generator {
 	private $month;
+	private $last_month;
 	private $calendar_generator;
+	 public $last_month_name2;
+	 public $last_month_name;
 
 	public function __construct( \DateTimeImmutable $date, CalendarGenerator $calendar_generator, Config $config ) {
 		parent::__construct( $config );
 		$this->month = $date->modify( 'first day of this month' );
+		$this->last_month  = $date->modify('-1 week');
 		$this->calendar_generator = $calendar_generator;
+		$last_month_name2 = self::get_localized_month_name( $this->last_month, $this->config->get( Config::MONTHS ) );
+
 	}
 
 	protected function generate_anchor_string() : ?string {
@@ -22,29 +28,56 @@ class MonthOverviewGenerator extends Generator {
 
 	protected function generate_content() : void {
 		$month_name = self::get_localized_month_name( $this->month, $this->config->get( Config::MONTHS ) );
+		$last_month_name = self::get_localized_month_name( $this->last_month, $this->config->get( Config::MONTHS ) );
 		$calendar_html = $this->calendar_generator->generate();
 ?>
 
+
+
+
+<!-- open month review table outside -->
 <table width="95%">
 			<tr>
-				<td style="border-bottom: 1px solid black;" class="header-line month-overview__month-name">Month Review </td>
+				<td style="border-bottom: 1px solid black;" class="header-line month-overview__month-name">Month Review <?php echo $last_month_name ?></td>
 				<td class="calendar-box"><?php echo $calendar_html ?></td>
 			</tr>
 		</table>
 
-		</table>
+		
 		<br>
-		<table width="95%" border="1"><!-- ====================== 2 June 2024 atk close table for month plan by day ================================== -->
-					<tr><td width="10%">Notes for Review of Month</td><td width="90%">&nbsp;<br>
+		<table width="95%" border="1"><!-- ====================== 2 June 2024 atk open  table for month review  ================================== -->
+					<tr><td width="10%">Notes for Review of Month
+
+					<?php
+					 echo $last_month_name2;
+						// AK NEW TEXT DEC 2024. TRYING TO MAKE MONTHLY NOTES SPECIFIC TO MONTH
+			$month_notes_all = $this->config->get( Config::MONTHLY_NOTES_2 );
+			$month_notes = $month_notes_in_day_all[ (int) $this->month->format( 'n' ) ] ?? $this->config->get( Config::MONTHLY_NOTES_COMMON ); // lowecase n for month number
+			$month_notes[0] = $month_name. " " . $month_notes[0]; // add month name to first item in month list
+			$month_notes_common = $this->config->get( Config::MONTHLY_NOTES_COMMON );
+			$month_notes_combined = array_unique(array_merge($month_notes_common, $month_notes));
+			self::generate_content_box2( $month_notes_combined ); 
+
+	
+		$current_reading_all = $this->config->get( Config::CURRENT_READING );
+		$current_reading = $current_reading_all[ (int) $this->month->format( 'n' ) ] ?? $this->config->get( Config::CURRENT_READING_COMMON ); 
+		self::generate_content_box_justified($current_reading);
+					?>
+					</td>
+					<td width="90%">&nbsp;<br>
+					<a href='#year-overview'>Link to Update Month Goals/Review Document</a>
 					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br>
-					&nbsp;<br></td></tr>
-		</table> <!-- ====================== close table for june plan day ============================================ -->
+				<?php
+			
+		$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
+		$itinerary_items = $all_itinerary_items[ Config::MONTH_REVIEW ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
+		self::generate_content_box( $itinerary_items );
+			echo "</td></tr>";
+?>
+
+		</table> <!-- ====================== close inside table for month review ============================================ -->
+	</td></tr></table> <!-- close month review table outside -->
+
 		<pagebreak />
 		<table width="100%">
 			<tr>
@@ -61,11 +94,7 @@ class MonthOverviewGenerator extends Generator {
 			self::generate_habits_table( $habits );
 		}
 
-		// itinerary items seems to be how may lines to show on day view
 		
-		$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
-		$itinerary_items = $all_itinerary_items[ Config::DAY_ITINERARY_MONTH_OVERVIEW ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
-		self::generate_content_box( $itinerary_items );
 ?>
 <?php
 	}
@@ -154,7 +183,7 @@ class MonthOverviewGenerator extends Generator {
 			
 ?>					
 		</table> <!-- ====================== close table for june plan day ============================================ -->
-		<pagebreak />
+		<!-- <pagebreak /> -->
 	<?php
 	}
 

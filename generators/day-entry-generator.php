@@ -87,7 +87,7 @@ class DayEntryGenerator extends Generator {
 									foreach ( $special_items as $index => $special_item ) {
 										echo "<span class=\"day-entry__special-item\">» $special_item</span>";
 										if ( $index < ( count( $special_items ) - 1 ) ) {
-											echo '<br />';
+											echo 'akdebug my special item<br />';
 										}
 									}
 ?>
@@ -125,9 +125,17 @@ class DayEntryGenerator extends Generator {
 								</table><!--  ============================ close ATK table ============================ -->
 
 								<pagebreak />					<!--	//atk added 29/05/2024				-->
-<?php		
-		echo '<table width="100%"><!-- start of table for day plan and july things and bucket list -->';
-			echo '<Tr><Td width="70%" rowspan="4">';
+
+
+		
+	
+
+		 <table width="100%"><!-- start of table for day plan and july things and bucket list -->
+		
+			<Tr><Td width="70%" rowspan="4">
+<?php
+				/*ITINERARY ITEMS ARE STORED AS NUMBER OF ROWS REQUIRED, TITLE OF SECTION 
+				AK WILL CHANGE THIS TO CHECK IF THE WORD EISENHOWER OCCURS IN THE TEXT*/
 				$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
 				$itinerary_items = $all_itinerary_items[ (int) $this->day->format( 'N' ) ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
 			    

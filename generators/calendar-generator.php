@@ -80,7 +80,7 @@ class CalendarGenerator extends Generator {
 					if ( self::is_weekend( $week_day ) ) {
 						$css_classes .= ' weekend-day';
 					}
-
+				
 					if ( ! empty( self::get_matching_special_items( $week_day, $special_dates ) ) ) {
 						$css_classes .= ' special-date';
 					}

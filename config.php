@@ -115,12 +115,14 @@ class Config {
 				"The Inflamed Mind, 1%", "Alloy of Law, 10%",	],
 			],
 			// Items for each page type
-			// The format is: [ NUMBER OF LINES, NAME (optional) ]
+			// The format is: [ NUMBER OF LINES, NAME (optional) ], maybe num of lines could be day number????
 			// You might need to adjust the number of lines depending on your config (locale, font size, etc.)
 			self::DAY_ITINERARY_ITEMS => [
 				// Common itinerary used if nothing more specific was defined
 				self::DAY_ITINERARY_COMMON => [
-					[ 27, 'Day Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
+					//ak may change this from [27, 'Day Plan', ], to something for eisenhower
+					// eg if title = Eisenhower - then print it out, breaking up the number of lines....
+					[ 27, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
 				],
 				// Itinerary for the weekly retrospective
 				self::DAY_ITINERARY_WEEK_RETRO => [
@@ -200,9 +202,9 @@ class Config {
 			// A list of special dates (anniversaries, birthdays, holidays) that will be highlighted throughout the calendar:
 			// in the small calendar, on weekly overviews and daily entries.
 			self::SPECIAL_DATES => [			
-				 '01-01' => 'New Year!',
-				 '01-04' => 'April Fools Day',
-				 '06-06' => 'AKs Bday!',
+				 '01-01' => ['New Year!'],
+				 '01-04' => ['April Fools Day'],
+				 '06-06' => ['AKs Bday!'],
 			],
 			// Stylesheet filename
 			self::STYLE_SHEET => 'style.css',

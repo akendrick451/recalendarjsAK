@@ -83,7 +83,7 @@ class WeekOverviewGenerator extends Generator {
 	}
 
 	private function generate_day_entry( \DateTimeImmutable $week_day, int $day_entry_height ) {
-		$special_items = self::get_matching_special_items( $week_day, $this->config->get( Config::SPECIAL_DATES ) );
+//		$special_items = self::get_matching_special_items( $week_day, $this->config->get( Config::SPECIAL_DATES ) );
 ?>
 	<td class="week-overview__day-entry" style="height: <?php echo $day_entry_height; ?>px;">
 			<table width="100%">

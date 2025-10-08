@@ -40,7 +40,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 		$strEisenhowerHtml = ' <!-- =======================================open eisenhower tables===========================-->
 		<!-- first need to close a table opened in outer function -->
 
-		<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'. str_replace("eisenhower", "", $item_name). '</td></table>
+		<tr><td style="padding-left:100px">'. str_replace("eisenhower", "", $item_name). '</td></table>
         <table id="eisenhowermatrix">
             <tr id="row1eisenhower">
                 <td class="eisenhowercol1"></td>

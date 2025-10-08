@@ -82,54 +82,6 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 	}
 
 
-	protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
-
-		$repeat_top = 20;
-		$repeat_bottom = 7;
-		$strEisenhowerHtml = ' <!-- =======================================open eisenhower tables===========================-->
-		<!-- first need to close a table opened in outer function -->
-
-		<tr><td>(akdebug close table)</td></table>
-        <table id="eisenhowermatrix">
-            <tr id="row1eisenhower">
-                <td class="eisenhowercol1"></td>
-                <td>URGENT</td>
-                <td>NOT URGENT</td>
-            </tr>
-            <tr id="row2eisenhower">
-                    <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td> <table class="eisenhowerlines">
-                    		<tr><td><span class="boxtext">DO NOW</span></td></tr>
-						' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
-                        </table></td>
-                    <td><table class="eisenhowerlines">
-							<tr><td><span class="boxtext">PLAN</span></td></tr> 
-          					' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
-                        </table></td>
-            </tr>
-            <tr id="row3eisenhower">
-                    <td class="vertical">N<Br>O<br>T<br>&nbsp;<br> I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td><span class="boxtext">DELEGATE</SPAN>
-                    <table class="eisenhowerlines">
-            			' . str_repeat('<tr><td></td></tr>', $repeat_bottom) . '
-                        </table></td>
-                    <td><span class="boxtext">DELETE</span>
-                          <table class="eisenhowerlines">
-                   
-            			' . str_repeat('<tr><td></td></tr>', $repeat_bottom) . '
-
-                        </table></td>
-            </tr>
-
-
-         <!-- no need for end table as this is done in outside fucntion generate content box -->
-        <!-- =======================================close eisenhower tables===========================-->
-		';
-		echo 'printing eisenhower html';
-		echo $strEisenhowerHtml;
-
-	}
-
 
 	protected static function generate_content_box( array $items ) : void { //what is a content box???, list number and then content / text?, list number and then content / text?
 		echo '<br><table class="content-box" align="center">';

@@ -48,6 +48,18 @@ class Config {
 
 	protected function get_configuration() : array {
 		$configuration = [
+			// The month from which to start the "year"
+			// Useful if you want to track your college year, for example.
+			// You could then set this to 10 (October) and the calendar
+			// would then be generated for 12 months starting from October.
+			self::MONTH => 6, //start month
+			// The number of months you want this calendar to be for.
+			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
+			self::MONTH_COUNT => 6,
+			// The year for which to generate this calendar.
+			// Defaults to the current year.
+			self::YEAR => 2025,
+			//self::YEAR => (int) date( 'Y' ),
 			self::AFFIRMATIONS => [
 				"I can do all things through Him who gives me strength",
 				"I am capable of succeeding",
@@ -177,7 +189,7 @@ class Config {
 			self::DAY_ITINERARY_ITEMS => [
 				// Common itinerary used if nothing more specific was defined
 				self::DAY_ITINERARY_COMMON => [
-					[ 27, 'Day Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
+					[ 30, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
 				],
 				// Itinerary for the weekly retrospective
 				self::DAY_ITINERARY_WEEK_RETRO => [
@@ -236,18 +248,7 @@ class Config {
 			// `locale -a` in your terminal (at least on Linux and MacOS)
 			// Note that you will still need to override some configuration variables, like `WEEK_NAME`, etc.
 			self::LOCALE => 'en_US.UTF-8',
-			// The month from which to start the "year"
-			// Useful if you want to track your college year, for example.
-			// You could then set this to 10 (October) and the calendar
-			// would then be generated for 12 months starting from October.
-			self::MONTH => 7, //start month
-			// The number of months you want this calendar to be for.
-			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
-			self::MONTH_COUNT => 6,
-			// The year for which to generate this calendar.
-			// Defaults to the current year.
-			self::YEAR => 2025,
-			//self::YEAR => (int) date( 'Y' ),
+			
 			// Title of the Week overview page
 			self::WEEK_NAME => 'Week',
 			// A short version of "Week Number" used in the header of the small calendar in upper right corner of the page

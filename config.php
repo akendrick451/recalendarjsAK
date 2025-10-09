@@ -36,6 +36,9 @@ class Config {
 	public const WEEK_NUMBER = 'week_number';
 	public const WEEKLY_RETROSPECTIVE_BOOKMARK = 'weekly_retrospective_bookmark';
 	public const WEEKLY_RETROSPECTIVE_TITLE = 'weekly_retrospective_title';
+		public const YEARLY_RETROSPECTIVE_TITLE = 'yearly_retrospective_title';
+		public const YEARLY_RETROSPECTIVE_BOOKMARK = 'yearly_retrospective_bookmark';
+
 	public const WEEKLY_TODOS = 'weekly_todos';
 	public const SPECIAL_DATES = 'special_dates';
 	public const STYLE_SHEET = 'style_sheet_filename';
@@ -117,26 +120,27 @@ class Config {
 				'Su',
 			],
 			//ak changed on 07/12/2024 11:30am 
+			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
-				 12 => [ 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 100%', 'Couns Business 20%', 'Get Healthy 35%' ,  'Big shoulders'] , 
-				 11 => [  'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 97%', 'Couns Business 20%', 'Get Healthy 35%' ,  'Big shoulders'	] ,
+				 12 => [ 'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'] , 
+				 11 => [   'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol' 	] ,
 				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
 				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
 				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
 				 4 => [ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 30%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
 				 5 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 35%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
 				 6 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 40%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
-				 7 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
+				 7 =>[ 'Sleep couns', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
 				 8 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%'  ], 
 				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Get Healthy 35%' , 'Big shoulders' ], 
-				 10 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 96%', 'Couns Business 20%', 'Get Healthy 35%' ,  'Big shoulders'  ], 
+				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'  ], //shoulders, business, pauses due to health / stress issues
 
 
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','Palouse Mindfulness Week 5', '<b>Longer</b>', '.. ADHD - DONE', '.. Sleep counsellor-DONE', 
-				'<b>Exciting</b>', '..Fix window', '..Build info screen wall',
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy (inc arts) 45%', 'Masters Degree 96%', 
+				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [
 				'Monthly Notes',
@@ -258,7 +262,9 @@ class Config {
 			// Used for the bookmark of the weekly retrospective pages
 			self::WEEKLY_RETROSPECTIVE_BOOKMARK => 'Week Review',
 			// Used for the title of the weekly retrospective pages
+			self::YEARLY_RETROSPECTIVE_BOOKMARK => 'Year Review',
 			self::WEEKLY_RETROSPECTIVE_TITLE => 'Weekly Review',
+					self::YEARLY_RETROSPECTIVE_TITLE => 'Yearly Review',
 			// A list of items you'd like to be listed in the notes of the weekly overview
 			self::WEEKLY_TODOS => [
 			],

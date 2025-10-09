@@ -49,18 +49,18 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
             </tr>
             <tr id="row2eisenhower">
                     <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td> <table class="eisenhowerlines">
+                    <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc"> <table class="eisenhowerlines">
                     		<tr><td><span class="boxtext">DO NOW</span></td></tr>
 						' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
                         </table></td>
-                    <td><table class="eisenhowerlines">
+                    <td style="border-bottom:2px solid #ccc"><table class="eisenhowerlines">
 							<tr><td><span class="boxtext">PLAN</span></td></tr> 
           					' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
                         </table></td>
             </tr>
             <tr id="row3eisenhower">
                     <td class="vertical">N<Br>O<br>T<br>&nbsp;<br> I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td><span class="boxtext">DELEGATE</SPAN>
+                    <td style="border-right:2px solid #ccc;"><span class="boxtext">DELEGATE</SPAN>
                     <table class="eisenhowerlines">
             			' . str_repeat('<tr><td></td></tr>', $repeat_bottom) . '
                         </table></td>

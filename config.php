@@ -191,7 +191,7 @@ class Config {
 				self::DAY_ITINERARY_COMMON => [
 					//ak may change this from [30, 'eisenhowerDay Plan', ], to something for eisenhower
 					// eg if title = Eisenhower - then print it out, breaking up the number of lines....
-					[ 27, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
+					[ 32, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
 				],
 				// Itinerary for the weekly retrospective
 				self::DAY_ITINERARY_WEEK_RETRO => [

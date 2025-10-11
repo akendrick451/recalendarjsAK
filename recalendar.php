@@ -78,15 +78,15 @@ class ReCalendar {
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("//output//recalendarForPDF.html", $this->all_html_ak);
+		file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$all_html_ak);
 		
-
 		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
 
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("output//recalendarForPDF2.html", $this->$html);
+		file_put_contents("output//recalendarForPDF2" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$html);
+
 	}
 
 

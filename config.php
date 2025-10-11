@@ -55,7 +55,7 @@ class Config {
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar
 			// would then be generated for 12 months starting from October.
-			self::MONTH => 6, //start month
+			self::MONTH => 7, //start month
 			// The number of months you want this calendar to be for.
 			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
 			self::MONTH_COUNT => 6,

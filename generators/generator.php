@@ -1,7 +1,16 @@
 <?php
 declare(strict_types=1);
-
 namespace ReCalendar;
+
+CONST blAKDebug = true;
+
+function AKDebug (string $strMessage) {
+
+	//if (blAKDebug) {
+		echo "AKDebug " . $strMessage;
+	//}
+
+}
 
 abstract class Generator {
 	protected $config;
@@ -152,6 +161,11 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 	protected static function get_week_retrospective_anchor( \DateTimeImmutable $date ) : string {
 		return self::get_week_number( $date ) . '-week-retrospective';
 	}
+
+		protected static function get_year_retrospective_anchor( \DateTimeImmutable $date ) : string {
+		return self::get_week_number( $date ) . '-year-retrospective';
+	}
+
 
 	protected static function get_year_overview_anchor() : string {
 		return 'year-overview';

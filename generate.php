@@ -9,7 +9,18 @@ error_reporting(E_ERROR); ini_set('display_errors', '1');
 //place this before any script you want to calculate time
 date_default_timezone_set('Australia/Melbourne');
 $time_start = microtime(true); 
-echo "Start now " .  (new \DateTime())->format( 'Y-m-d H:i:s' );
+$intRepeat = 100;
+
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo "=== RECALENDAR JS STARTING ";
+echo "Start now " .  (new \DateTime())->format( 'Y-m-d H:i:s' ) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
+echo str_repeat("=", $intRepeat) . "\n";
 
 try {
 	echo "require config.php";

@@ -17,6 +17,7 @@ require_once __DIR__ . '/generators/year-overview-generator.php';
 require_once __DIR__ . '/generators/year-overview-generator2.php';
 require_once __DIR__ . '/generators/week-overview-generator.php';
 require_once __DIR__ . '/generators/week-retrospective-generator.php';
+require_once __DIR__ . '/generators/year-retrospective-generator.php';
 
 class ReCalendar {
 	private $mpdf = null;
@@ -64,6 +65,8 @@ class ReCalendar {
 
 			$this->write_html();
 		}
+		$this->generate_year_retrospective( $week );
+		$this->write_html();
 
 
 		//ak change filename to include date and time
@@ -75,15 +78,15 @@ class ReCalendar {
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("//output//recalendarForPDF.html", $this->all_html_ak);
+		file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$all_html_ak);
 		
-
 		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
 
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("output//recalendarForPDF2.html", $this->$html);
+		file_put_contents("output//recalendarForPDF2" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$html);
+
 	}
 
 
@@ -151,6 +154,15 @@ class ReCalendar {
 		$this->append_html( $week_retrospective_generator->generate() );
 	}
 
+	private function generate_year_retrospective( \DateTimeImmutable $week ) : void {
+		$this->add_page();
+		$this->bookmark( $this->config->get( Config::YEARLY_RETROSPECTIVE_BOOKMARK ), 1 );
+
+		$calendar_generator = new CalendarGenerator( $week, CalendarGenerator::HIGHLIGHT_WEEK, $this->config );
+		$year_retrospective_generator = new YearRetrospectiveGenerator( $week, $calendar_generator, $this->config );
+		$this->append_html( $year_retrospective_generator->generate() );
+	}
+
 	private static function get_week_number( \DateTimeImmutable $week ) : int {
 		return (int) $week->modify( 'thursday this week' )->format( 'W' );
 	}
@@ -175,7 +187,7 @@ class ReCalendar {
 		
 		if ( $this->blDebugPrintedHTMLOnce == false ) {
 			$this->all_html_ak  = $this->all_html_ak . " " . $this->html;
-			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
+			echo " debugPrint printhtmlonce.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
 			
 		}
 		$this->mpdf->WriteHTML( $this->html );
@@ -185,7 +197,7 @@ class ReCalendar {
 		if ((strlen($this->all_html_ak) > 4137) && $this->blDebugPrintedHTMLOnce == false) {
 			// print it once and no more. 
 			$this->blDebugPrintedHTMLOnce = true;
-			echo " debug.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
+			echo " debugPrint2 HTML Is.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
 			file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
 
 		}

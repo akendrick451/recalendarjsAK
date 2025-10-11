@@ -22,6 +22,8 @@ class DayEntryGenerator extends Generator {
 		return self::get_day_entry_anchor( $this->day );
 	}
 
+
+
 	protected function get_random_quote() : ?string {
 		// AK 7/6/2024 ------------===========================================================>
 		// AK 7/6/2024 ------------===========================================================>
@@ -197,7 +199,13 @@ class DayEntryGenerator extends Generator {
 			$month_notes_in_day = $month_notes_in_day_all[ (int) $this->day->format( 'n' ) ] ?? $this->config->get( Config::MONTHLY_NOTES_COMMON ); // lowecase n for month number
 			$month_notes_in_day[0] = $month_name. " " . $month_notes_in_day[0]; // add month name to first item in month list
 			$month_notes_in_day_common = $this->config->get( Config::MONTHLY_NOTES_COMMON );
+		
 			$month_notes_combined = array_unique(array_merge($month_notes_in_day_common, $month_notes_in_day));
+			// ak thinks this prints to html... how to print to terminal??
+
+				if (count($month_notes_combined)>12) {
+				AKDebug ( "WARNING: MONTLY NOTES Combined GREATER THAN 12 items (ie " .count($month_notes_combined). "items ) - MAY GO OVER PAGE");
+			}
 			self::generate_content_box2( $month_notes_combined ); 
 
 		echo "</td></tr>";

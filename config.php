@@ -176,7 +176,7 @@ class Config {
 				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
 				10 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
 				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
+				"The Inflamed Mind, 1%", "The Healing Power of Vagus, 0%",	],
 				11 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
 				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
 				"The Inflamed Mind, 1%", "The Well of Ascension, 100%",	],

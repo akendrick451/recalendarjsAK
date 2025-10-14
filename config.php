@@ -133,7 +133,7 @@ class Config {
 				 7 =>[ 'Sleep couns', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
 				 8 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%'  ], 
 				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Get Healthy 35%' , 'Big shoulders' ], 
-				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'  ], //shoulders, business, pauses due to health / stress issues
+				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol', 'Breatless' ], //shoulders, business, pauses due to health / stress issues
 
 
 				 

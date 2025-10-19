@@ -139,7 +139,7 @@ class Config {
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','<b>Longer</b>', 'Get Healthy (inc arts) 45%', 'Masters Degree 96%', 
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affimatiion thpy fr', 'Masters Degree 96%', 
 				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [

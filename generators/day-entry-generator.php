@@ -203,8 +203,8 @@ class DayEntryGenerator extends Generator {
 			$month_notes_combined = array_unique(array_merge($month_notes_in_day_common, $month_notes_in_day));
 			// ak thinks this prints to html... how to print to terminal??
 
-				if (count($month_notes_combined)>12) {
-				AKDebug ( "WARNING: MONTLY NOTES Combined GREATER THAN 12 items (ie " .count($month_notes_combined). "items ) - MAY GO OVER PAGE");
+				if (count($month_notes_combined)>18) {
+				AKDebug ( "WARNING: MONTLY NOTES Combined GREATER THAN 18 items (ie " .count($month_notes_combined). "items ) - MAY GO OVER PAGE");
 			}
 			self::generate_content_box2( $month_notes_combined ); 
 

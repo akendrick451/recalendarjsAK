@@ -133,13 +133,13 @@ class Config {
 				 7 =>[ 'Sleep couns', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
 				 8 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%'  ], 
 				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Get Healthy 35%' , 'Big shoulders' ], 
-				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'  ], //shoulders, business, pauses due to health / stress issues
+				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol', 'Breatless' ], //shoulders, business, pauses due to health / stress issues
 
 
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','<b>Longer</b>', 'Get Healthy (inc arts) 45%', 'Masters Degree 96%', 
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affimatiion thpy fr', 'Masters Degree 96%', 
 				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [
@@ -176,7 +176,7 @@ class Config {
 				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
 				10 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
 				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
+				"The Inflamed Mind, 1%", "The Healing Power of Vagus, 0%",	],
 				11 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
 				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
 				"The Inflamed Mind, 1%", "The Well of Ascension, 100%",	],
@@ -195,7 +195,7 @@ class Config {
 				self::DAY_ITINERARY_COMMON => [
 					//ak may change this from [30, 'eisenhowerDay Plan', ], to something for eisenhower
 					// eg if title = Eisenhower - then print it out, breaking up the number of lines....
-					[ 27, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
+					[ 32, 'eisenhowerDay Plan', ], //ak changed from 23 on 29/05/2024 8:30pm // number of rows to print - changed to 28
 				],
 				// Itinerary for the weekly retrospective
 				self::DAY_ITINERARY_WEEK_RETRO => [

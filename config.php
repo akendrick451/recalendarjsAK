@@ -132,14 +132,14 @@ class Config {
 				 6 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 40%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
 				 7 =>[ 'Sleep couns', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
 				 8 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%'  ], 
-				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Get Healthy 35%' , 'Big shoulders' ], 
-				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol', 'Breatless' ], //shoulders, business, pauses due to health / stress issues
+				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Watch weight' , 'Big shoulders' ], 
+				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Late December Holiday', 'Book Music and Theatre', 'Cholesterol', 'Breathless Eml Course' ], //shoulders, business, pauses due to health / stress issues
 
 
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','<b>Longer</b>', 'Get Healthy (inc arts) 45%', 'Masters Degree 96%', 
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affimatiion thpy fr', 'Masters Degree 96%', 
 				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [

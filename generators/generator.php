@@ -12,6 +12,13 @@ function AKDebug (string $strMessage) {
 
 }
 
+function PadIfSingleDigit(string $stringHour) : string {
+	if (strlen($stringHour) == 1) {
+		$stringHour = "0".$stringHour;
+	}
+	return $stringHour;
+}
+
 abstract class Generator {
 	protected $config;
 
@@ -41,6 +48,26 @@ abstract class Generator {
 
 	abstract protected function generate_content() : void;
 	abstract protected function generate_anchor_string() : ?string;
+protected static function get_hour_table_html() : string  {
+
+
+
+	$strHourTableHtml = '<table id="hourtable">';
+
+	for ($hour = 6; $hour < 19; $hour++) {
+    	$strHourTableHtml = $strHourTableHtml . "<tr><td align=left>" . PadIfSingleDigit((string)$hour) . "-" . PadIfSingleDigit((string)($hour+1)) . "</td><td>&nbsp;</td></tr>";
+	}
+
+
+	$strHourTableHtml = $strHourTableHtml . '</table>';
+						
+			
+
+	return $strHourTableHtml;
+}
+
+
+
 
 protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
 
@@ -53,16 +80,19 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
         <table id="eisenhowermatrix">
             <tr id="row1eisenhower">
                 <td class="eisenhowercol1"></td>
-                <td>URGENT</td>
-                <td>NOT URGENT</td>
+                <td class="eisenhowercol2">URGENT</td>
+                <td class="eisenhowercol3">NOT URGENT</td>
             </tr>
             <tr id="row2eisenhower">
                     <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc"> <table class="eisenhowerlines">
+                    <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc;"> <table class="eisenhowerlines">
                     		<tr><td><span class="boxtext">DO NOW</span></td></tr>
-						' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
+						' . str_repeat('<tr><td></td></tr>', $repeat_top - 10) . '
+						<tr><td align=center>
+							' . self::get_hour_table_html() . '
+						</td></tr>
                         </table></td>
-                    <td style="border-bottom:2px solid #ccc"><table class="eisenhowerlines">
+                    <td style="border-bottom:2px solid #ccc;"><table class="eisenhowerlines">
 							<tr><td><span class="boxtext">PLAN</span></td></tr> 
           					' . str_repeat('<tr><td></td></tr>', $repeat_top) . '
                         </table></td>

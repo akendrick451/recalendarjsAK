@@ -12,7 +12,7 @@ a {
                  text-orientation: upright; /* Optional: Keeps characters upright instead of rotated */
          }
 
-         #eisenhowermatrix {
+	#eisenhowermatrix {
             width:100%;
 
          }
@@ -29,6 +29,14 @@ a {
 		 .eisenhowercol1 {
            width:30px;
          }
+
+		  .eisenhowercol2 {
+           width:45%;
+         }
+
+		  .eisenhowercol2 {
+           width:45%;
+         }
          .boxtext {
             border: 1px solid #ccc;
          }
@@ -36,14 +44,19 @@ a {
 #hourtable {
    background-color:#eee;
    border:1px solid #ccc;
-  float: right;
-  margin-left: 15px;
-  width: 200px;
-  height: 200px;  
-   position: absolute;
-        top: 200px;    /* 50 pixels from the top of the parent */
-        left: 50px;  
+	width:95%;
+ 
+
+
 }
+#hourtable td {
+   background-color:#eee;
+   border-bottom:1px solid #ccc;
+   font-size:8pt;
+   height:15px;
+
+}
+
 
 
 

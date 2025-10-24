@@ -54,3 +54,5 @@ if __name__ == "__main__":
     folder = r"C:\Users\akend\OneDrive\Documents\GitHub\recalendarjsAK\output"
     new_filename = "Journal25-Jul-Dec"  # no .pdf extension needed
     rename_latest_pdf(folder, new_filename)
+    folder =r"D:\AKProgramming\GitHub\recalendar\output"
+    rename_latest_pdf(folder, new_filename)

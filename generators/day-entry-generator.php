@@ -129,6 +129,7 @@ class DayEntryGenerator extends Generator {
 				</td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
 				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="2" class="content-box-height">What I'm doing for others this week?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<?php			

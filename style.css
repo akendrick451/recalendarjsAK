@@ -21,6 +21,7 @@ a {
          	width:100%;
             height: 20px;
             border-bottom: 1px solid #ccc;
+			padding: 0;
             
          }
          .eisenhowerlines {
@@ -43,7 +44,7 @@ a {
 
 #hourtable {
    background-color:#eee;
-   border:1px solid #ccc;
+   border:0px solid #fff;
 	width:95%;
  
 
@@ -53,8 +54,20 @@ a {
    background-color:#eee;
    border-bottom:1px solid #ccc;
    font-size:8pt;
-   height:15px;
+   height:13px;
 
+}
+#hourtable th {
+   background-color:#fff;
+   border-bottom:0px solid #fff;
+   font-size:1pt;
+   height:1px;
+
+}
+
+.smallerTextLight {
+	font-size: 9px;
+	color:#ccc;
 }
 
 
@@ -221,7 +234,7 @@ td.calendar__week-number {
 
 .month-overview__month-name {
 	text-transform: uppercase;
-	font-size: 35pt;
+	font-size: 30pt;
 	font-weight: bold;
 }
 

@@ -29,7 +29,7 @@ abstract class Generator {
 	public function generate() : string {
 
 		
-		ob_start();
+		ob_start(); // this redirectos echo from going straight out, so you can put it to a file 
 		$this->generate_anchor();
 		$this->generate_content();
 		$time_end = microtime(true);
@@ -53,8 +53,10 @@ protected static function get_hour_table_html() : string  {
 
 
 	$strHourTableHtml = '<table id="hourtable">';
+	#$strHourTableHtml .= '<tr><th>&nbsp;</th><th></th></tr>';
 
 	for ($hour = 6; $hour < 19; $hour++) {
+
     	$strHourTableHtml = $strHourTableHtml . "<tr><td align=left>" . PadIfSingleDigit((string)$hour) . "-" . PadIfSingleDigit((string)($hour+1)) . "</td><td>&nbsp;</td></tr>";
 	}
 
@@ -73,6 +75,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 
 		$repeat_top = (int)($total_number_of_rows*.75);
 		$repeat_bottom = (int)$total_number_of_rows-$repeat_top;
+		$intNumberOfLinesForHoursTable = 9;
 		$strEisenhowerHtml = ' <!-- =======================================open eisenhower tables===========================-->
 		<!-- first need to close a table opened in outer function -->
 
@@ -87,7 +90,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
                     <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
                     <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc;"> <table class="eisenhowerlines">
                     		<tr><td><span class="boxtext">DO NOW</span></td></tr>
-						' . str_repeat('<tr><td></td></tr>', $repeat_top - 10) . '
+						' . str_repeat('<tr><td></td></tr>', $repeat_top - $intNumberOfLinesForHoursTable) . '
 						<tr><td align=center>
 							' . self::get_hour_table_html() . '
 						</td></tr>
@@ -101,12 +104,12 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
                     <td class="vertical">N<Br>O<br>T<br>&nbsp;<br> I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
                     <td style="border-right:2px solid #ccc;"><span class="boxtext">DELEGATE</SPAN>
                     <table class="eisenhowerlines">
-            			' . str_repeat('<tr><td></td></tr>', $repeat_bottom) . '
+            			' . str_repeat('<tr><td>&nbsp;</td></tr>', $repeat_bottom) . '
                         </table></td>
                     <td><span class="boxtext">DELETE</span>
                           <table class="eisenhowerlines">
                    
-            			' . str_repeat('<tr><td></td></tr>', $repeat_bottom) . '
+            			' . str_repeat('<tr><td>&nbsp;</td></tr>', $repeat_bottom) . '
 
                         </table></td>
             </tr>

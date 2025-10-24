@@ -53,17 +53,17 @@ protected static function get_hour_table_html() : string  {
 
 
 	$strHourTableHtml = '<table id="hourtable">';
-	#$strHourTableHtml .= '<tr><th>&nbsp;</th><th></th></tr>';
+	$strHourTableHtml .= '<tr><th>&nbsp;</th><th></th></tr>';
 
 	for ($hour = 6; $hour < 19; $hour++) {
 
     	$strHourTableHtml = $strHourTableHtml . "<tr><td align=left>" . PadIfSingleDigit((string)$hour) . "-" . PadIfSingleDigit((string)($hour+1)) . "</td><td>&nbsp;</td></tr>";
 	}
 
-
+	$strHourTableHtml .= '<tr><td id="onePixHeight">&nbsp;</td><td id="onePixHeight"></td></tr>';
 	$strHourTableHtml = $strHourTableHtml . '</table>';
 						
-			
+		
 
 	return $strHourTableHtml;
 }
@@ -75,7 +75,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 
 		$repeat_top = (int)($total_number_of_rows*.75);
 		$repeat_bottom = (int)$total_number_of_rows-$repeat_top;
-		$intNumberOfLinesForHoursTable = 9;
+		$intNumberOfLinesForHoursTable = 12;
 		$strEisenhowerHtml = ' <!-- =======================================open eisenhower tables===========================-->
 		<!-- first need to close a table opened in outer function -->
 

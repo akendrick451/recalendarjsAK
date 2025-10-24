@@ -58,7 +58,7 @@ class Config {
 			self::MONTH => 7, //start month
 			// The number of months you want this calendar to be for.
 			// Useful if you want a calendar for the quarter (3) or a 15 month calendar.
-			self::MONTH_COUNT => 1,
+			self::MONTH_COUNT => 6,
 			// The year for which to generate this calendar.
 			// Defaults to the current year.
 			self::YEAR => 2025,

@@ -117,7 +117,7 @@ class Config {
 				"I can have feelings / I do have feelings", 
 				"I can heal so much / I am healing so much", 
 				"I can be the adult / I am an adult", 
-				"I can have adult relationships / I do have adult relationships (adult to adult, not child to adult)", 
+				"I can have adult relationships / I do have adult relationships (adult to adult, not inner child to adult)", 
 				"I have permission to be me", 
 				"I can be proud of something I have done / I am proud of things that I have done", 
 				"It's OK for me to be proud of something that I've done", 

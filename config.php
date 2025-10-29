@@ -9,6 +9,7 @@ namespace ReCalendar;
 class Config {
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const AFFIRMATIONS = "affirmations";
+	public const AK_INFORMATION = "ak_information";
 	public const BIBLE_VERSES = "bible_verses";
 	public const DAY_ITINERARY_ITEMS = 'day_itinerary_items';
 	//public const MONTHLY_NOTES = "monthly_notes";
@@ -127,6 +128,17 @@ class Config {
 				"I can dream / I dream", 
 				"I can plan / I do plan eg life plans, 10 years from now plans", 
 			],
+			// information that is useful for me that I put as reminders in my calendar
+			// I think I'll add it as random notes to my calendar near the quotes etc
+			// maybe on the second page ... the eisenhower page
+			// if cindluding information, please add source. 
+			self::AK_INFORMATION => [
+				'Omega 3 fatty acids 1mg of EPA a day is great for depression, ADHD - doi:10.1016/j.bbi.2024.02.029, additudemag.',
+				'Creatine is pretty great for cognitive and mood - https://www.uclahealth.org/', 
+				'Your brain generally tries to find answers, so trick it nicely eg, what wins have you had lately ',
+				'Be careful with speech, it confirms and leads you, eg better is I am healing, not the opposite.', 
+
+			], 
 			// Used in the small calendar in the upper right corner of most pages
 			// Please try to use a 2 character abbreviations to save space on the page
 			self::DAY_NAMES_SHORT => [
@@ -141,8 +153,8 @@ class Config {
 			//ak changed on 07/12/2024 11:30am 
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
-				 12 => [ 'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'] , 
-				 11 => [   'Reverse sensor', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol' 	] ,
+				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10', 'Sell on fiver and make webpage and advertise', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'] , 
+				 11 => [   'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre',  'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol' 	] ,
 				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
 				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
 				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 

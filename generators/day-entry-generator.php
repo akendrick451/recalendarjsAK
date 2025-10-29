@@ -52,6 +52,9 @@ class DayEntryGenerator extends Generator {
 		$strQuotesArr[] = "'I’m a greater believer in luck, and I find the harder I work the more I have of it.' — Thomas Jefferson";
 		$strQuotesArr[] = "'When we strive to become better than we are, everything around us becomes better too.' — Paulo Coelho";
 		$strQuotesArr[] = "'Opportunity is missed by most people because it is dressed in overalls and looks like work.' — Thomas Edison";
+		$strQuotesArr[] = "'Do you want to be right or happy?' — Fr Emmerich Vogt re the Twelve Steps";
+		$strQuotesArr[] = "'Get off the cross, we need the wood' — Fr Emmerich Vogt re the Twelve Steps";
+
 
 		$intRandomNumber = rand(0,count($strQuotesArr)-1);
         return $strQuotesArr[$intRandomNumber];
@@ -67,6 +70,9 @@ class DayEntryGenerator extends Generator {
 
 	} // get random function
 
+
+
+
 	protected function get_random_bible_verse() : ?string {
 
 		$all_bible_verses = $this->config->get( Config::BIBLE_VERSES );
@@ -76,6 +82,13 @@ class DayEntryGenerator extends Generator {
 
 	} // get random get_random_bible_verse
 	
+	protected function get_random_ak_information() : ?string {
+		$all_ak_information = $this->config->get( Config::AK_INFORMATION );
+		$intRandomNumber = rand(0,count($all_ak_information)-1);
+
+		return $all_ak_information[$intRandomNumber];
+
+	} // end get random ak information
 	
 	// called from parent class generate()
 	protected function generate_content() : void {
@@ -89,6 +102,7 @@ class DayEntryGenerator extends Generator {
 		$random_quote = self::get_random_quote();
 		$random_affirmation = self::get_random_affirmation();
 		$random_bible_verse = self::get_random_bible_verse();
+		$random_ak_information = self::get_random_ak_information();
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -179,6 +193,7 @@ class DayEntryGenerator extends Generator {
 				self::generate_content_box( $itinerary_items ); // prints all the rows - $itinerary_items an array of somethings
 
 
+
 		   // echo $itinerary_items[0][1]." - " . $this->day->format( 'D, d M Y' );
 
 		//	echo '<table class="ruledLines">';
@@ -187,7 +202,7 @@ class DayEntryGenerator extends Generator {
 						
 			
 
-
+			echo '<table><tr><td align="center">' . $random_ak_information .'</td></tr></table>';
 			echo '</td>';
 			echo '<Td width="30%" valign=top>';
 			/*			

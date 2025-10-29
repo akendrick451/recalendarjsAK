@@ -48,7 +48,7 @@ abstract class Generator {
 
 	abstract protected function generate_content() : void;
 	abstract protected function generate_anchor_string() : ?string;
-protected static function get_hour_table_html() : string  {
+	protected static function get_hour_table_html() : string  {
 
 
 
@@ -66,12 +66,12 @@ protected static function get_hour_table_html() : string  {
 		
 
 	return $strHourTableHtml;
-}
+	}// get_hour_table_html	
 
 
 
 
-protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
+	protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
 
 		$repeat_top = (int)($total_number_of_rows*.75);
 		$repeat_bottom = (int)$total_number_of_rows-$repeat_top;
@@ -113,6 +113,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 
                         </table></td>
             </tr>
+		
 
 
          <!-- no need for end table as this is done in outside fucntion generate content box -->
@@ -137,6 +138,7 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 			//akdebug ak add if title contains eisenhower, then print in eisenhower style
 		
 			if (str_contains(strtolower($item_name), 'eisenhower')) {
+				
 				self::generate_eisenhower_html($item_name, $number_of_rows);
 			} else {
 				echo "<tr><td class=\"content-box-line\">$item_name</td></tr>";
@@ -227,4 +229,4 @@ protected static function generate_eisenhower_html($item_name, $total_number_of_
 	protected static function is_weekend( \DateTimeImmutable $day ) : bool {
 		return in_array( $day->format( 'N' ), [ '6', '7' ], true );
 	}
-}
+} // end abstract class

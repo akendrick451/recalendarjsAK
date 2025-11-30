@@ -4,6 +4,7 @@ declare(strict_types=1);
 // ATK May 2024 - change date output
 // 1. Change date - done
 // 2. Can I set my own sections on the day print?
+// 3. How do I run this?
 
 
 namespace ReCalendar;

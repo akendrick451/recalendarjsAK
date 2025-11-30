@@ -150,12 +150,10 @@ class DayEntryGenerator extends Generator {
 							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
 							
 				?>
-				<tr><td colspan="2" class="content-box-height">Recent Successes</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
-				<?php			
-							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
-							
-				?>
-						<tr><td colspan="2" class="content-box-height">Next Sucess</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
+				<tr><td colspan="1" class="content-box-height">Recent Successes</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">Next Sucess</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<?php			
 							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
 							

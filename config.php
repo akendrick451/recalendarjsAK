@@ -153,8 +153,8 @@ class Config {
 			//ak changed on 07/12/2024 11:30am 
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
-				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10', 'Sell on fiver and make webpage and advertise', 'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol'] , 
-				 11 => [   'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre',  'Queens Pawn 20%', 'Save Money', 'Watch weight', 'Cholesterol' 	] ,
+				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Masters 100%', 'Sell personal diary service $10', 'Queens Pawn 20%', 'Save Money', 'Cholesterol'] , 
+				 11 => [   'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre',  'Masters 100%', 'Queens Pawn 20%', 'Watch weight', 'Cholesterol' 	] ,
 				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
 				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
 				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
@@ -170,7 +170,7 @@ class Config {
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affimatiion thpy fr', 'Masters Degree 96%', 
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affirmation thpy Fr', 'Masters Degree 96%', 
 				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [

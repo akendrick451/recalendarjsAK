@@ -465,10 +465,14 @@ s
 
 
   
-  .ruledLines td {
-   border-bottom: solid #ccc 1px;
-   width:100%
+  .ruledLinesTD {   
+   border-bottom: 1px solid #AAA;
+   width:95%;
+   background-color:rgb(188, 192, 192);
+   height:20pt;
+   font-size: 12pt;
   }
+
 
 
   #page-break-before {
@@ -493,8 +497,4 @@ s
   .eisenWide {
 	width:45%;
 	
-  }
-  .ruledLines {
-   
-   width:100%
   }

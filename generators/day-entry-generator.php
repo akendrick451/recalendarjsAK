@@ -146,10 +146,6 @@ class DayEntryGenerator extends Generator {
 				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
 				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="2" class="content-box-height">What I'm doing for others this week?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
-				<?php			
-							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
-							
-				?>
 				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
 				<tr><td colspan="1" class="content-box-height">Recent Successes</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>

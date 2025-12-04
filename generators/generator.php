@@ -73,7 +73,7 @@ abstract class Generator {
 
 	protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
 
-		$repeat_top = (int)($total_number_of_rows*.75);
+		$repeat_top = (int)($total_number_of_rows*.65);
 		$repeat_bottom = (int)$total_number_of_rows-$repeat_top;
 		$intNumberOfLinesForHoursTable = 12;
 		$strEisenhowerHtml = ' <!-- =======================================open eisenhower tables===========================-->
@@ -101,17 +101,11 @@ abstract class Generator {
                         </table></td>
             </tr>
             <tr id="row3eisenhower">
-                    <td class="vertical">N<Br>O<br>T<br>&nbsp;<br> I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
-                    <td style="border-right:2px solid #ccc;"><span class="boxtext">DELEGATE</SPAN>
+                    <td class="vertical">&nbsp;</td>
+                    <td colspan="2" style="width:100%"><span class="boxtext">Notes</SPAN>
                     <table class="eisenhowerlines">
             			' . str_repeat('<tr><td>&nbsp;</td></tr>', $repeat_bottom) . '
-                        </table></td>
-                    <td><span class="boxtext">DELETE</span>
-                          <table class="eisenhowerlines">
-                   
-            			' . str_repeat('<tr><td>&nbsp;</td></tr>', $repeat_bottom) . '
-
-                        </table></td>
+                        </table>
             </tr>
 		
 

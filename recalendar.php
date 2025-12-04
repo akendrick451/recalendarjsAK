@@ -70,19 +70,34 @@ class ReCalendar {
 		$this->write_html();
 
 
+		$page_count = $this->mpdf->page;
+		echo "page count2 is " . $page_count;
 		//ak change filename to include date and time
 		$dateNow   = new \DateTime(); //this returns the current date time
         $dateNowString = $dateNow->format('Y-m-d-H-i-s');
 		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
 
+		$expected_page_count = 475 ; // page count for 2025 for 6 months
+		if (($page_count > 400 & $page_count < 600) & $page_count <> $expected_page_count) {
+			
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "                        2025 - expected page count of 475 but got " . $page_count;
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
+			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
 
+		}
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
 		file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$all_html_ak);
 		
 		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
-
+		$page_count = $this -> page;	
+		echo "page count3 is " . $page_count;
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';

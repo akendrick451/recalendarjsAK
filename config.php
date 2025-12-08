@@ -171,7 +171,7 @@ class Config {
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
 				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affirmation thpy Fr', 'Masters Degree 96%', 
-				'<b>Exciting</b>', '..Fix window', '..Build info screen wall'
+				'<b>Exciting</b>', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [
 				'Monthly Notes',
@@ -186,10 +186,10 @@ class Config {
 				'Build Inner Wall',				
 			],*/
 			self::BUCKET_LIST => [
-				'Bucket List',
-				'Dance class', 'Sing in choir',
+				'Bucket List',				
+				'Dance Class,Sing in choir',
 				'Another cooking class',
-				'Try Amsterdam, England',				
+				'Try Amsterdam, England',					
 				'Love?',				
 			],
 

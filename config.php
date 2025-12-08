@@ -153,7 +153,7 @@ class Config {
 			//ak changed on 07/12/2024 11:30am 
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
-				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Masters 100%', 'Sell personal diary service $10', 'Queens Pawn 20%', 'Save Money', 'Cholesterol'] , 
+				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Masters 100%', 'Sell personal diary service $10', 'Save Money', 'Cholesterol'] , 
 				 11 => [   'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre',  'Masters 100%', 'Queens Pawn 20%', 'Watch weight', 'Cholesterol' 	] ,
 				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
 				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
@@ -187,11 +187,9 @@ class Config {
 			],*/
 			self::BUCKET_LIST => [
 				'Bucket List',
-				'Dance class',
-				'Sing in choir',
+				'Dance class', 'Sing in choir',
 				'Another cooking class',
-				'Try Amsterdam',
-				'Try England',				
+				'Try Amsterdam, England',				
 				'Love?',				
 			],
 

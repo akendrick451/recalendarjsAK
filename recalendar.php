@@ -19,6 +19,7 @@ require_once __DIR__ . '/generators/year-overview-generator2.php';
 require_once __DIR__ . '/generators/week-overview-generator.php';
 require_once __DIR__ . '/generators/week-retrospective-generator.php';
 require_once __DIR__ . '/generators/year-retrospective-generator.php';
+require_once __DIR__ . '/akfunctions.php';
 
 class ReCalendar {
 	private $mpdf = null;
@@ -84,11 +85,11 @@ class ReCalendar {
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
-			echo "                        2025 - expected page count of 475 but got " . $page_count;
+			echo "                        2025 - expected page count of " . $expected_page_count. " but got " . $page_count;
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
-
+			error_beep();
 		}
 			// ==============================================================================================================================
 		// ==============================================================================================================================

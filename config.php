@@ -187,7 +187,7 @@ class Config {
 			],*/
 			self::BUCKET_LIST => [
 				'Bucket List',				
-				'Dance Class,Sing in choir',
+				'Dance Class, Sing in choir',
 				'Another cooking class',
 				'Try Amsterdam, England',					
 				'Love?',				

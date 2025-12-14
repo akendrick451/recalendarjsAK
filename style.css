@@ -473,6 +473,14 @@ s
    font-size: 12pt;
   }
 
+  .ruledLinesTDSmaller {
+	  border-bottom: 1px solid #AAA;
+   width:95%;
+   background-color:rgb(188, 192, 192);
+   height:12pt;
+   font-size: 8pt;
+  }
+
 
 
   #page-break-before {

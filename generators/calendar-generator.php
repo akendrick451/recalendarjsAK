@@ -13,6 +13,7 @@ class CalendarGenerator extends Generator {
 	private $month;
 	private $date;
 	private $display_full_month_name;
+	public $highlight_mode;
 
 	public function __construct( \DateTimeImmutable $date, string $highlight_mode, Config $config, bool $display_full_month_name = false ) {
 		parent::__construct( $config );
@@ -118,8 +119,8 @@ class CalendarGenerator extends Generator {
 		$year_overview_anchor = self::get_year_overview_anchor();
 ?>
 		<a href="#<?php echo $previous_month_overview_anchor; ?>" class="calendar__previous-month">&nbsp;&lt;&nbsp;</a>
-		<a href="#<?php echo $month_overview_anchor; ?>"><?php echo strftime( '%b', $this->month->getTimestamp() ); ?></a>
-		<a href="#<?php echo $year_overview_anchor; ?>"><?php echo strftime( '%Y', $this->month->getTimestamp() ); ?></a>
+		<a href="#<?php echo $month_overview_anchor; ?>"><?php echo date( 'M', $this->month->getTimestamp() ); ?></a>
+		<a href="#<?php echo $year_overview_anchor; ?>"><?php echo date( 'Y', $this->month->getTimestamp() ); ?></a>
 		<a href="#<?php echo $next_month_overview_anchor; ?>" class="calendar__next-month">&nbsp;&gt;&nbsp;</a>
 <?php
 	}

@@ -127,7 +127,7 @@ class DayEntryGenerator extends Generator {
 									}
 ?>
 								</td>
-								<td class="header-line day-entry__day-of-week"><?php echo strftime( '%A', $this->day->getTimestamp() ); ?></td>
+								<td class="header-line day-entry__day-of-week"><?php echo date( 'l', $this->day->getTimestamp() ); ?></td>
 							</tr>
 						</tbody>
 					</table>

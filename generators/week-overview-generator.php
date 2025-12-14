@@ -24,8 +24,8 @@ class WeekOverviewGenerator extends Generator {
 
 	protected function generate_content() : void {
 		$calendar_html = $this->calendar_generator->generate();
-		$week_start = strftime( '%d %B', $this->week->modify( 'monday this week' )->getTimestamp() );
-		$week_end = strftime( '%d %B', $this->week->modify( 'sunday this week' )->getTimestamp() );
+		$week_start = date( 'd F', $this->week->modify( 'monday this week' )->getTimestamp() );
+		$week_end = date( 'd F', $this->week->modify( 'sunday this week' )->getTimestamp() );
 
 		$previous_week_anchor = self::get_week_overview_anchor( $this->week->modify( 'previous week' ) );
 		$next_week_anchor = self::get_week_overview_anchor( $this->week->modify( 'next week' ) );
@@ -58,13 +58,13 @@ class WeekOverviewGenerator extends Generator {
 
 ?>
 		
-				<?php $this->generate_day_entry( $week_days[0], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[1], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[2], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[3], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[4], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[5], $day_entry_height ); ?>
-				<?php $this->generate_day_entry( $week_days[6], $day_entry_height ); ?>
+				<?php $this->generate_day_entry( $week_days[0], $day_entry_height,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[1], $day_entry_height ,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[2], $day_entry_height ,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[3], $day_entry_height ,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config ); ?>
+				<?php $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config ); ?>
 				<tr><td colspan="2" class="week-overview__notes">
 <?php
 					$weekly_todos = $this->config->get( Config::WEEKLY_TODOS );
@@ -86,8 +86,8 @@ class WeekOverviewGenerator extends Generator {
 	<td class="week-overview__day-entry" style="height: <?php echo $day_entry_height; ?>px;">
 			<table width="100%">
 				<tr height="100%">
-					<td class="week-overview__day-of-week"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo strftime( '%A', $week_day->getTimestamp() ); ?></a></td>
-					<td class="week-overview__date"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo strftime( '%d %b', $week_day->getTimestamp() ); ?></a></td>
+					<td class="week-overview__day-of-week"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo date( 'l', $week_day->getTimestamp() ); ?></a></td>
+					<td class="week-overview__date"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo date( 'd M', $week_day->getTimestamp() ); ?></a></td>
 				</tr>
 <?php
 				foreach ( $special_items as $special_item ) {
@@ -99,41 +99,8 @@ class WeekOverviewGenerator extends Generator {
 <?php
 	}
 
-	private function generate_day_entry( \DateTimeImmutable $week_day, int $day_entry_height ) {
-		// 3 rows for each day. Do same format as week review, so we can copy and paste
-	//		$special_items = self::get_matching_special_items( $week_day, $this->config->get( Config::SPECIAL_DATES ) );
-	?>
+
+
+
 	
-		<tr><td class="ruledLinesTD"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo strftime( '%A', $week_day->getTimestamp() ); ?></a> | <a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo strftime( '%d %b', $week_day->getTimestamp() ); ?></a></td>
-	<?php
-					foreach ( $special_items as $special_item ) {
-						echo "<tr><td class=\"week-overview__special-item\">» $special_item</td></tr>";
-					}
-	?>
-		<tr><td class="ruledLinesTD">&nbsp;</td></tr>				
-		<tr><td class="ruledLinesTD">&nbsp;</td></tr>				
-	<?php
-		}
-
-
-	private static function get_day_entry_height( int $start_week_number, int $end_week_number ) : int {
-		if ( $start_week_number > $end_week_number ) {
-			// Edge case when the Jan 1st falls on Week 53 of the previous year
-			// See 2020/2021
-			$start_week_number = 0;
-		}
-
-		$number_of_weeks_in_month = $end_week_number - $start_week_number + 1;
-		switch ( $number_of_weeks_in_month ) {
-			case 6:
-				return 208;
-
-			case 4:
-				return 221;
-
-			case 5:
-			default:
-				return 215;
-		}
-	}
 }

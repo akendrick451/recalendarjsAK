@@ -39,8 +39,8 @@ class YearRetrospectiveGenerator extends Generator {
 
 	protected function generate_content() : void {
 		$calendar_html = $this->calendar_generator->generate();
-		$week_start = strftime( '%d %B', $this->week->modify( 'monday this week' )->getTimestamp() );
-		$week_end = strftime( '%d %B', $this->week->modify( 'sunday this week' )->getTimestamp() );
+		$week_start = date( 'd F', $this->week->modify( 'monday this week' )->getTimestamp() );
+		$week_end = date( 'd F', $this->week->modify( 'sunday this week' )->getTimestamp() );
 		$year_overview_anchor = self::get_year_overview_anchor( $this->week );
 		$previous_week_retrospective_anchor = self::get_year_retrospective_anchor( $this->week->modify( 'previous week' ) );
 		$next_week_retrospective_anchor = self::get_year_retrospective_anchor( $this->week->modify( 'next week' ) );

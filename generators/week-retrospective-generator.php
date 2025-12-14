@@ -24,8 +24,8 @@ class WeekRetrospectiveGenerator extends Generator {
 
 	protected function generate_content() : void {
 		$calendar_html = $this->calendar_generator->generate();
-		$week_start = strftime( '%d %B', $this->week->modify( 'monday this week' )->getTimestamp() );
-		$week_end = strftime( '%d %B', $this->week->modify( 'sunday this week' )->getTimestamp() );
+		$week_start = date( 'd F', $this->week->modify( 'monday this week' )->getTimestamp() );
+		$week_end = date( 'd F', $this->week->modify( 'sunday this week' )->getTimestamp() );
 		$week_overview_anchor = self::get_week_overview_anchor( $this->week );
 		$previous_week_retrospective_anchor = self::get_week_retrospective_anchor( $this->week->modify( 'previous week' ) );
 		$next_week_retrospective_anchor = self::get_week_retrospective_anchor( $this->week->modify( 'next week' ) );
@@ -42,11 +42,46 @@ class WeekRetrospectiveGenerator extends Generator {
 				<td colspan="4" class="header-line week-retrospective__range"><?php echo $week_start; ?> - <?php echo $week_end; ?></td>
 			</tr>
 		</table>
+		<table class="content-box" align="center">
 <?php
-		$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
-		$itinerary_items = $all_itinerary_items[ Config::DAY_ITINERARY_WEEK_RETRO ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
-		self::generate_content_box( $itinerary_items );
+		//$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
+		//$itinerary_items = $all_itinerary_items[ Config::DAY_ITINERARY_WEEK_RETRO ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
+		//self::generate_content_box( $itinerary_items );
+		$next_week = $this->week->modify('next week');
+		$this_week = $this->week->modify('this week');
+		echo "next_week is" . $next_week->format('Y-m-d H:i:s');
+		echo "this_week is" . $this_week->format('Y-m-d H:i:s');
+		$week_period = new \DatePeriod( $this->week, new \DateInterval( 'P1D' ), $next_week );
+		$week_days = [];
+		$month_start_week_number = self::get_week_number( $this->week->modify( 'first day of this month' )->modify( 'monday this week' ) );
+		$month_end_week_number = self::get_week_number( $this->week->modify( 'last day of this month' )->modify( 'monday this week' ) );
+		$day_entry_height = self::get_day_entry_height( $month_start_week_number, $month_end_week_number );
+		foreach ( $week_period as $week_day ) {
+			$week_days[] = $week_day;
+		}
+		$blRetrospective = true;
+
 ?>
+
+				<?php $this->generate_day_entry( $week_days[0], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[1], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[2], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[3], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<tr><td colspan="2" class="week-overview__notes">
+<?php
+					$weekly_todos = $this->config->get( Config::WEEKLY_TODOS );
+					foreach ( $weekly_todos as $weekly_todo ) {
+						echo "<span>$weekly_todo</span><br />";
+					}
+?>
+				</td></tr>
+				<tr><Td class="ruledLinesTDSmaller"><b>Notes on Week</b></td></tr>
+				<?php echo str_repeat('<tr><td class="ruledLinesTDSmaller">&nbsp;</td></tr>', 12); ?>
+
+				</table>
 <?php
 	}
 }

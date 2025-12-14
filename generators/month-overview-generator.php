@@ -18,7 +18,7 @@ class MonthOverviewGenerator extends Generator {
 		$this->month = $date->modify( 'first day of this month' );
 		$this->last_month  = $date->modify('-1 week');
 		$this->calendar_generator = $calendar_generator;
-		$last_month_name2 = self::get_localized_month_name( $this->last_month, $this->config->get( Config::MONTHS ) );
+		$this->last_month_name2 = self::get_localized_month_name( $this->last_month, $this->config->get( Config::MONTHS ) );
 
 	}
 
@@ -49,7 +49,7 @@ class MonthOverviewGenerator extends Generator {
 					<tr><td width="10%">Notes for Review of Month
 
 					<?php
-					 echo $last_month_name2;
+					 echo $this->last_month_name2;
 						// AK NEW TEXT DEC 2024. TRYING TO MAKE MONTHLY NOTES SPECIFIC TO MONTH
 			$month_notes_all = $this->config->get( Config::MONTHLY_NOTES_2 );
 			$month_notes = $month_notes_in_day_all[ (int) $this->month->format( 'n' ) ] ?? $this->config->get( Config::MONTHLY_NOTES_COMMON ); // lowecase n for month number
@@ -125,7 +125,7 @@ class MonthOverviewGenerator extends Generator {
 
 					$i = 1;
 					foreach ( $month_period as $day ) {
-						$day_name = strftime( '%a', $day->getTimestamp() );
+						$day_name = $day->format( 'D' );
 						$day_entry_anchor = self::get_day_entry_anchor( $day );
 						$css_classes = 'month-overview__habit-header name';
 						if ( self::is_weekend( $day ) ) {
@@ -159,7 +159,7 @@ class MonthOverviewGenerator extends Generator {
 			$i = 1;
 			foreach ( $month_period as $day ) {
 				$day_number = $day->format( 'j' );
-				$day_name = strftime( '%a', $day->getTimestamp() );
+				$day_name = $day->format( 'D' );
 				$day_entry_anchor = self::get_day_entry_anchor( $day );
 				$css_classes = 'month-overview__habit-header name';
 						if ( self::is_weekend( $day ) ) {

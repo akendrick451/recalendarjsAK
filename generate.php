@@ -66,8 +66,13 @@ setlocale( LC_TIME, $config->get( \ReCalendar\Config::LOCALE ) );
 echo "Get recalendar.php";
 
 try {
-	require_once __DIR__ . '/recalendar.php';;
+	require_once __DIR__ . '/recalendar.php';
+	echo "Get recalendar.php2";
+
  } catch (\Throwable $e) {
+	
+	echo "Get recalendar.php 3";
+
 	 echo "\nThis was caught: " . $e->getMessage();
 	 echo $e;
  }
@@ -83,9 +88,20 @@ function l( $stuff ) : void {
 	}
 }
 
+function beep($frequency = 800, $duration = 300) {
+    $freq = (int)$frequency;
+    $dur  = (int)$duration;
+    // Escape for PowerShell
+    $cmd = "powershell -Command \"[console]::Beep($freq, $dur)\"";
+    shell_exec($cmd);
+}
+
+
 try {
 	echo "Setup done.. get config1...";
 
+	// try to do a beep\a
+	
 
 	$defaultConfig = ( new \Mpdf\Config\ConfigVariables() )->getDefaults();
 	$fontDirs = $defaultConfig['fontDir'];
@@ -128,8 +144,10 @@ try {
 	echo "You probably now want to run py .\\renameLatestJournalPDF.py";
 	echo '<b>Total Execution Time:</b> '. number_format((float) $execution_time, 10).' Mins';
 	// if you get weird results, use number_format((float) $execution_time, 10)
+	echo "\nIf all good - you can run py renameLatestJournalPDF.py";
 } catch (\Throwable $e) {
     echo "\nAK Error - This was caught: " . $e->getMessage();
+	error_beep();
 	echo $e;
 }
 

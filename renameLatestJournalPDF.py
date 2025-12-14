@@ -9,6 +9,7 @@ def rename_latest_pdf(directory, new_name):
     If 'new_name.pdf' already exists, that file is renamed to 'new_name_OLD_<timestamp>.pdf'.
     If the rename fails (e.g., because the file is open), a copy is created instead.
     """
+    print("1. Start rename using " + directory  + " and " + new_name)
     if not os.path.isdir(directory):
         print(f"Error: Directory '{directory}' does not exist.")
         return
@@ -20,6 +21,8 @@ def rename_latest_pdf(directory, new_name):
 
     latest_pdf = max(pdf_files, key=os.path.getmtime)
     new_path = os.path.join(directory, f"{new_name}.pdf")
+
+    print("2. trying to save to " + new_path)
 
     # If a file with the target name already exists, rename it with timestamp
     if os.path.exists(new_path):
@@ -35,6 +38,8 @@ def rename_latest_pdf(directory, new_name):
             print(f"Existing file is open — copied to: {copy_name}")
 
     # Try to rename the most recent file
+    print("3. Try to rename the most recent file which is\n" + latest_pdf)
+
     try:
         os.rename(latest_pdf, new_path)
         print(f"Renamed most recent PDF:\n  {latest_pdf}\n→ {new_path}")
@@ -50,9 +55,7 @@ def rename_latest_pdf(directory, new_name):
 
 # Example usage:
 # Change these to your actual folder path and desired filename.
-if __name__ == "__main__":
-    folder = r"C:\Users\akend\OneDrive\Documents\GitHub\recalendarjsAK\output"
-    new_filename = "Journal25-Jul-Dec"  # no .pdf extension needed
-    rename_latest_pdf(folder, new_filename)
-    folder =r"D:\AKProgramming\GitHub\recalendar\output"
-    rename_latest_pdf(folder, new_filename)
+
+folder = os.getcwd()+ "\\output\\"
+new_filename = "Journal25-Jul-Dec"  # no .pdf extension needed
+rename_latest_pdf(folder, new_filename)

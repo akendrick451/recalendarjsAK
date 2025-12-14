@@ -54,6 +54,7 @@ class DayEntryGenerator extends Generator {
 		$strQuotesArr[] = "'Opportunity is missed by most people because it is dressed in overalls and looks like work.' — Thomas Edison";
 		$strQuotesArr[] = "'Do you want to be right or happy?' — Fr Emmerich Vogt re the Twelve Steps";
 		$strQuotesArr[] = "'Get off the cross, we need the wood' — Fr Emmerich Vogt re the Twelve Steps";
+		$strQuotesArr[] = "'A smooth sea never made a skilled sailor' - Franklin D. Roosevelt'";
 
 
 		$intRandomNumber = rand(0,count($strQuotesArr)-1);

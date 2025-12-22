@@ -477,7 +477,7 @@ class Config {
 		$period = new \DatePeriod( $start, $interval, $end );
 		$month_names = [];
 		foreach ( $period as $index => $month ) {
-			$month_names[ $index + 1 ] = strftime( '%B', $month->getTimestamp() );
+			$month_names[ $index + 1 ] = $month->format( 'F' );//strftime( '%B', $month->getTimestamp() );
 		}
 
 		setlocale( LC_TIME, $old_locale );

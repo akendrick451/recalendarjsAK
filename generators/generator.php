@@ -69,7 +69,52 @@ abstract class Generator {
 	}// get_hour_table_html	
 
 
+	protected static function generate_day_entry( \DateTimeImmutable $week_day, int $day_entry_height, Config $config, bool $blRetrospective = false ) {
+		// 3 rows for each day. Do same format as week review, so we can copy and paste
+		//echo $config;
+			$special_items = self::get_matching_special_items( $week_day, $config->get( Config::SPECIAL_DATES ) );
+			if ($blRetrospective) {
+				$class = "ruledLinesTDSmaller";
+			} else {
+				$class = "ruledLinesTD";
+			}
+		
+	?>
+	
+		<tr><td class="<?php echo $class; ?>"><?php if ($blRetrospective) { echo "<i>"; }?><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>">
+			<?php echo $week_day->format( 'l' ); ?></a> | <a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>">
+				<?php echo date( 'd M', $week_day->getTimestamp() ); ?></a><?php if ($blRetrospective) { echo "</i>"; }?></td>
+	<?php
+					foreach ( $special_items as $special_item ) {
+						echo "<tr><td class=\"week-overview__special-item\">» $special_item</td></tr>";
+					}
+	?>
+		<tr><td class="<?php echo $class; ?>">&nbsp;</td></tr>				
+		<tr><td class="<?php echo $class; ?>">&nbsp;</td></tr>				
+	<?php
+		}
 
+	
+	protected static function get_day_entry_height( int $start_week_number, int $end_week_number ) : int {
+		if ( $start_week_number > $end_week_number ) {
+			// Edge case when the Jan 1st falls on Week 53 of the previous year
+			// See 2020/2021
+			$start_week_number = 0;
+		}
+
+		$number_of_weeks_in_month = $end_week_number - $start_week_number + 1;
+		switch ( $number_of_weeks_in_month ) {
+			case 6:
+				return 208;
+
+			case 4:
+				return 221;
+
+			case 5:
+			default:
+				return 215;
+		}
+	} // end get day entry height		
 
 	protected static function generate_eisenhower_html($item_name, $total_number_of_rows) {
 

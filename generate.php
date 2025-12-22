@@ -2,8 +2,10 @@
 <?php
 declare(strict_types=1);
 
-
-error_reporting(E_ERROR); ini_set('display_errors', '1');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+//error_reporting(E_ERROR); ini_set('display_errors', '1');
 
 
 //place this before any script you want to calculate time
@@ -139,7 +141,8 @@ try {
 	echo 'Finish at '.  (new \DateTime())->format( 'Y-m-d H:i:s' );
 	//dividing with 60 will give the execution time in minutes otherwise seconds
 	$execution_time = ($time_end - $time_start)/60;   //execution time of the script
-	echo 'Total Execution Time: '. number_format((float) $execution_time, 2).' Mins';
+	echo "You probably now want to run py .\\renameLatestJournalPDF.py";
+	echo '<b>Total Execution Time:</b> '. number_format((float) $execution_time, 10).' Mins';
 	// if you get weird results, use number_format((float) $execution_time, 10)
 	echo "\nIf all good - you can run py renameLatestJournalPDF.py";
 } catch (\Throwable $e) {

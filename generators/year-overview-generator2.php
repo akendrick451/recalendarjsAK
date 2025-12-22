@@ -6,7 +6,7 @@ namespace ReCalendar;
 require_once __DIR__ . '/generator.php';
 require_once __DIR__ . '/calendar-generator.php';
 
-class YearOverviewGenerator2 extends Generator {
+class YearOverviewGenerator extends Generator {
 	private $year_start;
 	private $year_end;
 
@@ -38,7 +38,7 @@ class YearOverviewGenerator2 extends Generator {
 			echo '<td class="year-overview__calendar">' 
                 .'   <table class="akyearlyplan" style-"border=1px solid #eee">
                     <tr><td><a href="#01012025-month-overview">Jan</a></td><td><a href="#01022025-month-overview">Feb</a></td><td><a href="#01032025-month-overview">Mar</a></td></tr>
-                    <tr><td><a href="#01042025-month-overview">Apr<</a></td><td><a href="#01052025-month-overview">May</a></td><td><a href="#01062025-month-overview">Jun</a></td></tr>
+                    <tr><td><a href="#01042025-month-overview">Apr</a></td><td><a href="#01052025-month-overview">May</a></td><td><a href="#01062025-month-overview">Jun</a></td></tr>
                     <tr><td><a href="#01072025-month-overview">Jul</a></td><td><a href="#01008025-month-overview">Aug</a></td><td><a href="#01092025-month-overview">Sept</a></td></tr>
                     <tr><td><a href="#01102025-month-overview">Oct</a></td><td><a href="#01112025-month-overview">Nov</a></td><td><a href="#01122025-month-overview">Dec</a></td></tr>
             </tr></table>' .

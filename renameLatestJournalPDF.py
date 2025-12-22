@@ -58,4 +58,5 @@ def rename_latest_pdf(directory, new_name):
 
 folder = os.getcwd()+ "\\output\\"
 new_filename = "Journal25-Jul-Dec"  # no .pdf extension needed
+new_filename = "Journal26-Jan-Jun"
 rename_latest_pdf(folder, new_filename)

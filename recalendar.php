@@ -51,7 +51,10 @@ class ReCalendar {
 		$start = new \DateTimeImmutable( "$year-$month-01" );
 		$month_count = (int) $this->config->get( Config::MONTH_COUNT );
 		$end = $start->modify( "$month_count months" );
-		$year_overview_generator = new YearOverviewGenerator( $start, $end, $this->config );
+
+		$jan_date = new \DateTimeImmutable( "$year-01-01" );
+		$dec_date = new \DateTimeImmutable( "$year-12-31" );
+		$year_overview_generator = new YearOverviewGenerator( $jan_date, $dec_date, $this->config );
 		//$year_overview_generator2 = new YearOverviewGenerator2( $start, $end, $this->config );
 		//$this->add_page();
 		//$this->append_html( $year_overview_generator->generate() );

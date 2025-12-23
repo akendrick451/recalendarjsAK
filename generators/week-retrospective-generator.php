@@ -49,8 +49,8 @@ class WeekRetrospectiveGenerator extends Generator {
 		//self::generate_content_box( $itinerary_items );
 		$next_week = $this->week->modify('next week');
 		$this_week = $this->week->modify('this week');
-		echo "next_week is" . $next_week->format('Y-m-d H:i:s');
-		echo "this_week is" . $this_week->format('Y-m-d H:i:s');
+		//echo "next_week is" . $next_week->format('Y-m-d H:i:s');
+		//echo "this_week is" . $this_week->format('Y-m-d H:i:s');
 		$week_period = new \DatePeriod( $this->week, new \DateInterval( 'P1D' ), $next_week );
 		$week_days = [];
 		$month_start_week_number = self::get_week_number( $this->week->modify( 'first day of this month' )->modify( 'monday this week' ) );

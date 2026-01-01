@@ -82,6 +82,13 @@ class DayEntryGenerator extends Generator {
 		return $all_bible_verses[$intRandomNumber];
 
 	} // get random get_random_bible_verse
+
+	protected function getDailyQuestion() : ?string {
+		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'All you need is love'];
+		$all_questions[] = 'If today was perfect, what would it look like?' ;
+		$intRandomNumber = rand(0,count($all_questions)-1);
+		return $all_questions[$intRandomNumber];
+	}
 	
 	protected function get_random_ak_information() : ?string {
 		$all_ak_information = $this->config->get( Config::AK_INFORMATION );
@@ -104,6 +111,7 @@ class DayEntryGenerator extends Generator {
 		$random_affirmation = self::get_random_affirmation();
 		$random_bible_verse = self::get_random_bible_verse();
 		$random_ak_information = self::get_random_ak_information();
+		$random_question = self::getDailyQuestion();
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -148,13 +156,12 @@ class DayEntryGenerator extends Generator {
 				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="2" class="content-box-height">What I'm doing for others this week?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
-				<tr><td colspan="1" class="content-box-height">Recent Successes</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">Next Sucess</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<?php			
-							echo str_repeat( '<tr><td colspan="5" class="content-box-line"></td></tr>', 1 );
-							
-				?>
+				<tr><td colspan="1" class="content-box-height"><?php echo $random_question; ?> </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+
+				
 				<tr><td colspan="5"><br></td></tr>
 				<!-- <tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
 				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr> -->

@@ -71,7 +71,7 @@ a {
 }
 .smallerTextLight {
 	font-size: 9px;
-	color:#ccc;
+	color:#bdbcbc;
 }
 
 
@@ -347,7 +347,7 @@ td.calendar__week-number {
 }
 
 .content-box { 
-	background-color: rgb(188, 192, 192);
+	background-color: rgb(212, 214, 214); /* rgb(188, 192, 192);- too dark, rgb(200, 202, 202); also too dark change color as differnt boox update makes color darker */
 	width: 95%; /* ak changed 15/06/2024 */
 	vertical-align: middle;
 }
@@ -468,7 +468,7 @@ s
   .ruledLinesTD {   
    border-bottom: 1px solid #AAA;
    width:95%;
-   background-color:rgb(188, 192, 192);
+   background-color:rgb(212, 214, 214);
    height:20pt;
    font-size: 12pt;
   }
@@ -476,7 +476,7 @@ s
   .ruledLinesTDSmaller {
 	  border-bottom: 1px solid #AAA;
    width:95%;
-   background-color:rgb(188, 192, 192);
+   background-color:rgb(212, 214, 214);
    height:12pt;
    font-size: 8pt;
   }

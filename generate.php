@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//error_reporting(E_ERROR); ini_set('display_errors', '1');
+#error_reporting(E_ALL);
+error_reporting(E_ERROR); ini_set('display_errors', '1');
 
 
 //place this before any script you want to calculate time
@@ -50,6 +50,8 @@ if ( $argc > 1 && $argv[1] === '-c' ) {
 	require_once __DIR__ . '/local.config.php';
 }
 
+
+
 echo "Check if class exists...";
 
 
@@ -57,6 +59,18 @@ if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
 	$config = new \Recalendar\LocalConfig();
 } else {
 	$config = new \Recalendar\Config();
+}
+
+// check if we are debug or test.. then set to only 1 month for speed
+// else set to 6
+if ( $argc > 1 && $argv[1] === 'test' ) {
+	$month_count = (int) $config->get( 'month_count' );
+	echo $month_count;
+	$config->set( 'month_count', 1);
+	echo "DEBUG/TEST ONLY USING ONE MONTH";
+	$month_count = (int) $config->get( 'month_count' );
+	echo "Month count should now be one.... it is [" . $month_count . "]";
+
 }
 
 echo "Set Locale...";
@@ -141,10 +155,10 @@ try {
 	echo 'Finish at '.  (new \DateTime())->format( 'Y-m-d H:i:s' );
 	//dividing with 60 will give the execution time in minutes otherwise seconds
 	$execution_time = ($time_end - $time_start)/60;   //execution time of the script
-	echo "You probably now want to run py .\\renameLatestJournalPDF.py";
+	echo "You probably now want to run python .\\renameLatestJournalPDF.py";
 	echo '<b>Total Execution Time:</b> '. number_format((float) $execution_time, 10).' Mins';
 	// if you get weird results, use number_format((float) $execution_time, 10)
-	echo "\nIf all good - you can run py renameLatestJournalPDF.py";
+	echo "\nIf all good - you can run python .\\renameLatestJournalPDF.py";
 } catch (\Throwable $e) {
     echo "\nAK Error - This was caught: " . $e->getMessage();
 	error_beep();

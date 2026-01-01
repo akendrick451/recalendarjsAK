@@ -7,6 +7,8 @@ namespace ReCalendar;
 // also can update self::YEAR
 
 class Config {
+	private array $configuration;
+
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const AFFIRMATIONS = "affirmations";
 	public const AK_INFORMATION = "ak_information";
@@ -46,12 +48,18 @@ class Config {
 	public const SUBTITLE = 'subtitle';
 	public const YEAR = 'year';
 
-	public function get( string $key ) {
-		return $this->get_configuration()[ $key ] ?? null;
+	public function get(string $key) {
+		return $this->configuration[$key] ?? null;
 	}
 
-	protected function get_configuration() : array {
-		$configuration = [
+
+	public function set(string $key, $value): void {
+        $this->configuration[$key] = $value;  // ← Direct access — works perfectly
+    }
+
+	//protected function get_configuration() : array {
+	public function __construct() {
+		$this->configuration = [
 			// The month from which to start the "year"
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar
@@ -153,24 +161,23 @@ class Config {
 			//ak changed on 07/12/2024 11:30am 
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
-				 12 => [ 'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Masters 100%', 'Sell personal diary service $10', 'Save Money', 'Cholesterol'] , 
-				 11 => [   'Reverse sensor', 'Book Holidays x2!','Book Music and Theatre',  'Masters 100%', 'Queens Pawn 20%', 'Watch weight', 'Cholesterol' 	] ,
-				 1 => ['Holiday', 'Go away!', 'Rest for year', 'Buy wardrobe'] , 
-				 2 => [  'Hard work on cardinal v', 'Compassion re teaching', '2x clients', 'Get chest of drawers'	], 
-				 3 => [ 'Be More social', '2x Climbing', 'Book Jan Holiday'] , 
-				 4 => [ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 30%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
-				 5 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 35%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
-				 6 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 40%', 'Masters Degree 80%', 'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
-				 7 =>[ 'Sleep couns', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%' , 'House Deposit 16%' ], 
-				 8 =>[ 'Chess Beginnings 80%', 'Queens Pawn 1%', 'Pacing ME 50%', 'Masters Degree 90%', 'Couns Business 20%', 'Get Healthy 25%'  ], 
-				 9 =>[  'Queens Pawn 10%', 'Pacing ME 50%', 'Masters Degree 95%', 'Couns Business 20%', 'Watch weight' , 'Big shoulders' ], 
-				 10 =>[  'Reverse sensor', 'Queens Pawn 20%', 'Late December Holiday', 'Book Music and Theatre', 'Cholesterol', 'Breathless Eml Course' ], //shoulders, business, pauses due to health / stress issues
-
-
+			
+				 1 => ['Focus on Business','Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
+				 2 => [   'Self Compassion', '2x clients', 'Cholesterol'	], 
+				 3 => [ 'Be More social', '2x Climbing'] , 
+				 4 => [ 'Pacing ME 30%',  'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+				 5 =>[ 'Jog' ], 
+				 6 =>[ '' ], 
+				 7 =>[ '' ], 
+				 8 => [ '' ],  
+				 9 => [  'Big shoulders' ], 
+				 10 =>[ '' ],
+				 11 => [ 'Plan something different for new years or stay home.'] ,  
+				 12 => [ 'Stay in Energy Env.'] , 
 				 
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
-				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affirmation thpy Fr', 'Masters Degree 96%', 
+				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affirmation thpy Fr', 
 				'<b>Exciting</b>', '..Build info screen wall'
 			],
 			/*self::MONTHLY_NOTES => [
@@ -194,27 +201,18 @@ class Config {
 			],
 
 			self::CURRENT_READING_COMMON => [
-				'Current Reading','The Edge thriller - 30%', 
-				'Watership Down',				
+				'Current Reading','',			
 			],
 
 			self::CURRENT_READING => [
-				7 => ['Current Reading', 'The Edge Thriller - 30%', 'Don\'t let them - 30%', ],
-				9 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
-				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "The Well of Ascension, 10%",	],
-				10 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
-				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "The Healing Power of Vagus, 0%",	],
-				11 => ['Current Reading',  'Why zebras dont get ulcerss, 10%', 
-				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "The Well of Ascension, 100%",	],
-				12 => ['Current Reading', 'No Bad Parts, Schwarz', 'Why zebras dont get ulcerss, 10%', 
-				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "Alloy of Law, 10%",	],
+				7 => ['Current Reading', '' ],
+				9 => ['Current Reading', ''],
+				10 => ['Current Reading',  "The Healing Power of Vagus, 0%",	],
+				11 => ['Current Reading', ''	],
+				12 => ['Current Reading', ''	],
 				1 => ['Current Reading', 'No Bad Parts, Schwarz', 'Why zebras dont get ulcerss, 10%', 
-				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Mindful Emotions Workbook, 20%', 	
-				"The Inflamed Mind, 1%", "Alloy of Law, 10%",	],
+				'The explosive child, 20%',	'Dare to Connect, 20%', 'The Healing Power of Vagus, 20%', 	
+				'The Murder of Roger Ackroyd'	],
 			],
 			// Items for each page type
 			// The format is: [ NUMBER OF LINES, NAME (optional) ], maybe num of lines could be day number????
@@ -462,10 +460,9 @@ class Config {
 		// have their names decilned in the locale provided by the system, while
 		// you'd probably want a non-declined version.
 		// Example: 'stycznia' instead of 'Styczeń' for January in Polish.
-		$configuration[ self::MONTHS ] = $this->generate_month_names( $configuration[ self::LOCALE ] );
+		$this->configuration[ self::MONTHS ] = $this->generate_month_names( $this->configuration[ self::LOCALE ] );
 
-		return $configuration;
-	}
+		return $this->configuration;	}
 
 	private function generate_month_names( string $locale ) : array {
 		$old_locale = setlocale( LC_TIME, 0 );

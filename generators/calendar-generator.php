@@ -106,6 +106,14 @@ class CalendarGenerator extends Generator {
 <?php
 	}
 
+	public function get_month_link() : string {
+		// ak function generaate a preview showing only month names in a 3x4 table
+		$month_overview_anchor = self::get_month_overview_anchor( $this->month );
+		$month_name = self::get_localized_month_name( $this->month, $this->config->get( Config::MONTHS ) );
+		return "<a class=\"calendar__full-month-name\" href=\"#$month_overview_anchor\">$month_name</a>";
+		
+	}
+
 	private function generate_header() : void {
 		$month_overview_anchor = self::get_month_overview_anchor( $this->month );
 		if ( $this->display_full_month_name ) {

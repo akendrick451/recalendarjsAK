@@ -19,6 +19,7 @@ function error_beep() {
 		beep($note[0], $note[1]);
 		usleep(50000); // tiny pause between notes
 	}
+	/*
 	// Basic beep (800 Hz, 500 ms)
 	//	echo "1st beep\n";
 	//	shell_exec('powershell -Command "[console]::Beep(800,500)"');
@@ -38,7 +39,8 @@ function error_beep() {
 	shell_exec('powershell -Command "(New-Object System.Media.SoundPlayer).PlaySync()"');
 
 	// Or play the classic Windows Ding.wav
-	//shell_exec('powershell -Command "(New-Object Media.SoundPlayer \'C:\\Windows\\Media\\Windows Ding.wav\').PlaySync()"');
+	shell_exec('powershell -Command "(New-Object Media.SoundPlayer \'C:\\Windows\\Media\\Windows Ding.wav\').PlaySync()"');
+	*/
 } // error beep noise
 
 ?>

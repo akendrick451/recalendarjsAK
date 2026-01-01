@@ -81,7 +81,7 @@ class ReCalendar {
         $dateNowString = $dateNow->format('Y-m-d-H-i-s');
 		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
 
-		$expected_page_count = 574 ; // page count for 2025 for 6 months
+		$expected_page_count = 545 ; // page count for 2025 for 6 months
 		if (($page_count > 400 & $page_count < 600) & $page_count <> $expected_page_count) {
 			
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";

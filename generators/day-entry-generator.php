@@ -86,6 +86,14 @@ class DayEntryGenerator extends Generator {
 	protected function getDailyQuestion() : ?string {
 		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'All you need is love'];
 		$all_questions[] = 'If today was perfect, what would it look like?' ;
+		$all_questions[] = 'How do I want to feel at the end of this day?';
+		$all_questions[] = 'What one thing can I do today to move closer to my bigger goals?';
+		$all_questions[] = 'What tasks will bring me the most energy and joy?';
+		$all_questions[] = 'What boundaries do I need to set today to protect my energy and time?';
+		$all_questions[] = 'How can I incorporate moments of rest or joy into my schedule today?';
+		$all_questions[] = 'What healthy habits (like movement, hydration, or nutrition) do I want to prioritize today?';
+		$all_questions[] = 'At the end of the day, what will make me feel proud of how I spent my time?';
+
 		$intRandomNumber = rand(0,count($all_questions)-1);
 		return $all_questions[$intRandomNumber];
 	}
@@ -112,6 +120,13 @@ class DayEntryGenerator extends Generator {
 		$random_bible_verse = self::get_random_bible_verse();
 		$random_ak_information = self::get_random_ak_information();
 		$random_question = self::getDailyQuestion();
+		if (strlen($random_quote) < 160 ) {
+			$breaksAroundQuoteBefore = "&nbsp;<br>";
+			$breaksAroundQuoteAfter ="<br>&nbsp;<br>";
+		} else {
+			$breaksAroundQuoteBefore = "";
+			$breaksAroundQuoteAfter = "";
+		}
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -146,27 +161,31 @@ class DayEntryGenerator extends Generator {
 			<table width="95%" align="center">
 			<!-- ============================ open ATK table ============================ -->
 			 <!-- bible verse first --> 
-			<tr><td colspan="5"><i><?php echo $random_bible_verse?></i></b></td></tr>
+			  <tr ><td colspan="5" style="height:1px"></td></tr> <!-- 1mm for a break above -->
+			<tr ><td colspan="5" style="height:90px;"><i><?php echo $random_bible_verse?></i></b></td></tr>
+			<!-- setting the height the same for the bible verse means everything else lines up better if the verse is changed by recreating the pdf -->
 				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; yesterday? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
+				<tr><td colspan="2" class="content-box-height">What I learnt yesterday?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="2" class="content-box-height">What I'm doing for others this week?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
-				<tr><td colspan="1" class="content-box-height"><?php echo $random_question; ?> </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="4" class="content-box-height"><?php echo $random_question; ?> </td><td colspan="1" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 
 				
 				<tr><td colspan="5"><br></td></tr>
 				<!-- <tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>
 				<tr><td colspan="4"><br>View/Pan Long Term Work Tasks Document</td><td>&#10063;</td></tr> -->
-				<tr><td colspan="5"><br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
-					<br><?php echo $random_quote ?><br>&nbsp;<br></td></tr></table>
+				<tr><td colspan="5"><br><table width="99%" border=1><tr>
+					<td align="center" style="font-style:italic;font-size:smaller">
+					<?php echo $breaksAroundQuoteBefore .  $random_quote . $breaksAroundQuoteAfter?></td></tr></table>
 					<br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
 					<br><?php echo $random_affirmation ?><br>&nbsp;<br></td></tr></table>
 				</td></tr>

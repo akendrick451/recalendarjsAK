@@ -2,13 +2,13 @@
 declare(strict_types=1);
 namespace ReCalendar;
 
-CONST blAKDebug = true;
+include("../akfunctions.php");
 
 function AKDebug (string $strMessage) {
 
-	//if (blAKDebug) {
+	if ($G_BL_AK_DEBUG) {
 		echo "AKDebug " . $strMessage;
-	//}
+	}
 
 }
 

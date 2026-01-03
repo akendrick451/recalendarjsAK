@@ -59,12 +59,18 @@ class TitlePageGenerator extends Generator {
 		$title_image_file_and_path = "title_image.jpg";
 		list($width, $height, $type) = getimagesize($title_image_file_and_path) ?: [0, 0, 0];
 		checkAndResizeImageIfRequired($title_image_file_and_path);
-
+        if ($G_BL_AK_DEBUG) {
+            $ifDebugRedStyle = " style='color:red'";
+            $debugWord = "DEBUG!";
+        } else {
+            $ifDebugRedStyle = "";
+            $debugWord = "";
+        }
 ?>
 		
 		<div class="title-page">
 			<div align=center><img src="title_image.png"></img></div>
-			<div class="title-page__year"><?php echo $year; ?></div>
+			<div class="title-page__year" <?php echo $ifDebugRedStyle?>><?php echo $debugWord . $year; ?></div>
 			<div class="title-page__recalendar"><?php echo $subtitle ?></div>
 		</div>
 <?php

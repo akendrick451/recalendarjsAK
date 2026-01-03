@@ -105,7 +105,20 @@ class ReCalendar {
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("output//recalendarForPDF2" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$html);
+		
+		//file_put_contents("output//recalendarForPDF2" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$html);
+	
+		$reCalendarOutputFilename = escapeshellarg("\\output\\".$reCalendarOutputFilename);
+		echo "\n";
+		$strCurrentPath = __DIR__;
+		echo $strCurrentPath;
+		
+	   echo "\nOpen the pdf - ". __DIR__ . $reCalendarOutputFilename;
+		// Use 'start' command to open with default PDF viewer (Edge, Acrobat, etc.)
+		$command = 'start "" ' . __DIR__ . $reCalendarOutputFilename;
+
+
+		exec($command);
 
 	}
 

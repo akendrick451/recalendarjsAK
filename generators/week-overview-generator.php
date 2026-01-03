@@ -44,6 +44,11 @@ class WeekOverviewGenerator extends Generator {
 		</table>
 		<br/>
 		<table class="content-box" align="center">
+				<tr><td class="content-box-height">What I'm doing for others this week?</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+
+
 <?php
 		$month_start_week_number = self::get_week_number( $this->week->modify( 'first day of this month' )->modify( 'monday this week' ) );
 		$month_end_week_number = self::get_week_number( $this->week->modify( 'last day of this month' )->modify( 'monday this week' ) );

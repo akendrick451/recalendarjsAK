@@ -1,5 +1,8 @@
 <?php
 //ak functions
+
+$G_BL_AK_DEBUG = false;
+
 function error_beep() {
 		
 		
@@ -41,6 +44,16 @@ function error_beep() {
 	// Or play the classic Windows Ding.wav
 	shell_exec('powershell -Command "(New-Object Media.SoundPlayer \'C:\\Windows\\Media\\Windows Ding.wav\').PlaySync()"');
 	*/
+} // error beep noise
+
+function good_beep() {
+		
+		
+	// Simple success beep
+	beep(1000, 200);
+	sleep(1);
+
+	
 } // error beep noise
 
 ?>

@@ -71,7 +71,7 @@ a {
 }
 .smallerTextLight {
 	font-size: 9px;
-	color:#bdbcbc;
+	color:#ababab; /* make a bit darker atk 1 Jan 2026 from bdbcbc */
 }
 
 
@@ -469,8 +469,8 @@ s
    border-bottom: 1px solid #AAA;
    width:95%;
    background-color:rgb(212, 214, 214);
-   height:20pt;
-   font-size: 12pt;
+   height:16pt;
+   font-size: 10pt;
   }
 
   .ruledLinesTDSmaller {

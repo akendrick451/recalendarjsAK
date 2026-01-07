@@ -93,6 +93,8 @@ class DayEntryGenerator extends Generator {
 		$all_questions[] = 'How can I incorporate moments of rest or joy into my schedule today?';
 		$all_questions[] = 'What healthy habits (like movement, hydration, or nutrition) do I want to prioritize today?';
 		$all_questions[] = 'At the end of the day, what will make me feel proud of how I spent my time?';
+	$all_questions[] = 'How could I practice rejection therapy today?';
+
 
 		$intRandomNumber = rand(0,count($all_questions)-1);
 		return $all_questions[$intRandomNumber];

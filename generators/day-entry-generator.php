@@ -125,7 +125,7 @@ class DayEntryGenerator extends Generator {
 		$random_affirmation = self::get_random_affirmation();
 		$random_bible_verse = self::get_random_bible_verse();
 		$random_ak_information = self::get_random_ak_information();
-		$random_question = self::getDailyQuestion($day_number);
+		$daily_question = self::getDailyQuestion($day_number);
 		if (strlen($random_quote) < 160 ) {
 			$breaksAroundQuoteBefore = "&nbsp;<br>";
 			$breaksAroundQuoteAfter ="<br>&nbsp;<br>";
@@ -182,9 +182,8 @@ class DayEntryGenerator extends Generator {
 				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
-				<tr><td colspan="4" class="content-box-height"><?php echo $random_question; ?> </td><td colspan="1" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="5" class="content-box-height"><?php echo $daily_question; ?> </td></tr>
 				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
-
 				
 				<tr><td colspan="5"><br></td></tr>
 				<!-- <tr><td colspan="4"><br>View/Plan Work Tasks Document</td><td>&#9744;</td></tr>

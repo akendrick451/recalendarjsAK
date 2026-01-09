@@ -83,7 +83,7 @@ class DayEntryGenerator extends Generator {
 
 	} // get random get_random_bible_verse
 
-	protected function getDailyQuestion() : ?string {
+	protected function getDailyQuestion($intDayNumber) : ?string {
 		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'All you need is love'];
 		$all_questions[] = 'If today was perfect, what would it look like?' ;
 		$all_questions[] = 'How do I want to feel at the end of this day?';
@@ -93,11 +93,15 @@ class DayEntryGenerator extends Generator {
 		$all_questions[] = 'How can I incorporate moments of rest or joy into my schedule today?';
 		$all_questions[] = 'What healthy habits (like movement, hydration, or nutrition) do I want to prioritize today?';
 		$all_questions[] = 'At the end of the day, what will make me feel proud of how I spent my time?';
-	$all_questions[] = 'How could I practice rejection therapy today?';
+		$all_questions[] = 'How could I practice rejection therapy today?';
 
-
-		$intRandomNumber = rand(0,count($all_questions)-1);
-		return $all_questions[$intRandomNumber];
+		//shall i get these based on day number so that they don't change - as I'll be answering them. Yes. 
+		$intCountAllQuestions = count($all_questions);
+		while( $intDayNumber > $intCountAllQuestions) {
+			$intDayNumber = $intDayNumber - $intCountAllQuestions; // eg daynumber 31.. becomes 31- 10, = 21, then 11, then 1
+		}
+		$intNumberToChoose = $intDayNumber;
+		return $all_questions[$intNumberToChoose];
 	}
 	
 	protected function get_random_ak_information() : ?string {
@@ -121,7 +125,7 @@ class DayEntryGenerator extends Generator {
 		$random_affirmation = self::get_random_affirmation();
 		$random_bible_verse = self::get_random_bible_verse();
 		$random_ak_information = self::get_random_ak_information();
-		$random_question = self::getDailyQuestion();
+		$random_question = self::getDailyQuestion($day_number);
 		if (strlen($random_quote) < 160 ) {
 			$breaksAroundQuoteBefore = "&nbsp;<br>";
 			$breaksAroundQuoteAfter ="<br>&nbsp;<br>";

@@ -57,13 +57,14 @@ class TitlePageGenerator extends Generator {
 
 	protected function generate_content() : void {
         
+        $config = \ReCalendar\LocalConfig::getInstance();
         
-    if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
+   /* if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
         $config = new \Recalendar\LocalConfig();
     } else {
         $config = new \Recalendar\Config();
     }
-
+*/
     $blDebug = $config->get('debug');
 
       

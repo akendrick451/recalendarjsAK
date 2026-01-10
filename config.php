@@ -6,9 +6,27 @@ namespace ReCalendar;
 // self::MONTH => 8, //start month eg Aug
 // also can update self::YEAR
 
+//ak updated with localconfig to only have one static version
+
+class LocalConfig extends Config {
+    private static $instance = null;
+
+    public static function getInstance(): self {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    // Optional: make constructor private/protected
+    protected function __construct() {
+        parent::__construct();
+	    }
+	}
+
+
 class Config {
 	private array $configuration;
-
 
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const AFFIRMATIONS = "affirmations";
@@ -51,7 +69,7 @@ class Config {
 	public const DEBUG = 'debug'; //not sure why we declare this a const, cause we change it? and some others above. 
 
 
-
+	
 	public function get(string $key) {
 		return $this->configuration[$key] ?? null;
 	}

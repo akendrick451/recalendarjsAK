@@ -3,11 +3,8 @@
    require_once __DIR__ . '/config.php';
 
 
-if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
-	$config = new \Recalendar\LocalConfig();
-} else {
-	$config = new \Recalendar\Config();
-}
+$config = \ReCalendar\LocalConfig::getInstance();
+
 
 
    $blDebug = $config->get('debug');

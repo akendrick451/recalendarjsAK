@@ -126,8 +126,17 @@ class DayEntryGenerator extends Generator {
 	protected function get_random_ak_information() : ?string {
 		$all_ak_information = $this->config->get( Config::AK_INFORMATION );
 		$intRandomNumber = rand(0,count($all_ak_information)-1);
+		$strInformation = $all_ak_information[$intRandomNumber];
 
-		return $all_ak_information[$intRandomNumber];
+
+			if (strlen($all_ak_information[$intRandomNumber]) < 130 ) { // for long quotes do not add leading and trailing blank lines. This is so that
+			// the daily information all fits on one page and does not spill over to two pages
+			$strInformation= "&nbsp;<br>" . $strInformation . "<br>&nbsp;<br>";
+			// allow us to have nice line breaks before and after if the ifnormation is not too long
+		}
+
+		return 	$strInformation;
+
 
 	} // end get random ak information
 	
@@ -213,16 +222,12 @@ class DayEntryGenerator extends Generator {
 					<td align="center" style="font-style:italic;font-size:smaller">
 					<?php echo $breaksAroundQuoteBefore .  $random_quote . $breaksAroundQuoteAfter?></td></tr></table>
 					<br><table width="99%" border=1><tr><td align="center" style="font-style:italic;font-size:smaller">
-					<br><?php echo $random_affirmation ?><br>&nbsp;<br></td></tr></table>
+					<br><?php echo $random_affirmation ?></td></tr></table>
 				</td></tr>
 
 								</table><!--  ============================ close ATK table ============================ -->
 
 								<pagebreak />					<!--	//atk added 29/05/2024				-->
-
-
-		
-	
 
 		 <table width="100%"><!-- start of table for day plan and july things and bucket list -->
 		

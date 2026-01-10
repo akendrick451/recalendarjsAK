@@ -57,12 +57,13 @@ if ( $argc > 1 && $argv[1] === '-c' ) {
 
 echo "Check if class exists...";
 
-
+$config = \ReCalendar\LocalConfig::getInstance();
+/*
 if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
 	$config = new \Recalendar\LocalConfig();
 } else {
 	$config = new \Recalendar\Config();
-}
+}*/
 
 require __DIR__ . '/generators/generator.php';
 

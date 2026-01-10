@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 #error_reporting(E_ALL);
 error_reporting(E_ERROR); ini_set('display_errors', '1');
-require __DIR__ . '/akfunctions.php';
+
 
 
 //place this before any script you want to calculate time
@@ -31,6 +31,7 @@ try {
    require_once __DIR__ . '/config.php';
    echo "... require vendor autoload.";
    require_once __DIR__ . '/vendor/autoload.php';
+  
 } catch (\Throwable $e) {
     echo "This was caught: " . $e->getMessage();
 }
@@ -69,7 +70,7 @@ require __DIR__ . '/generators/generator.php';
 // check if we are debug or test.. then set to only 1 month for speed
 // else set to 6
 if ( $argc > 1 && $argv[1] === 'debug' ) {
-	$G_BL_AK_DEBUG = true; // declared in generator
+	$config->set('debug', true);
 	$month_count = (int) $config->get( 'month_count' );
 	echo $month_count;
 	$config->set( 'month_count', 1);
@@ -78,7 +79,7 @@ if ( $argc > 1 && $argv[1] === 'debug' ) {
 	echo "Month count should now be one.... it is [" . $month_count . "]";
 
 } else {
-	$G_BL_AK_DEBUG = false;
+	$config->set('debug', false);
 }
 
 

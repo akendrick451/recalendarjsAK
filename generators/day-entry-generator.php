@@ -83,8 +83,8 @@ class DayEntryGenerator extends Generator {
 
 	} // get random get_random_bible_verse
 
-	protected function getDailyQuestion($intDayNumber) : ?string {
-		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'All you need is love'];
+	protected function getDailyQuestion($intDayNumOfMonth) : ?string {
+		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'Can I do a 2 minute game today (sociability, rejection therapy)?'];
 		$all_questions[] = 'If today was perfect, what would it look like?' ;
 		$all_questions[] = 'How do I want to feel at the end of this day?';
 		$all_questions[] = 'What one thing can I do today to move closer to my bigger goals?';
@@ -97,13 +97,32 @@ class DayEntryGenerator extends Generator {
 
 		//shall i get these based on day number so that they don't change - as I'll be answering them. Yes. 
 		$intCountAllQuestions = count($all_questions);
-		while( $intDayNumber > $intCountAllQuestions) {
-			$intDayNumber = $intDayNumber - $intCountAllQuestions; // eg daynumber 31.. becomes 31- 10, = 21, then 11, then 1
+		while( $intDayNumOfMonth > $intCountAllQuestions) {
+			$intDayNumOfMonth = $intDayNumOfMonth - $intCountAllQuestions; // eg daynumber 31.. becomes 31- 10, = 21, then 11, then 1
 		}
-		$intNumberToChoose = $intDayNumber;
+		$intNumberToChoose = $intDayNumOfMonth;
+		
+
+		//self::AKDebug2TEMP("getting day question number " . $intNumberToChoose);
+		//self::AKDebug2TEMP("which is '" . $all_questions[$intNumberToChoose] .  "'");
 		return $all_questions[$intNumberToChoose];
 	}
 	
+
+	protected function AKDebug2TEMP (string $strMessage) {
+
+
+    $blDebug = $this->config->get('debug');
+	if ( $blDebug) {
+		// echo may go to building the pdf, so write out echo and then something ob_start
+		$currentEchoBuffer = ob_get_clean();
+
+		echo "AKDebug " . $strMessage . "\n"; 
+		ob_start(); // restart buffering
+		echo $currentEchoBuffer; // put the previous data back in
+	}
+
+}
 	protected function get_random_ak_information() : ?string {
 		$all_ak_information = $this->config->get( Config::AK_INFORMATION );
 		$intRandomNumber = rand(0,count($all_ak_information)-1);
@@ -115,6 +134,7 @@ class DayEntryGenerator extends Generator {
 	// called from parent class generate()
 	protected function generate_content() : void {
 		$day_number = $this->day->format( 'd' );
+		$day_number_no_leading = $this->day->format( 'j' ); // for ak get daily question
 		$month_name = self::get_localized_month_name( $this->day, $this->config->get( Config::MONTHS ) );
 		$month_overview_anchor = self::get_month_overview_anchor( $this->day );
 		$calendar_html = $this->calendar_generator->generate();
@@ -125,8 +145,9 @@ class DayEntryGenerator extends Generator {
 		$random_affirmation = self::get_random_affirmation();
 		$random_bible_verse = self::get_random_bible_verse();
 		$random_ak_information = self::get_random_ak_information();
-		$daily_question = self::getDailyQuestion($day_number);
-		if (strlen($random_quote) < 160 ) {
+		$daily_question = self::getDailyQuestion($day_number_no_leading);
+		if (strlen($random_quote) < 111 ) { // for long quotes do not add leading and trailing blank lines. This is so that
+			// the daily information all fits on one page and does not spill over to two pages
 			$breaksAroundQuoteBefore = "&nbsp;<br>";
 			$breaksAroundQuoteAfter ="<br>&nbsp;<br>";
 		} else {

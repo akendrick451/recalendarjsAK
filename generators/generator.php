@@ -2,15 +2,7 @@
 declare(strict_types=1);
 namespace ReCalendar;
 
-include("../akfunctions.php");
-
-function AKDebug (string $strMessage) {
-
-	if ($G_BL_AK_DEBUG) {
-		echo "AKDebug " . $strMessage;
-	}
-
-}
+include("../akfunctions.php"); // maybe for beep
 
 function PadIfSingleDigit(string $stringHour) : string {
 	if (strlen($stringHour) == 1) {

@@ -53,13 +53,26 @@ class TitlePageGenerator extends Generator {
 		return 'title_page';
 	}
 
+
+
 	protected function generate_content() : void {
+        
+        
+    if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
+        $config = new \Recalendar\LocalConfig();
+    } else {
+        $config = new \Recalendar\Config();
+    }
+
+    $blDebug = $config->get('debug');
+
+      
 		$year = (int) $this->config->get( Config::YEAR );
 		$subtitle = $this->config->get( Config::SUBTITLE );
 		$title_image_file_and_path = "title_image.jpg";
 		list($width, $height, $type) = getimagesize($title_image_file_and_path) ?: [0, 0, 0];
 		checkAndResizeImageIfRequired($title_image_file_and_path);
-        if ($G_BL_AK_DEBUG) {
+        if ($blDebug) {
             $ifDebugRedStyle = " style='color:red'";
             $debugWord = "DEBUG!";
         } else {

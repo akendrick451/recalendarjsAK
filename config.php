@@ -9,6 +9,7 @@ namespace ReCalendar;
 class Config {
 	private array $configuration;
 
+
 	public const DAY_NAMES_SHORT = 'day_names_short';
 	public const AFFIRMATIONS = "affirmations";
 	public const AK_INFORMATION = "ak_information";
@@ -47,6 +48,9 @@ class Config {
 	public const STYLE_SHEET = 'style_sheet_filename';
 	public const SUBTITLE = 'subtitle';
 	public const YEAR = 'year';
+	public const DEBUG = 'debug'; //not sure why we declare this a const, cause we change it? and some others above. 
+
+
 
 	public function get(string $key) {
 		return $this->configuration[$key] ?? null;
@@ -60,6 +64,7 @@ class Config {
 	//protected function get_configuration() : array {
 	public function __construct() {
 		$this->configuration = [
+			self::DEBUG => false,
 			// The month from which to start the "year"
 			// Useful if you want to track your college year, for example.
 			// You could then set this to 10 (October) and the calendar

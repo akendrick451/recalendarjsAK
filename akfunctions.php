@@ -1,7 +1,31 @@
 <?php
 //ak functions
+   require_once __DIR__ . '/config.php';
 
-$G_BL_AK_DEBUG = false;
+
+if ( class_exists( '\ReCalendar\LocalConfig' ) ) {
+	$config = new \Recalendar\LocalConfig();
+} else {
+	$config = new \Recalendar\Config();
+}
+
+
+   $blDebug = $config->get('debug');
+
+
+function AKDebug (string $strMessage) {
+
+	if ( $blDebug) {
+		// echo may go to building the pdf, so write out echo and then something ob_start
+		$currentEchoBuffer = ob_get_clean();
+
+		echo "AKDebug " . $strMessage;
+		ob_start(); // restart buffering
+		echo $currentEchoBuffer; // put the previous data back in
+	}
+
+}
+
 
 function error_beep() {
 		

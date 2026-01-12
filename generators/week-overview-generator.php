@@ -6,6 +6,7 @@ namespace ReCalendar;
 require_once __DIR__ . '/generator.php';
 require_once __DIR__ . '/calendar-generator.php';
 
+
 class WeekOverviewGenerator extends Generator {
 	private $week;
 	private $week_number;
@@ -16,6 +17,7 @@ class WeekOverviewGenerator extends Generator {
 		$this->week = $week;
 		$this->week_number = self::get_week_number( $week );
 		$this->calendar_generator = $calendar_generator;
+
 	}
 
 	protected function generate_anchor_string() : ?string {
@@ -43,13 +45,23 @@ class WeekOverviewGenerator extends Generator {
 			</tr>
 		</table>
 		<br/>
+		<?php $this->generate_week_overview(false);?>
+		<!-- AK emotions -->
+				<?php include "emotions.html";?> 
+		<!-- -- end emotions -->
+<?php
+	}
+
+	 public function generate_week_overview(bool $blRetrospective = false) : void {
+
+		?>
 		<table class="content-box" align="center">
 				<tr><td class="content-box-height">What I'm doing for others this week?</td></tr>
 				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+		
 
-
-<?php
+<?php 
 		$month_start_week_number = self::get_week_number( $this->week->modify( 'first day of this month' )->modify( 'monday this week' ) );
 		$month_end_week_number = self::get_week_number( $this->week->modify( 'last day of this month' )->modify( 'monday this week' ) );
 		$day_entry_height = self::get_day_entry_height( $month_start_week_number, $month_end_week_number );
@@ -59,30 +71,24 @@ class WeekOverviewGenerator extends Generator {
 		foreach ( $week_period as $week_day ) {
 			$week_days[] = $week_day;
 		}
-		
-
 ?>
-		
-				<?php $this->generate_day_entry( $week_days[0], $day_entry_height,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[1], $day_entry_height ,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[2], $day_entry_height ,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[3], $day_entry_height ,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config ); ?>
-				<?php $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config ); ?>
+				<?php  $this->generate_day_entry( $week_days[0], $day_entry_height,  $this->config, $blRetrospective ); ?> 
+				<?php  $this->generate_day_entry( $week_days[1], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php   $this->generate_day_entry( $week_days[2], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php   $this->generate_day_entry( $week_days[3], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config, $blRetrospective ); ?>
 				<tr><td colspan="2" class="week-overview__notes">
-<?php
+<?php 
 					$weekly_todos = $this->config->get( Config::WEEKLY_TODOS );
 					foreach ( $weekly_todos as $weekly_todo ) {
-						echo "<span>$weekly_todo</span><br />";
+						$strReturnText= $strReturnText .  "<span>$weekly_todo</span><br />";
 					}
-?>
-	</td></tr>
-				</table>
-		<!-- AK emotions -->
-				<?php include "emotions.html";?> 
-		<!-- -- end emotions -->
-<?php
+					?>
+
+			</td></tr></table>
+<?php	
 	}
 
 	private function generate_day_entry_old( \DateTimeImmutable $week_day, int $day_entry_height ) {

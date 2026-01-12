@@ -395,6 +395,15 @@ td.calendar__week-number {
 	text-transform: uppercase;
 }
 
+.content-box-line-smaller {
+	width: 100%;
+	border-bottom: 1px solid #AAA;
+	height: 14;
+	padding: 0 0 0 10px;
+	font-size: 10pt;
+	
+}
+
 .content-box-line-ak {
 	width: 100%;
 	border-bottom: 1px solid #AAA;
@@ -466,7 +475,7 @@ s
 
   
   .ruledLinesTD {   
-   border-bottom: 1px solid #AAA;
+   border-bottom: 1px solid #bfbebe; /*  atk was AAA  12 Jan 2026*/
    width:95%;
    background-color:rgb(212, 214, 214);
    height:16pt;
@@ -474,11 +483,11 @@ s
   }
 
   .ruledLinesTDSmaller {
-	  border-bottom: 1px solid #AAA;
+	  border-bottom: 1px solid #bfbebe;
    width:95%;
    background-color:rgb(212, 214, 214);
-   height:12pt;
-   font-size: 8pt;
+   height:10pt;
+   font-size: 7pt;
   }
 
 

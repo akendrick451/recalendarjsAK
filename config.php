@@ -36,6 +36,7 @@ class Config {
 	//public const MONTHLY_NOTES = "monthly_notes";
 	public const MONTHLY_NOTES_2 = "monthly_notes_2";
 	public const MONTHLY_NOTES_COMMON = "monthly_notes_common";
+	public const WEEKLY_REPEATS ="weekly_repeats"; // not fully coded yet ak 12 Jan 2026 - todo 
 	public const CURRENT_READING_COMMON = "current_reading_common";
 	public const BUCKET_LIST = "bucket_list";
 	public const CURRENT_READING = "current_reading";
@@ -203,6 +204,16 @@ class Config {
 				'Monthly Notes','<b>Longer</b>', 'Get Healthy 45%', 'Affirmation thpy Fr', 
 				'<b>Exciting</b>', '..Build info screen wall'
 			],
+			self::WEEKLY_REPEATS => [
+				/* 1 => ['Focus on Business','Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
+				 2 => [   'Self Compassion', '2x clients', 'Cholesterol'	], 
+				 3 => [ 'Be More social', '2x Climbing'] , 
+				 4 => [ 'Pacing ME 30%',  'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
+				 5 =>[ '' ], 
+				 6 =>[ '' ], */
+				 7 =>[ '' ],  // each sunday have the text - review the week and plan next week. 
+
+			], 
 			/*self::MONTHLY_NOTES => [
 				'Monthly Notes',
 				'Big Shoulders',

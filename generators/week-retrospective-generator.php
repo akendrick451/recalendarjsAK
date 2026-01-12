@@ -43,7 +43,86 @@ class WeekRetrospectiveGenerator extends Generator {
 			</tr>
 		</table>
 		<table width="100%"><tr><td width="70%"><!-- outer table with weekly review days, successes and notes below both --> 
-			<table class="content-box" align="center">
+			<?php $this->generate_week_overview(true);?>
+			 <!-- close table for weekly days -->
+</td>		<td rowspan="2" width="30%" valign=top><table width="98%"> <!-- success table on right side of weekly days review-->
+			<tr><td class="content-box-height">Recent Successes</td></tr>
+				<?php			
+							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  6);
+							
+				?>
+				<tr><td class="content-box-height">Next Sucess/Dreams</td></tr>
+				<?php			
+							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  6);
+							
+				?>
+				<tr><td class="content-box-height">Grateful/Best thing this week</td></tr>
+				<?php			
+							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  6);
+							
+				?>
+				<tr><td class="content-box-height">What I learnt this week?</td></tr>
+				<?php			
+							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  6);
+							
+				?>
+			</table> <!-- /success table -->
+	
+				</td></tr><!-- outside table close row -->
+				<tr><td>
+					<table class="content-box" align="center">
+						<tr><td colspan="2" class="ruledLinesTDSmaller"><b>Notes on Week</b></td></tr>
+							<?php echo str_repeat('<tr><td  colspan="2" class="ruledLinesTDSmaller">&nbsp;</td></tr>', 10); ?>
+				</table>
+				</td><Td></td></tr>
+				</table><!-- /close outer table with weekly review days, successes and notes below both --> 
+<?php
+	} // end function
+
+
+public function generate_week_overview(bool $blRetrospective = false) : void {
+
+		?>
+		<table class="content-box" align="center">
+				<tr><td class="content-box-height">What I'm doing for others this week?</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+		
+
+<?php 
+					
+		$month_start_week_number = self::get_week_number( $this->week->modify( 'first day of this month' )->modify( 'monday this week' ) );
+		$month_end_week_number = self::get_week_number( $this->week->modify( 'last day of this month' )->modify( 'monday this week' ) );
+		$day_entry_height = self::get_day_entry_height( $month_start_week_number, $month_end_week_number );
+		$next_week = $this->week->modify( 'next week' );
+		$week_period = new \DatePeriod( $this->week, new \DateInterval( 'P1D' ), $next_week );
+		$week_days = [];
+		foreach ( $week_period as $week_day ) {
+			$week_days[] = $week_day;
+		}
+?>
+				<?php  $this->generate_day_entry( $week_days[0], $day_entry_height,  $this->config, $blRetrospective ); ?> 
+				<?php  $this->generate_day_entry( $week_days[1], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php   $this->generate_day_entry( $week_days[2], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php   $this->generate_day_entry( $week_days[3], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<?php  $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config, $blRetrospective ); ?>
+				<tr><td colspan="2" class="week-overview__notes">
+<?php 
+					$weekly_todos = $this->config->get( Config::WEEKLY_TODOS );
+					foreach ( $weekly_todos as $weekly_todo ) {
+						$strReturnText= $strReturnText .  "<span>$weekly_todo</span><br />";
+					}
+					?>
+
+			</td></tr></table>
+<?php	
+	}
+
+	public function old_generate_week_overview(bool $blRetrospective = false) : void {
+		?>
+		<table class="content-box" align="center">
 				<?php
 					//$all_itinerary_items = $this->config->get( Config::DAY_ITINERARY_ITEMS );
 					//$itinerary_items = $all_itinerary_items[ Config::DAY_ITINERARY_WEEK_RETRO ] ?? $all_itinerary_items[ Config::DAY_ITINERARY_COMMON ];
@@ -77,28 +156,8 @@ class WeekRetrospectiveGenerator extends Generator {
 					foreach ( $weekly_todos as $weekly_todo ) {
 						echo "<span>$weekly_todo</span><br />";
 					}
-?></td></tr></table> <!-- close table for weekly days -->
-</td>		<td width="30%" valign=top><table width="98%"> <!-- success table on right side of weekly days review-->
-			<tr><td class="content-box-height">Recent Successes</td></tr>
-				<?php			
-							echo str_repeat( '<tr><td class="content-box-line"></td></tr>',  5);
-							
-				?>
-				<tr><td class="content-box-height">Next Sucess/Dreams</td></tr>
-				<?php			
-							echo str_repeat( '<tr><td class="content-box-line"></td></tr>',  5);
-							
-				?>
-			</table> <!-- /success table -->
-	
-				</td></tr><!-- outside table close row -->
-				<tr><td>
-					<table class="content-box" align="center">
-						<tr><td colspan="2" class="ruledLinesTDSmaller"><b>Notes on Week</b></td></tr>
-							<?php echo str_repeat('<tr><td  colspan="2" class="ruledLinesTDSmaller">&nbsp;</td></tr>', 12); ?>
-				</table>
-				</td><Td></td></tr>
-				</table><!-- /close outer table with weekly review days, successes and notes below both --> 
+?></td></tr></table>
 <?php
-	}
-}
+	} // end function 
+
+} // end class

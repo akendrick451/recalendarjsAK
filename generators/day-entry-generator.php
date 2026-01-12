@@ -93,7 +93,9 @@ class DayEntryGenerator extends Generator {
 		$all_questions[] = 'How can I incorporate moments of rest or joy into my schedule today?';
 		$all_questions[] = 'What healthy habits (like movement, hydration, or nutrition) do I want to prioritize today?';
 		$all_questions[] = 'At the end of the day, what will make me feel proud of how I spent my time?';
-		$all_questions[] = 'How could I practice rejection therapy today?';
+		$all_questions[] = 'How could I practice rejection therapy (take risks)today?';
+		$all_questions[] = 'How could combat fear today?';
+
 
 		//shall i get these based on day number so that they don't change - as I'll be answering them. Yes. 
 		$intCountAllQuestions = count($all_questions);

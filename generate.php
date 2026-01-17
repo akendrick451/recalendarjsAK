@@ -8,7 +8,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ERROR); 
 ini_set('display_errors', '1');
 
-
+// AK VERSION INFO
+// Version 1.2 17 Jan 2025 (17/01/2025)
 
 //place this before any script you want to calculate time
 date_default_timezone_set('Australia/Melbourne');

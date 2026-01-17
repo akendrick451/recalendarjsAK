@@ -16,6 +16,7 @@ $time_start = microtime(true);
 $intRepeat = 100;
 
 
+
 echo str_repeat("=", $intRepeat) . "\n";
 echo str_repeat("=", $intRepeat) . "\n";
 echo str_repeat("=", $intRepeat) . "\n";
@@ -26,6 +27,9 @@ echo str_repeat("=", $intRepeat) . "\n";
 echo str_repeat("=", $intRepeat) . "\n";
 echo str_repeat("=", $intRepeat) . "\n";
 echo str_repeat("=", $intRepeat) . "\n";
+
+
+//on very first run make sure we have an output folder that is not created automatically by git as it has gitignore 
 
 try {
 	echo "require config.php";
@@ -98,6 +102,8 @@ try {
  } catch (\Throwable $e) {
 	
 	echo "Get recalendar.php 3";
+	echo "Have you installed mpdf at least once? eg linux composer require mpdf/mpdf";
+	echo "And sudo apt install php8.3-gd gd extesnion";
 
 	 echo "\nThis was caught: " . $e->getMessage();
 	 echo $e;
@@ -117,9 +123,15 @@ function l( $stuff ) : void {
 function beep($frequency = 800, $duration = 300) {
     $freq = (int)$frequency;
     $dur  = (int)$duration;
-    // Escape for PowerShell
-    $cmd = "powershell -Command \"[console]::Beep($freq, $dur)\"";
-    shell_exec($cmd);
+	for ($i = 0; $i < 4; $i++) {
+    // Output the ASCII Bell character
+    echo "\x07"; 
+    
+    // Brief pause to distinguish individual beeps
+    usleep(50000); // 0.05 seconds
+}
+
+    
 }
 
 

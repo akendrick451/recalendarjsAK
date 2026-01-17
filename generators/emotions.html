@@ -30,11 +30,25 @@ div#emotions {
 
  }
 
+  
+
+ /* Styles for alternating columns (even-numbered columns) */
+  .akemotioninner th:nth-child(even), .akemotioninner td:nth-child(even) {
+  background-color: #f0db24;
+}
+
+/* Styles odd columns for tables with class "akemotion" */
+.akemotioninner th:nth-child(odd), .akemotioninner td:nth-child(odd) {
+  background-color: #ffffff;
+
+}
+
    
     
    div#emotions  table td {
        border:1px solid #ccc; 
-      color:#ccc;
+       border-right: 1px solid #525151;
+      color:#727070;
        text-align: center;
       
     }
@@ -59,7 +73,7 @@ div#emotions {
               <td class="akemotion">Emotions</span></h2>
                 <a id="t.0ac7147aeba17ce02673f1194b18562afcdb5e23"></a
                 ><a id="t.1"></a>
-                <table style="border:1px solid #ccc;" width="100%">
+                <table class="akemotioninner" style="border:1px solid #ccc;" width="100%">
                   <tr >
                     <td colspan="7" class="akheading"  >
                       <p ><span>STRONG</span></p>

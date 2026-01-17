@@ -97,31 +97,79 @@ class ReCalendar {
 			// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
-		file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$all_html_ak);
-		
-		$this->mpdf->Output( __DIR__ . '//output//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
-		$page_count = $this -> page;	
-		echo "page count3 is " . $page_count;
+			try {
+				$outputFolder = "output";
+					//	file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$all_html_ak);
+
+				$this->mpdf->Output( __DIR__ . '//'. $outputFolder .'//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
+			}
+			catch ( \Mpdf\MpdfException $e ) {
+					echo  $e->getMessage() ;
+		           //may be becuase outfile directory does not exist, try to create
+				   // Check if the directory does not exist and then create it recursively
+				if (!is_dir("output")) {
+					// The mkdir function parameters are:
+					// 1. Path: The directory path
+					// 2. Mode: Permissions (e.g., 0755 is recommended)
+					// 3. Recursive: true to create nested directories
+					if (!mkdir($outputFolder, 0755, true)) {
+						die("Failed to create directory: $outputFolder");
+					} else {
+						// retry the output command
+						$this->mpdf->Output( __DIR__ . '//'. $outputFolder .'//' . $reCalendarOutputFilename , \Mpdf\Output\Destination::FILE );
+
+					}
+				}
+			} // end catch
+
+	
 		// ==============================================================================================================================
 		// ==============================================================================================================================
 		echo '.... AK trying to save html for debugging......';
 		
 		//file_put_contents("output//recalendarForPDF2" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->$html);
 	
-		$reCalendarOutputFilename = escapeshellarg("\\output\\".$reCalendarOutputFilename);
+		//PHP's filesystem functions are designed to work with forward slashes on all operating systems, including Windows, even though Windows uses backslashes (\) natively.
+		$reCalendarOutputFilename = "/output/".$reCalendarOutputFilename; // ak removed escapeshellarg as I open pdf differently on windows, ie not via a shell command
 		echo "\n";
 		$strCurrentPath = __DIR__;
 		echo $strCurrentPath;
 		
 	   echo "\nOpen the pdf - ". __DIR__ . $reCalendarOutputFilename;
-		// Use 'start' command to open with default PDF viewer (Edge, Acrobat, etc.)
-		$command = 'start "" ' . __DIR__ . $reCalendarOutputFilename;
+		// Use 'start' command to open with default PDF viewer (Edge, Acrobat, etc.) all systems eg linux and windows
+		$this->openPdfAllSystems(__DIR__. $reCalendarOutputFilename);
+		//$command = 'start "" ' . __DIR__ . $reCalendarOutputFilename;
 
 
-		exec($command);
+		//exec($command);
 
 	}
 
+public function openPdfAllSystems($filepath) {
+    if (!file_exists($filepath)) {
+        die("Error: File not found at $filepath\n");
+    }
+
+    // Wrap path in quotes to handle spaces and prevent shell injection
+    $safePath = escapeshellarg($filepath);
+
+    switch (PHP_OS_FAMILY) {
+        case 'Windows':
+            // Use 'start' to open the file with the associated program
+            shell_exec("start \"\" $safePath");
+            break;
+        case 'Linux':
+            // 'xdg-open' is the standard for opening files in default apps
+            shell_exec("xdg-open $safePath > /dev/null 2>&1 &");
+            break;
+        case 'Darwin': // macOS
+            shell_exec("open $safePath");
+            break;
+        default:
+            echo "Unsupported operating system.\n";
+            break;
+    }
+}
 
 	private function generate_title_page() : void {
 		$title_page_generator = new TitlePageGenerator( $this->config );

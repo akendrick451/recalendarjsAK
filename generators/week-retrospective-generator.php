@@ -63,7 +63,7 @@ class WeekRetrospectiveGenerator extends Generator {
 				?>
 				<tr><td class="content-box-height">What I learnt this week?</td></tr>
 				<?php			
-							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  6);
+							echo str_repeat( '<tr><td class="content-box-line-smaller"></td></tr>',  7);
 							
 				?>
 			</table> <!-- /success table -->

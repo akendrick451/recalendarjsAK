@@ -10,6 +10,7 @@ ini_set('display_errors', '1');
 
 // AK VERSION INFO
 // Version 1.2 17 Jan 2025 (17/01/2025)
+// 1.3 18/01/2025 - darker lines in eisenhower
 
 //place this before any script you want to calculate time
 date_default_timezone_set('Australia/Melbourne');
@@ -153,7 +154,7 @@ try {
 	echo "\nSetup done.. create new mpdf...";
 	// creates a calendar and saves it in ReCalendar.pdf
 	$mpdf = new \Mpdf\Mpdf( [
-		'tempDir' =>  "C:\\temp\\",
+	    'tempDir' => __DIR__ . '/my-mpdf-temp',
 		'fontDir' => array_merge( $fontDirs, [
 			__DIR__ . $config->get( \ReCalendar\Config::FONT_DIR ),
 		] ),

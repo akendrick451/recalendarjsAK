@@ -6,28 +6,45 @@ namespace ReCalendar;
 require_once __DIR__ . '/generator.php';
 
 function checkAndResizeImageIfRequired($source_path, $max_width = 800, $max_height = 500, $quality = 90) {
-    // Load
+    // Load the image
     $source_image = imagecreatefromjpeg($source_path);
-    if (!$source_image) return false;
+    if (!$source_image) {
+        return false;
+    }
 
     $original_width  = imagesx($source_image);
     $original_height = imagesy($source_image);
 
-    // Calculate the ratio
+    // Only resize if image exceeds at least one of the max dimensions
+    if ($original_width <= $max_width && $original_height <= $max_height) {
+        // No need to resize — clean up and exit early
+        imagedestroy($source_image);
+        return true;  // or false if you want to signal "no change made"
+    }
+
+    // Calculate scaling ratio to fit within both constraints (preserves aspect ratio)
     $ratio = min($max_width / $original_width, $max_height / $original_height);
 
-    // New dimensions
-    $new_width  = (int)($original_width * $ratio);
-    $new_height = (int)($original_height * $ratio);
+    // New dimensions (will be ≤ max in both directions)
+    $new_width  = (int) round($original_width * $ratio);
+    $new_height = (int) round($original_height * $ratio);
 
-    // Create resized image
+    // Ensure we don't end up with zero dimension due to rounding
+    $new_width  = max(1, $new_width);
+    $new_height = max(1, $new_height);
+
+    // Create new image
     $resized_image = imagecreatetruecolor($new_width, $new_height);
+    if (!$resized_image) {
+        imagedestroy($source_image);
+        return false;
+    }
 
-    // Optional: white background for JPG
+    // Optional: fill with white background (good for JPG → JPG)
     $white = imagecolorallocate($resized_image, 255, 255, 255);
     imagefill($resized_image, 0, 0, $white);
 
-    // Resize with high quality
+    // High-quality resize
     imagecopyresampled(
         $resized_image, $source_image,
         0, 0, 0, 0,
@@ -35,14 +52,14 @@ function checkAndResizeImageIfRequired($source_path, $max_width = 800, $max_heig
         $original_width, $original_height
     );
 
-    // Save
-    imagejpeg($resized_image, $source_path, $quality);
+    // Overwrite original file
+    $success = imagejpeg($resized_image, $source_path, $quality);
 
     // Cleanup
     imagedestroy($source_image);
     imagedestroy($resized_image);
 
-    return true;
+    return $success;
 }
 
 

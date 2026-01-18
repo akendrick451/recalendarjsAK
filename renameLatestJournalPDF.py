@@ -9,9 +9,9 @@ def rename_latest_pdf(directory, new_name):
     If 'new_name.pdf' already exists, that file is renamed to 'new_name_OLD_<timestamp>.pdf'.
     If the rename fails (e.g., because the file is open), a copy is created instead.
     """
-    print("1. Start rename using " + directory  + " and " + new_name)
+    print("1. Start rename using " + str(directory)  + " and " + new_name)
     if not os.path.isdir(directory):
-        print(f"Error: Directory '{directory}' does not exist.")
+        print(f"Error: Directory '{str(directory)}' does not exist.")
         return
 
     pdf_files = glob.glob(os.path.join(directory, "*.pdf"))
@@ -56,7 +56,8 @@ def rename_latest_pdf(directory, new_name):
 # Example usage:
 # Change these to your actual folder path and desired filename.
 
-folder = os.getcwd()+ "\\output\\"
+from pathlib import Path
+folder = Path.cwd() / "output"
 new_filename = "Journal25-Jul-Dec"  # no .pdf extension needed
 new_filename = "Journal26-Jan-Jun"
 rename_latest_pdf(folder, new_filename)

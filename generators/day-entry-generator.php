@@ -12,12 +12,14 @@ require_once __DIR__ . '/calendar-generator.php';
 
 class DayEntryGenerator extends Generator {
 	private $day;
+	private $week_number;
 	private $calendar_generator;
 
 	public function __construct( \DateTimeImmutable $day, CalendarGenerator $calendar_generator, Config $config ) {
 		parent::__construct( $config );
 		$this->day = $day;
 		$this->calendar_generator = $calendar_generator;
+		$this->week_number = self::get_week_number( $day );
 	}
 
 	protected function generate_anchor_string() : ?string {
@@ -259,7 +261,7 @@ protected function GenerateFutureImaginationQuestionOncePerWeek($dateForToday) :
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; yesterday? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
 				<tr><td colspan="2" class="content-box-height">What I learnt yesterday?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<tr><td colspan="1" class="content-box-height">Current Emotions? <a href="#linkToEmotions<?php echo $this->week_number ?>">link</a></td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<?php 
 					echo $this->GenerateFutureImaginationQuestionOncePerWeek($dateNotImmutable); 
 				?>

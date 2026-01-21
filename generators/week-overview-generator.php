@@ -47,7 +47,11 @@ class WeekOverviewGenerator extends Generator {
 		<br/>
 		<?php $this->generate_week_overview(false);?>
 		<!-- AK emotions -->
-				<?php include "emotions.html";?> 
+		 		<br>&nbsp;
+				<div id="emotionsDiv">
+				<?php echo "<a name='linkToEmotions" . $this->week_number. "'></a>";
+				 include "emotions.html";?> 
+				 </div>
 		<!-- -- end emotions -->
 <?php
 	}
@@ -101,9 +105,9 @@ class WeekOverviewGenerator extends Generator {
 					<td class="week-overview__date"><a href="#<?php echo self::get_day_entry_anchor( $week_day ); ?>"><?php echo date( 'd M', $week_day->getTimestamp() ); ?></a></td>
 				</tr>
 <?php
-				foreach ( $special_items as $special_item ) {
-					echo "<tr><td colspan=\"2\" class=\"week-overview__special-item\">» $special_item</td></tr>";
-				}
+				//foreach ( $special_items as $special_item ) {
+			//		echo "<tr><td colspan=\"2\" class=\"week-overview__special-item\">» $special_item</td></tr>";
+		//		}
 ?>
 			</table>
 		</td>

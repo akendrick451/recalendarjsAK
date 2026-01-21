@@ -117,7 +117,7 @@ class YearRetrospectiveGenerator extends Generator {
 			$yearly_activites_table = "<html><head><link rel='stylesheet' href='../styles.css'></head><body>". $yearly_activites_table;
 
 
-			file_put_contents("output//recalendarForPDFyear" . $dateNow->format('Y-m-d-H-i-s') . ".html", $yearly_activites_table);
+			// debug information - file_put_contents("output//recalendarForPDFyear" . $dateNow->format('Y-m-d-H-i-s') . ".html", $yearly_activites_table);
 				
 		//	self::generate_content_box2( $month_notes_combined ); 
 ?>

@@ -11,6 +11,7 @@ ini_set('display_errors', '1');
 // AK VERSION INFO
 // Version 1.2 17 Jan 2025 (17/01/2025)
 // 1.3 18/01/2025 - darker lines in eisenhower
+// 1.4 21/2/2025 move future question to once a week, maybe I'll add link to and from emotions page
 
 //place this before any script you want to calculate time
 date_default_timezone_set('Australia/Melbourne');

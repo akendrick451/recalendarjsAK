@@ -186,7 +186,7 @@ class Config {
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
 			
-				 1 => ['Focus on Business','Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
+				 1 => ['Focus on Business', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
 				 2 => [   'Self Compassion', '2x clients', 'Cholesterol'	], 
 				 3 => [ 'Be More social', '2x Climbing'] , 
 				 4 => [ 'Pacing ME 30%',  'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 

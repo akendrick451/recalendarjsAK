@@ -23,6 +23,20 @@ function AKDebug (string $strMessage) {
 
 }
 
+function minus2InBase7($num1) {
+    // 1. Convert base-7 strings to decimal
+    
+
+    // 2. Subtract in base-10
+    $resultDec = $num1 - 2;
+
+    // 3. Convert result back to base-
+	
+	$intBase7Number = base_convert($resultDec, 10, 7);
+	//echo "base7InitialValue " . $resultDec . " and convertednumber " . $intBase7Number;
+    return $intBase7Number;
+}
+
 
 function error_beep() {
 		

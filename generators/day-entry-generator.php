@@ -6,6 +6,7 @@ namespace ReCalendar;
 use DateTime;
 
 //ATK Modified a fair bit to add my own page in months - 29/05/2024 see comment re table "open atk table"
+require_once __DIR__ ."/../akfunctions.php";
 
 require_once __DIR__ . '/generator.php';
 require_once __DIR__ . '/calendar-generator.php';
@@ -67,25 +68,58 @@ class DayEntryGenerator extends Generator {
 	} //get_random_quote
     
 
-	function onlyShowOnceAWeek(DateTime $dt): bool
-{
+	function onlyShowOnceAWeekWithDifferentDayToOtherOnceAWeek($dt) : bool {
+		//essentially the same as onlyShowOnceAWeek plus or minus a day or two or maybe a random number. Maybe mins 2 for now
+		
+			
+   		$todayIso = (int) $dt->format('N');
+		$chosenDay  = $this->GetInteger1to7BasedOnWeekNumber($dt);
+    	// Run only on the chosen day plus or minus something
+		$offset = -2;
+		$oneToSevenNumber = (($chosenDay - 1 + $offset) % 7 + 7) % 7 + 1;   // now always 1–7
+		//echo "base7number2 is "  . $oneToSevenNumber ." and chosenDay was ". $chosenDay . ". AND today number is " . $todayIso;
+		//AKDebug("base7number2 is "  . $oneToSevenNumber ." and chosenDay was ". $chosenDay . ". AND today number is " . $todayIso);
+    	return $todayIso === $oneToSevenNumber; // ak may not show every week, eg if day chosen day is 1, then 1-2 = -1 but should be 6
+
+	}
+
+
+	function GetInteger1to7BasedOnWeekNumber($dt) : int {
+
+		// Get ISO week year + week number (stable identifier for the week)
+		$weekKey = $dt->format('o-W');           // e.g. "2026-03" or "2025-52"
+		
+		// Create a deterministic "random" weekday 1–5 (Monday–Friday)
+		// You can also do 1–7 if you want weekends possible
+		$hash = hexdec(substr(md5('special-salt-' . $weekKey), 0, 8));
+		$chosenDay = ($hash % 5) + 1;            // → 1,2,3,4,5
+		return $chosenDay;
+	}
+	function onlyShowOnceAWeek(DateTime $dt): bool {
     // Convert input date to DateTime
   
-    
-    // Get ISO week year + week number (stable identifier for the week)
-    $weekKey = $dt->format('o-W');           // e.g. "2026-03" or "2025-52"
-    
-    // Create a deterministic "random" weekday 1–5 (Monday–Friday)
-    // You can also do 1–7 if you want weekends possible
-    $hash = hexdec(substr(md5('special-salt-' . $weekKey), 0, 8));
-    $chosenDay = ($hash % 5) + 1;            // → 1,2,3,4,5
+		$chosenDay  = $this->GetInteger1to7BasedOnWeekNumber($dt);
+	
 
-    // What day is today? (1=Monday … 7=Sunday)
-    $todayIso = (int) $dt->format('N');
+    	// What day is today? (1=Monday … 7=Sunday)
+   		 $todayIso = (int) $dt->format('N');
 
     // Run only on the chosen day
     return $todayIso === $chosenDay;
-}
+} //only show once a week
+
+protected function GenerateMeGratitudeOncePerWeek($dateForToday) : string {
+	$strReturn = "";
+	if($this->onlyShowOnceAWeekWithDifferentDayToOtherOnceAWeek($dateForToday)){
+	    $strReturn = '<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>';
+
+	} else {
+		// return a blank line so not to mess up spacing etc 
+		$strReturn = '<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp;</td><td colspan="4"></td></tr>';
+
+	}
+	return $strReturn;
+} // en functdion meGratitudeonce a week
 protected function GenerateFutureImaginationQuestionOncePerWeek($dateForToday) : string {
 
 	
@@ -257,8 +291,8 @@ protected function GenerateFutureImaginationQuestionOncePerWeek($dateForToday) :
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; yesterday? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<?php echo $this->GenerateMeGratitudeOncePerWeek($dateNotImmutable); ?>
 				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
 				<tr><td colspan="2" class="content-box-height">What I learnt yesterday?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">Current Emotions? <a href="#linkToEmotions<?php echo $this->week_number ?>">link</a></td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>

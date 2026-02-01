@@ -80,7 +80,11 @@ class Config {
         $this->configuration[$key] = $value;  // ← Direct access — works perfectly
     }
 
-	//protected function get_configuration() : array {
+	protected function get_configuration() : array {
+		return $this->configuration;
+	}
+
+
 	public function __construct() {
 		$this->configuration = [
 			self::DEBUG => false,
@@ -328,6 +332,7 @@ class Config {
 					self::YEARLY_RETROSPECTIVE_TITLE => 'Yearly Review',
 			// A list of items you'd like to be listed in the notes of the weekly overview
 			self::WEEKLY_TODOS => [
+				"Plan week on Sunday", 
 			],
 			// A list of special dates (anniversaries, birthdays, holidays) that will be highlighted throughout the calendar:
 			// in the small calendar, on weekly overviews and daily entries.
@@ -496,7 +501,8 @@ class Config {
 		// Example: 'stycznia' instead of 'Styczeń' for January in Polish.
 		$this->configuration[ self::MONTHS ] = $this->generate_month_names( $this->configuration[ self::LOCALE ] );
 
-		return $this->configuration;	}
+		//return $this->configuration;	
+		} // end constructor
 
 	private function generate_month_names( string $locale ) : array {
 		$old_locale = setlocale( LC_TIME, 0 );

@@ -11,6 +11,7 @@ class WeekOverviewGenerator extends Generator {
 	private $week;
 	private $week_number;
 	private $calendar_generator;
+	 /** @var array<string> $weekly_todos */	
 
 	public function __construct( \DateTimeImmutable $week, CalendarGenerator $calendar_generator, Config $config ) {
 		parent::__construct( $config );
@@ -60,9 +61,7 @@ class WeekOverviewGenerator extends Generator {
 
 		?>
 		<table class="content-box" align="center">
-				<tr><td class="content-box-height">What I'm doing for others this week?</td></tr>
-				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
-				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+				
 		
 
 <?php 
@@ -83,13 +82,18 @@ class WeekOverviewGenerator extends Generator {
 				<?php  $this->generate_day_entry( $week_days[4], $day_entry_height ,  $this->config, $blRetrospective ); ?>
 				<?php  $this->generate_day_entry( $week_days[5], $day_entry_height ,  $this->config, $blRetrospective ); ?>
 				<?php  $this->generate_day_entry( $week_days[6], $day_entry_height ,  $this->config, $blRetrospective ); ?>
-				<tr><td colspan="2" class="week-overview__notes">
+				
+				<tr><td colspan="2" class="week-overview__notes">To Do: 
 <?php 
 					$weekly_todos = $this->config->get( Config::WEEKLY_TODOS );
 					foreach ( $weekly_todos as $weekly_todo ) {
-						$strReturnText= $strReturnText .  "<span>$weekly_todo</span><br />";
+						  echo "<span>$weekly_todo</span><br />";
 					}
 					?>
+				<tr><td class="content-box-height">What I'm doing for others this week?</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+				<tr><td style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
+				<tr><td>&nbsp;</td></tr>
 
 			</td></tr></table>
 <?php	

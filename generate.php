@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 error_reporting(E_ERROR); 
-ini_set('display_errors', '1');
+
 
 // AK VERSION INFO
 // Version 1.2 17 Jan 2025 (17/01/2025)

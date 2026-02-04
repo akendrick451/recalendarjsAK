@@ -61,8 +61,8 @@ class ReCalendar {
 		$period = new \DatePeriod( $start, $interval, $end );
 
 		foreach( $period as $week ) {
-			$this->generate_week( $week, $end );
-
+			$this->generate_week( $week, $end ); // has generate day, which also has generate month revdiew and year review
+			// if week -  26 0 do summary/year review - generate_year_retrospective
 			$this->write_html();
 		}
 		$this->generate_year_retrospective( $week );
@@ -76,7 +76,7 @@ class ReCalendar {
         $dateNowString = $dateNow->format('Y-m-d-H-i-s');
 		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
 
-		$expected_page_count = 552 ; // page count for 2025 for 6 months
+		$expected_page_count = 566 ; // page count for 2025 for 6 months
 		if (($page_count > 400 & $page_count < 600) & $page_count <> $expected_page_count) {
 			
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
@@ -199,6 +199,8 @@ public function openPdfAllSystems($filepath) {
 	private function generate_month_overview( \DateTimeImmutable $month ) : void {
 		$localized_month_name = $this->config->get( Config::MONTHS )[ (int) $month->format( 'n' ) ];
 
+		$this->generate_year_retrospective( $month );
+
 		$this->add_page();
 		$this->bookmark( $localized_month_name, 1 );
 
@@ -206,6 +208,7 @@ public function openPdfAllSystems($filepath) {
 		$month_overview_generator = new MonthOverviewGenerator( $month, $calendar_generator, $this->config );
 
 		$this->append_html( $month_overview_generator->generate() );
+
 	}
 
 	
@@ -225,9 +228,11 @@ public function openPdfAllSystems($filepath) {
 		$week_period = new \DatePeriod( $week, new \DateInterval( 'P1D' ), $next_week );
 		foreach( $week_period as $week_day ) {
 			if ( (int) $week_day->format( 'j' ) === 1 && $week_day < $year_end ) {
+
 				$this->generate_year_overview(false); // ak add year overview each month to get a good idea of BIG THINGS IN YEAR! - copy and paste data in boox manually each monhth
 				// therefore need link to FIRST year overview
-				$this->generate_month_overview( $week_day );
+				$this->generate_month_overview( $week_day ); // includes year retrospective for focus review
+				
 			}
 
 			$this->generate_day_entry( $week_day );

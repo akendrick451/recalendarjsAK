@@ -44,6 +44,7 @@ try {
     echo "This was caught: " . $e->getMessage();
 }
 
+require_once __DIR__ . "/akfunctions.php";
 
 echo "Check Arguments";
 
@@ -180,12 +181,18 @@ try {
 	$recalendar->generate();
 	$time_end = microtime(true);
 	echo 'Finish at '.  (new \DateTime())->format( 'Y-m-d H:i:s' );
+
+	// delete html and pdf's older than 2 days 
+	$resultOfDeletions = deleteOldHtmlAndPdf('output/', 24, false, true);
+
+	//print_r($resultOfDeletions);
+
 	//dividing with 60 will give the execution time in minutes otherwise seconds
 	$execution_time = ($time_end - $time_start)/60;   //execution time of the script
 	echo "You probably now want to run python .\\renameLatestJournalPDF.py";
 	echo '<b>Total Execution Time:</b> '. number_format((float) $execution_time, 1).' Mins';
 	// if you get weird results, use number_format((float) $execution_time, 10)
-	echo "\nIf all good - you can run python .\\renameLatestJournalPDF.py";
+	echo "\nIf all good - you can run python .\\renameLatestJournalPDF.py"; // also makes a copy in a "versions" folder
 	good_beep();
 
 	

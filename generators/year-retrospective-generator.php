@@ -74,6 +74,7 @@ class YearRetrospectiveGenerator extends Generator {
                 
     		$month_notes_all_months_without_month_number = [];
 			$month_notes_common = $this->config->get( Config::MONTHLY_NOTES_COMMON );
+			$reading_list_by_month =  $this->config->get( Config::CURRENT_READING );
 
 			$i =0;
 			$yearly_activites_table = "<table id='year-review-table'><tr>";
@@ -92,6 +93,13 @@ class YearRetrospectiveGenerator extends Generator {
 						$yearly_activites_table = $yearly_activites_table . $each_activity . "<br>";
 
 					}
+				$this_month_reading = $reading_list_by_month[$month];
+				foreach ($this_month_reading as $book ) {
+					// do not show first entry as this is current reading....
+
+						$yearly_activites_table = $yearly_activites_table . $book . "<br>";
+
+				}
 
 				$yearly_activites_table = $yearly_activites_table . "</td>";
 

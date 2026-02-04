@@ -243,6 +243,7 @@ class Config {
 			],
 
 			self::CURRENT_READING => [
+				2 => ['Current Reading', 'The Healing.. Vagus 30%', 'Non Violent (Negotiation)', 'Psychic Wholeness, Baars', ],
 				7 => ['Current Reading', '' ],
 				9 => ['Current Reading', ''],
 				10 => ['Current Reading',  "The Healing Power of Vagus, 0%",	],
@@ -329,7 +330,7 @@ class Config {
 			// Used for the title of the weekly retrospective pages
 			self::YEARLY_RETROSPECTIVE_BOOKMARK => 'Year Review',
 			self::WEEKLY_RETROSPECTIVE_TITLE => 'Weekly Review',
-					self::YEARLY_RETROSPECTIVE_TITLE => 'Yearly Review',
+					self::YEARLY_RETROSPECTIVE_TITLE => 'Focus Review',
 			// A list of items you'd like to be listed in the notes of the weekly overview
 			self::WEEKLY_TODOS => [
 				"Plan week on Sunday", 

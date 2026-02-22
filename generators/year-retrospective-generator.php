@@ -74,6 +74,7 @@ class YearRetrospectiveGenerator extends Generator {
                 
     		$month_notes_all_months_without_month_number = [];
 			$month_notes_common = $this->config->get( Config::MONTHLY_NOTES_COMMON );
+			$reading_list_by_month =  $this->config->get( Config::CURRENT_READING );
 
 			$i =0;
 			$yearly_activites_table = "<table id='year-review-table'><tr>";
@@ -92,6 +93,13 @@ class YearRetrospectiveGenerator extends Generator {
 						$yearly_activites_table = $yearly_activites_table . $each_activity . "<br>";
 
 					}
+				$this_month_reading = $reading_list_by_month[$month];
+				foreach ($this_month_reading as $book ) {
+					// do not show first entry as this is current reading....
+
+						$yearly_activites_table = $yearly_activites_table . $book . "<br>";
+
+				}
 
 				$yearly_activites_table = $yearly_activites_table . "</td>";
 
@@ -117,7 +125,7 @@ class YearRetrospectiveGenerator extends Generator {
 			$yearly_activites_table = "<html><head><link rel='stylesheet' href='../styles.css'></head><body>". $yearly_activites_table;
 
 
-			file_put_contents("output//recalendarForPDFyear" . $dateNow->format('Y-m-d-H-i-s') . ".html", $yearly_activites_table);
+			// debug information - file_put_contents("output//recalendarForPDFyear" . $dateNow->format('Y-m-d-H-i-s') . ".html", $yearly_activites_table);
 				
 		//	self::generate_content_box2( $month_notes_combined ); 
 ?>

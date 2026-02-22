@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ReCalendar;
 
+use setasign\Fpdi\PdfParser\Type\PdfBoolean;
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/generators/calendar-generator.php';
 require_once __DIR__ . '/generators/day-entry-generator.php';
@@ -45,29 +47,22 @@ class ReCalendar {
 		$this->all_html_ak = "<!DOCTYPE html><html lang='en-US'><head><style>" . $stylesheet . "</style></head><body> ";
 		$this->mpdf->WriteHTML( $stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS );
 		$this->generate_title_page();
+		$year = (int) $this->config->get( Config::YEAR );
 
 		$month = sprintf( '%02d', (int) $this->config->get( Config::MONTH ) );
-		$year = (int) $this->config->get( Config::YEAR );
 		$start = new \DateTimeImmutable( "$year-$month-01" );
 		$month_count = (int) $this->config->get( Config::MONTH_COUNT );
 		$end = $start->modify( "$month_count months" );
 
-		$jan_date = new \DateTimeImmutable( "$year-01-01" );
-		$dec_date = new \DateTimeImmutable( "$year-12-31" );
-		$year_overview_generator = new YearOverviewGenerator( $jan_date, $dec_date, $this->config );
-		//$year_overview_generator2 = new YearOverviewGenerator2( $start, $end, $this->config );
-		//$this->add_page();
-		//$this->append_html( $year_overview_generator->generate() );
-		$this->add_page();
-		$this->append_html( $year_overview_generator->generate() );
+		$this->generate_year_overview(true);
 		
 		$start = $start->modify( 'monday this week' );
 		$interval = new \DateInterval( 'P1W' );
 		$period = new \DatePeriod( $start, $interval, $end );
 
 		foreach( $period as $week ) {
-			$this->generate_week( $week, $end );
-
+			$this->generate_week( $week, $end ); // has generate day, which also has generate month revdiew and year review
+			// if week -  26 0 do summary/year review - generate_year_retrospective
 			$this->write_html();
 		}
 		$this->generate_year_retrospective( $week );
@@ -81,7 +76,7 @@ class ReCalendar {
         $dateNowString = $dateNow->format('Y-m-d-H-i-s');
 		$reCalendarOutputFilename = 'ReCalendar' . $dateNowString . '.pdf';
 
-		$expected_page_count = 545 ; // page count for 2025 for 6 months
+		$expected_page_count = 566 ; // page count for 2025 for 6 months
 		if (($page_count > 400 & $page_count < 600) & $page_count <> $expected_page_count) {
 			
 			echo "PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT,PAGE COUNT ALERT, PAGE COUNT ALERT\n";
@@ -184,8 +179,27 @@ public function openPdfAllSystems($filepath) {
 		$this->generate_week_retrospective( $week );
 	}
 
+	private function generate_year_overview( bool $blMainYearOverview) : void {
+		$year = (int) $this->config->get( Config::YEAR );
+		$jan_date = new \DateTimeImmutable( "$year-01-01" );
+		$dec_date = new \DateTimeImmutable( "$year-12-31" );
+		$year_overview_generator = new YearOverviewGenerator( $jan_date, $dec_date, $this->config );
+		//$year_overview_generator2 = new YearOverviewGenerator2( $start, $end, $this->config );
+		//$this->add_page();
+		//$this->append_html( $year_overview_generator->generate() );
+		$this->add_page();
+		if ( $blMainYearOverview ) {
+			$this->append_html( $year_overview_generator->generate() );
+		} else  {
+			$this-> append_html("<h1>Important Events in Year Reminder</h1>");
+			$this->append_html( $year_overview_generator->generate_actual_big_calendar() );
+		}
+	}
+
 	private function generate_month_overview( \DateTimeImmutable $month ) : void {
 		$localized_month_name = $this->config->get( Config::MONTHS )[ (int) $month->format( 'n' ) ];
+
+		$this->generate_year_retrospective( $month );
 
 		$this->add_page();
 		$this->bookmark( $localized_month_name, 1 );
@@ -194,7 +208,10 @@ public function openPdfAllSystems($filepath) {
 		$month_overview_generator = new MonthOverviewGenerator( $month, $calendar_generator, $this->config );
 
 		$this->append_html( $month_overview_generator->generate() );
+
 	}
+
+	
 
 	private function generate_week_overview( \DateTimeImmutable $week ) : void {
 		$this->add_page();
@@ -211,7 +228,11 @@ public function openPdfAllSystems($filepath) {
 		$week_period = new \DatePeriod( $week, new \DateInterval( 'P1D' ), $next_week );
 		foreach( $week_period as $week_day ) {
 			if ( (int) $week_day->format( 'j' ) === 1 && $week_day < $year_end ) {
-				$this->generate_month_overview( $week_day );
+
+				$this->generate_year_overview(false); // ak add year overview each month to get a good idea of BIG THINGS IN YEAR! - copy and paste data in boox manually each monhth
+				// therefore need link to FIRST year overview
+				$this->generate_month_overview( $week_day ); // includes year retrospective for focus review
+				
 			}
 
 			$this->generate_day_entry( $week_day );
@@ -268,7 +289,7 @@ public function openPdfAllSystems($filepath) {
 		
 		if ( $this->blDebugPrintedHTMLOnce == false ) {
 			$this->all_html_ak  = $this->all_html_ak . " " . $this->html;
-			echo " debugPrint printhtmlonce.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
+			echo " debugPrint printhtmlonce.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
 			
 		}
 		$this->mpdf->WriteHTML( $this->html );
@@ -278,7 +299,7 @@ public function openPdfAllSystems($filepath) {
 		if ((strlen($this->all_html_ak) > 4137) && $this->blDebugPrintedHTMLOnce == false) {
 			// print it once and no more. 
 			$this->blDebugPrintedHTMLOnce = true;
-			echo " debugPrint2 HTML Is.... $this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
+			echo " debugPrint2 HTML Is.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
 			file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
 
 		}

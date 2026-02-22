@@ -187,6 +187,8 @@ class MonthOverviewGenerator extends Generator {
 	<?php
 	}
 
+
+	
 	private function generate_habit_row( string $habit_name ) : void {
 		echo "<tr><td class=\"month-overview__habit-name\">$habit_name</td>";
 

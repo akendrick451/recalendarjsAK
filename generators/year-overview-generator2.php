@@ -21,10 +21,32 @@ class YearOverviewGenerator extends Generator {
 		return self::get_year_overview_anchor();
 	}
 
-	protected function generate_content() : void {
+	public function generate_actual_big_calendar() : ?string {
 		$interval = new \DateInterval( 'P1M' );
 		$period = new \DatePeriod( $this->year_start, $interval, $this->year_end );
 
+		$strReturn =  '<table class="year-overview__calendars">';
+		$strReturn .= '<tr>';
+		$strReturn .=  '<td class="year-overview__calendar">' ;
+	    $strReturn .=  '   <table class="akyearlyplan" style-"border=1px solid #eee">';
+		foreach ( $period as $index => $month ) {
+			$is_new_row = 0 === ( $index % 3 );
+			if ( $is_new_row ) {
+				if ( $index > 0 ) {
+					$strReturn .=  '</tr>';
+				}
+				$strReturn .=  '<tr>';
+			}
+			$calendar_generator = new CalendarGenerator( $month, CalendarGenerator::HIGHLIGHT_NONE, $this->config, true );
+			
+			$strReturn .=  "<td styl='bs'>" . $calendar_generator->get_month_link() . '</td>';
+		}
+		$strReturn .=  '</tr></table>';
+		$strReturn .=  '</td></tr></table>';
+		return $strReturn ;
+	}
+	protected function generate_content() : void {
+		
 		$title = (int) $this->year_start->format( 'Y' );
 		echo "<h1 class=\"year-overview__title\"><a name='" . $this->generate_anchor_string() . "'></a>$title Planner ATKPlanner</h1>";
 		echo "&nbsp;&nbsp;<u>Insert link here to weekly plan and review and monthly planner document</u>";
@@ -33,24 +55,7 @@ class YearOverviewGenerator extends Generator {
 		echo "<Br>&nbsp;&nbsp;";
 		echo "<Br>&nbsp;&nbsp;Use the highlight function in boox to link";
 		echo "<Br>&nbsp;&nbsp;";
-		echo '<table class="year-overview__calendars">';
-		echo '<tr>';
-		echo '<td class="year-overview__calendar">' ;
-	    echo '   <table class="akyearlyplan" style-"border=1px solid #eee">';
-		foreach ( $period as $index => $month ) {
-			$is_new_row = 0 === ( $index % 3 );
-			if ( $is_new_row ) {
-				if ( $index > 0 ) {
-					echo '</tr>';
-				}
-				echo '<tr>';
-			}
-			$calendar_generator = new CalendarGenerator( $month, CalendarGenerator::HIGHLIGHT_NONE, $this->config, true );
-			
-			echo "<td styl='bs'>" . $calendar_generator->get_month_link() . '</td>';
-		}
-		echo '</tr></table>';
-		echo '</td></tr></table>';
+		 echo $this->generate_actual_big_calendar();
 
 		
 			

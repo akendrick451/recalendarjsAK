@@ -399,9 +399,9 @@ td.calendar__week-number {
 .content-box-line-smaller {
 	width: 100%;
 	border-bottom: 1px solid #AAA;
-	height: 14;
+	height: 15;
 	padding: 0 0 0 10px;
-	font-size: 10pt;
+	font-size: 11pt;
 	
 }
 
@@ -479,8 +479,8 @@ s
    border-bottom: 1px solid #bfbebe; /*  atk was AAA  12 Jan 2026*/
    width:95%;
    background-color:rgb(212, 214, 214);
-   height:16pt;
-   font-size: 10pt;
+   height:14pt;
+   font-size: 9pt;
   }
 
   .ruledLinesTDSmaller {
@@ -515,4 +515,78 @@ s
   .eisenWide {
 	width:45%;
 	
+  }
+
+
+  div#emotionsDiv table td.akheading {
+    background-color: rgb(40, 52, 142);
+    font-weight: bold;
+    color: #ededed;
+  }
+
+  div#emotionsDiv {
+    align-self: center;
+    break-before: always;
+    width:97%;
+	page-break-before:always;
+  
+  }
+
+  div#emotionsDiv td span.akemotion {
+    color: #444444;       
+    text-align:center;
+  
+  }
+
+  .akemotion {
+    color: #e0dede;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  td.akemotion {
+    color: #e0dede;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  td.mainTd3ColsApprox {
+    width:30%;
+  }
+
+  #mainTableEmotions {
+    width:100%;
+    
+  }
+
+  div#emotionsDiv table td.akemotion {
+    border: 1px solid #ccc;
+    color: #444444;
+    text-align: center;
+    
+  }
+
+  /* Styles for alternating columns (even-numbered columns) */
+  .akemotioninner th:nth-child(even),
+  .akemotioninner td:nth-child(even) {
+    background-color: #b8e3e9;
+    text-align: center;
+  }
+
+  /* Styles odd columns for tables with class "akemotion" */
+  .akemotioninner th:nth-child(odd),
+  .akemotioninner td:nth-child(odd) {
+    background-color: #ffffff;
+    text-align: center;
+  }
+
+  .akemotioninner {
+    width:99%;
+    color:#656565;
+  }
+  div#emotions table td {
+    border: 1px solid #ccc;
+    border-right: 1px solid #525151;
+    color: #727070;
+    text-align: center;
   }

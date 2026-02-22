@@ -3,19 +3,24 @@ declare(strict_types=1);
 
 namespace ReCalendar;
 
+use DateTime;
+
 //ATK Modified a fair bit to add my own page in months - 29/05/2024 see comment re table "open atk table"
+require_once __DIR__ ."/../akfunctions.php";
 
 require_once __DIR__ . '/generator.php';
 require_once __DIR__ . '/calendar-generator.php';
 
 class DayEntryGenerator extends Generator {
 	private $day;
+	private $week_number;
 	private $calendar_generator;
 
 	public function __construct( \DateTimeImmutable $day, CalendarGenerator $calendar_generator, Config $config ) {
 		parent::__construct( $config );
 		$this->day = $day;
 		$this->calendar_generator = $calendar_generator;
+		$this->week_number = self::get_week_number( $day );
 	}
 
 	protected function generate_anchor_string() : ?string {
@@ -62,6 +67,74 @@ class DayEntryGenerator extends Generator {
 
 	} //get_random_quote
     
+
+	function onlyShowOnceAWeekWithDifferentDayToOtherOnceAWeek($dt) : bool {
+		//essentially the same as onlyShowOnceAWeek plus or minus a day or two or maybe a random number. Maybe mins 2 for now
+		
+			
+   		$todayIso = (int) $dt->format('N');
+		$chosenDay  = $this->GetInteger1to7BasedOnWeekNumber($dt);
+    	// Run only on the chosen day plus or minus something
+		$offset = -2;
+		$oneToSevenNumber = (($chosenDay - 1 + $offset) % 7 + 7) % 7 + 1;   // now always 1–7
+		//echo "base7number2 is "  . $oneToSevenNumber ." and chosenDay was ". $chosenDay . ". AND today number is " . $todayIso;
+		//AKDebug("base7number2 is "  . $oneToSevenNumber ." and chosenDay was ". $chosenDay . ". AND today number is " . $todayIso);
+    	return $todayIso === $oneToSevenNumber; // ak may not show every week, eg if day chosen day is 1, then 1-2 = -1 but should be 6
+
+	}
+
+
+	function GetInteger1to7BasedOnWeekNumber($dt) : int {
+
+		// Get ISO week year + week number (stable identifier for the week)
+		$weekKey = $dt->format('o-W');           // e.g. "2026-03" or "2025-52"
+		
+		// Create a deterministic "random" weekday 1–5 (Monday–Friday)
+		// You can also do 1–7 if you want weekends possible
+		$hash = hexdec(substr(md5('special-salt-' . $weekKey), 0, 8));
+		$chosenDay = ($hash % 5) + 1;            // → 1,2,3,4,5
+		return $chosenDay;
+	}
+	function onlyShowOnceAWeek(DateTime $dt): bool {
+    // Convert input date to DateTime
+  
+		$chosenDay  = $this->GetInteger1to7BasedOnWeekNumber($dt);
+	
+
+    	// What day is today? (1=Monday … 7=Sunday)
+   		 $todayIso = (int) $dt->format('N');
+
+    // Run only on the chosen day
+    return $todayIso === $chosenDay;
+} //only show once a week
+
+protected function GenerateMeGratitudeOncePerWeek($dateForToday) : string {
+	$strReturn = "";
+	if($this->onlyShowOnceAWeekWithDifferentDayToOtherOnceAWeek($dateForToday)){
+	    $strReturn = '<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>';
+
+	} else {
+		// return a blank line so not to mess up spacing etc 
+		$strReturn = '<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp;</td><td colspan="4"></td></tr>';
+
+	}
+	return $strReturn;
+} // en functdion meGratitudeonce a week
+protected function GenerateFutureImaginationQuestionOncePerWeek($dateForToday) : string {
+
+	
+	if ($this->onlyShowOnceAWeek($dateForToday)) {
+		$strQuestion = "<tr><td colspan='2' class='content-box-height'>What's one part of a nice future?</td><td colspan='3' style='border-bottom:1px solid #AAA'></td></tr>";
+		$strQuestion = $strQuestion. "<tr><td colspan='5' class='smallerTextLight'>eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>";
+	} else {
+// return a blank line so not to mess up spacing etc 
+		$strQuestion = "<tr><td colspan='5' class='content-box-height'>&nbsp;</td></tr>";
+		$strQuestion = $strQuestion. "<tr><td colspan='5' class='smallerTextLight'>&nbsp;</td><tr>";
+	}
+	return $strQuestion;
+
+} // hopefully this sort of prints out
+
 	protected function get_random_affirmation() : ?string {
 
 		$all_affirmations = $this->config->get( Config::AFFIRMATIONS );
@@ -84,17 +157,22 @@ class DayEntryGenerator extends Generator {
 	} // get random get_random_bible_verse
 
 	protected function getDailyQuestion($intDayNumOfMonth) : ?string {
-		$all_questions = ['How to be optimistic today?', 'What to be optimistic about today?', 'Can I do a 2 minute game today (sociability, rejection therapy)?'];
+		$all_questions = ["How to be optimistic today?", "What to be optimistic about today?", "Can I do a 2 minute game today (sociability, rejection therapy)?"];
 		$all_questions[] = 'If today was perfect, what would it look like?' ;
 		$all_questions[] = 'How do I want to feel at the end of this day?';
+		$all_questions[] = "What's one part of a nice future I'd like to have (imagination)?";
 		$all_questions[] = 'What one thing can I do today to move closer to my bigger goals?';
 		$all_questions[] = 'What tasks will bring me the most energy and joy?';
 		$all_questions[] = 'What boundaries do I need to set today to protect my energy and time?';
+		$all_questions[] = 'What things that fear me can I do today (being mindful of capactity)?';
 		$all_questions[] = 'How can I incorporate moments of rest or joy into my schedule today?';
 		$all_questions[] = 'What healthy habits (like movement, hydration, or nutrition) do I want to prioritize today?';
 		$all_questions[] = 'At the end of the day, what will make me feel proud of how I spent my time?';
 		$all_questions[] = 'How could I practice rejection therapy (take risks)today?';
-		$all_questions[] = 'How could combat fear today?';
+		$all_questions[] = 'How could I combat fear today?';	
+		$all_questions[] = "What's one part of a nice future I'd like to have (imagination)?"; // reusing this question to have it once a week
+		$all_questions[] = 'What things that fear me can I do today (being mindful of capactity)?';
+
 
 
 		//shall i get these based on day number so that they don't change - as I'll be answering them. Yes. 
@@ -107,7 +185,7 @@ class DayEntryGenerator extends Generator {
 
 		//self::AKDebug2TEMP("getting day question number " . $intNumberToChoose);
 		//self::AKDebug2TEMP("which is '" . $all_questions[$intNumberToChoose] .  "'");
-		return $all_questions[$intNumberToChoose];
+		return $all_questions[$intNumberToChoose-1];
 	}
 	
 
@@ -165,6 +243,9 @@ class DayEntryGenerator extends Generator {
 			$breaksAroundQuoteBefore = "";
 			$breaksAroundQuoteAfter = "";
 		}
+		//get date that is NOT immutable format
+		$dateNotImmutable = new DateTime();
+		$dateNotImmutable->setTimestamp(timestamp: $this->day->getTimestamp());
 ?>
 		<table width="95%" align="center">
 		<tr>
@@ -189,7 +270,8 @@ class DayEntryGenerator extends Generator {
 									}
 ?>
 								</td>
-								<td class="header-line day-entry__day-of-week"><?php echo date( 'l', $this->day->getTimestamp() ); ?></td>
+								<td class="header-line day-entry__day-of-week">
+								<?php echo date( 'l', $this->day->getTimestamp() ); ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -200,20 +282,23 @@ class DayEntryGenerator extends Generator {
 			<!-- ============================ open ATK table ============================ -->
 			 <!-- bible verse first --> 
 			  <tr ><td colspan="5" style="height:1px"></td></tr> <!-- 1mm for a break above -->
-			<tr ><td colspan="5" style="height:90px;"><i><?php echo $random_bible_verse?></i></b></td></tr>
+			<tr ><td colspan="5" style="height:90px;"><i>
+			<?php echo $random_bible_verse ;
+			?>
+			</i></b></td></tr>
 			<!-- setting the height the same for the bible verse means everything else lines up better if the verse is changed by recreating the pdf -->
 				<tr><td colspan="5"><br><b>What I'm grateful for:</b></td></tr>
 				<tr><td colspan="1"  width="25%" class="content-box-height">&nbsp;&nbsp;&nbsp; generally? </td><td colspan="4" width="75%" style="border-bottom:1px solid #AAA">&nbsp;
 				</td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; who? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; about myself?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
 				<tr><td colspan="1" class="content-box-height">&nbsp;&nbsp;&nbsp; yesterday? </td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<?php echo $this->GenerateMeGratitudeOncePerWeek($dateNotImmutable); ?>
 				<tr><td colspan="5" class="smallerTextLight">Negativity bias leads us to focus on negative experiences, which can skew our perception of reality & affect wellbeing. To counteract this, practice mindfulness, focus on positive experiences & consciously cultivate gratitude to shift attention. Regularly engaging in these steps can enhance positivity & improve overall mental health.</td></tr>
 				<tr><td colspan="2" class="content-box-height">What I learnt yesterday?</td><td colspan="3" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">Current Emotions?</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="1" class="content-box-height">Future vision</td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
-				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
-				<tr><td colspan="5" class="smallerTextLight">eg Nice house in lots of trees - Building my future, and my adhd non-verbal imagination one line at a time.</td></tr>
+				<tr><td colspan="1" class="content-box-height">Current Emotions? <a href="#linkToEmotions<?php echo $this->week_number ?>">link</a></td><td colspan="4" style="border-bottom:1px solid #AAA"></td></tr>
+				<?php 
+					echo $this->GenerateFutureImaginationQuestionOncePerWeek($dateNotImmutable); 
+				?>
 				<tr><td colspan="5" class="content-box-height"><?php echo $daily_question; ?> </td></tr>
 				<tr><td colspan="5" style="border-bottom:1px solid #AAA">&nbsp;</td></tr>
 				

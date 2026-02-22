@@ -80,7 +80,11 @@ class Config {
         $this->configuration[$key] = $value;  // ← Direct access — works perfectly
     }
 
-	//protected function get_configuration() : array {
+	protected function get_configuration() : array {
+		return $this->configuration;
+	}
+
+
 	public function __construct() {
 		$this->configuration = [
 			self::DEBUG => false,
@@ -186,7 +190,7 @@ class Config {
 			// see also monthly notes common. 13 rows - total of this and that list
 			self::MONTHLY_NOTES_2 => [ // bit like a todo list
 			
-				 1 => ['Focus on Business','Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
+				 1 => ['Focus on Business', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
 				 2 => [   'Self Compassion', '2x clients', 'Cholesterol'	], 
 				 3 => [ 'Be More social', '2x Climbing'] , 
 				 4 => [ 'Pacing ME 30%',  'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
@@ -239,6 +243,7 @@ class Config {
 			],
 
 			self::CURRENT_READING => [
+				2 => ['Current Reading', 'The Healing.. Vagus 30%', 'Non Violent (Negotiation)', 'Psychic Wholeness, Baars', ],
 				7 => ['Current Reading', '' ],
 				9 => ['Current Reading', ''],
 				10 => ['Current Reading',  "The Healing Power of Vagus, 0%",	],
@@ -325,9 +330,10 @@ class Config {
 			// Used for the title of the weekly retrospective pages
 			self::YEARLY_RETROSPECTIVE_BOOKMARK => 'Year Review',
 			self::WEEKLY_RETROSPECTIVE_TITLE => 'Weekly Review',
-					self::YEARLY_RETROSPECTIVE_TITLE => 'Yearly Review',
+					self::YEARLY_RETROSPECTIVE_TITLE => 'Focus Review',
 			// A list of items you'd like to be listed in the notes of the weekly overview
 			self::WEEKLY_TODOS => [
+				"Plan week on Sunday", 
 			],
 			// A list of special dates (anniversaries, birthdays, holidays) that will be highlighted throughout the calendar:
 			// in the small calendar, on weekly overviews and daily entries.
@@ -496,7 +502,8 @@ class Config {
 		// Example: 'stycznia' instead of 'Styczeń' for January in Polish.
 		$this->configuration[ self::MONTHS ] = $this->generate_month_names( $this->configuration[ self::LOCALE ] );
 
-		return $this->configuration;	}
+		//return $this->configuration;	
+		} // end constructor
 
 	private function generate_month_names( string $locale ) : array {
 		$old_locale = setlocale( LC_TIME, 0 );

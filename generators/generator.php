@@ -117,16 +117,16 @@ abstract class Generator {
 		<!-- first need to close a table opened in outer function -->
 
 		<tr><td style="padding-left:100px">'. str_replace("eisenhower", "", $item_name). '</td></table>
-        <table id="eisenhowermatrix">
+        <table id="eisenhowermatrix" align="center">
             <tr id="row1eisenhower">
-                <td class="eisenhowercol1"></td>
-                <td class="eisenhowercol2">URGENT</td>
+              
+                <td class="eisenhowercol2">CBT Reframe</td>
                 <td class="eisenhowercol3">NOT URGENT</td>
             </tr>
             <tr id="row2eisenhower">
-                    <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
+                    <!-- ak removed important TD Feb 2026 -->
                     <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc;"> <table class="eisenhowerlines">
-                    		<tr><td><span class="boxtext">DO NOW</span></td></tr>
+                    		<tr><td><span class="boxtext"></span></td></tr>
 						<tr><td>Circumstance/Area<span class="smallerTextLight"> eg decisions:</span></td></tr>
 						<tr><td></td></tr>					
 						<tr><td>Thought:<span class="smallerTextLight"> eg I\'m not good at them</span></td></tr>
@@ -146,7 +146,7 @@ abstract class Generator {
                         </table></td>
             </tr>
             <tr id="row3eisenhower">
-                    <td class="vertical">&nbsp;</td>
+              
                     <td colspan="2" style="width:100%"><span class="boxtext">Notes</SPAN>
                     <table class="eisenhowerlines">
             			' . str_repeat('<tr><td>&nbsp;</td></tr>', $repeat_bottom) . '

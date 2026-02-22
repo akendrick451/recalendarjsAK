@@ -127,7 +127,15 @@ abstract class Generator {
                     <td class="vertical">I<br>M<br>P<br>O<br>R<br>T<br>A<br>N<br>T</td>
                     <td style="border-right:2px solid #ccc;border-bottom:2px solid #ccc;"> <table class="eisenhowerlines">
                     		<tr><td><span class="boxtext">DO NOW</span></td></tr>
-						' . str_repeat('<tr><td></td></tr>', $repeat_top - $intNumberOfLinesForHoursTable) . '
+						<tr><td>Circumstance/Area<span class="smallerTextLight"> eg decisions:</span></td></tr>
+						<tr><td></td></tr>					
+						<tr><td>Thought:<span class="smallerTextLight"> eg I\'m not good at them</span></td></tr>
+						<tr><td></td></tr>					
+						<tr><td>Therefore Feel:<span class="smallerTextLight">> not so good</span></td></tr>
+					    <tr><td> New Thought: <span class="smallerTextLight">eg I do must bet at decisions</span></td></tr>
+						<tr><td></td></tr>					
+						<tr><td> New feeling:<span class="smallerTextLight">Better</span></td></tr>
+						<tr><td></td></tr>					
 						<tr><td align=center>
 							' . self::get_hour_table_html() . '
 						</td></tr>

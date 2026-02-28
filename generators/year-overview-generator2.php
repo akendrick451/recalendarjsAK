@@ -28,7 +28,7 @@ class YearOverviewGenerator extends Generator {
 		$strReturn =  '<table class="year-overview__calendars">';
 		$strReturn .= '<tr>';
 		$strReturn .=  '<td class="year-overview__calendar">' ;
-	    $strReturn .=  '   <table class="akyearlyplan" style-"border=1px solid #eee">';
+	    $strReturn .=  '   <table class="akyearlyplan" style="border=1px solid #eee">';
 		foreach ( $period as $index => $month ) {
 			$is_new_row = 0 === ( $index % 3 );
 			if ( $is_new_row ) {
@@ -39,7 +39,7 @@ class YearOverviewGenerator extends Generator {
 			}
 			$calendar_generator = new CalendarGenerator( $month, CalendarGenerator::HIGHLIGHT_NONE, $this->config, true );
 			
-			$strReturn .=  "<td styl='bs'>" . $calendar_generator->get_month_link() . '</td>';
+			$strReturn .=  "<td style='bs'>" . $calendar_generator->get_month_link() . '</td>';
 		}
 		$strReturn .=  '</tr></table>';
 		$strReturn .=  '</td></tr></table>';

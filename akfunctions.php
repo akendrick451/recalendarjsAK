@@ -11,12 +11,12 @@ $config = \ReCalendar\LocalConfig::getInstance();
 
 
 function AKDebug (string $strMessage) {
-
+    $blDebug = true;
 	if ( $blDebug) {
 		// echo may go to building the pdf, so write out echo and then something ob_start
 		$currentEchoBuffer = ob_get_clean();
 
-		echo "AKDebug " . $strMessage;
+		echo "AKDebug " . $strMessage  ."\n";
 		ob_start(); // restart buffering
 		echo $currentEchoBuffer; // put the previous data back in
 	}

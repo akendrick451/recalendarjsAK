@@ -281,30 +281,137 @@ public function openPdfAllSystems($filepath) {
 		$this->html .= "<bookmark content=\"$bookmark\" level=\"$level\" />";
 	}
 
-	private function write_html() : void {
-		if ( empty( $this->html ) ) {
-			return;
-		}
-		$dateNow   = new \DateTime(); //this returns the current date time
-		
-		if ( $this->blDebugPrintedHTMLOnce == false ) {
-			$this->all_html_ak  = $this->all_html_ak . " " . $this->html;
-			echo " debugPrint printhtmlonce.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
-			
-		}
-		$this->mpdf->WriteHTML( $this->html );
-		
-		//echo $this->html;
-		// only do this for a small size		
-		if ((strlen($this->all_html_ak) > 4137) && $this->blDebugPrintedHTMLOnce == false) {
-			// print it once and no more. 
-			$this->blDebugPrintedHTMLOnce = true;
-			echo " debugPrint2 HTML Is.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
-			file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
 
-		}
-
-		$this->html = '';
-	}
+	function detectMalformedAttributes($html) {
+    libxml_use_internal_errors(true);
+    
+$dom = new \DOMDocument();    // Wrap in fragment + utf-8
+    $dom->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    
+    $errors = libxml_get_errors();
+    libxml_clear_errors();
+    
+    $issues = [];
+    foreach ($errors as $error) {
+        $msg = trim($error->message);
+        if (stripos($msg, 'attribute') !== false || 
+            stripos($msg, 'quote') !== false || 
+            stripos($msg, 'unclosed') !== false ||
+            stripos($msg, 'value') !== false) {
+            $issues[] = $msg . ' at line ' . $error->line;
+        }
+    }
+    
+    if ($issues) {
+        return [
+            'valid' => false,
+            'errors' => $issues,
+            'message' => 'Malformed attributes detected (likely unclosed quotes)'
+        ];
+    }
+    
+    return ['valid' => true];
 }
 
+	private function write_html() : void {
+		try {
+			if ( empty( $this->html ) ) {
+				return;
+			}
+			$dateNow   = new \DateTime(); //this returns the current date time
+			//echo "Write html debug 1";
+			if ( $this->blDebugPrintedHTMLOnce == false ) {
+				$this->all_html_ak  = $this->all_html_ak . " " . $this->html;
+				//echo " debugPrint1 printhtmlonce.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "]";
+				file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html",  $this->html);
+				echo "have just written html file for debug";
+			}
+	//		echo "Then write html debug 2";
+
+			$tidy = new \tidy;
+			$cleanHtml = $tidy->repairString($this->html , [
+				'output-xhtml'   => true,
+				'wrap'           => 0,
+				'clean'                     => true,
+				'show-body-only' => true,
+			], 'utf8');
+
+			echo "finished tidy html";
+			if ($tidy->errorBuffer) {
+    error_log("Tidy warnings: " . $tidy->errorBuffer);
+	echo "Tidy warnings: " . $tidy->errorBuffer;
+    // Or echo for debug: echo "<pre>" . htmlspecialchars($tidy->errorBuffer) . "</pre>";
+}
+
+
+// Usage in your generate.php
+			echo "Check malformed html";
+
+$check = $this->detectMalformedAttributes($this->html );
+if (!$check['valid']) {
+    error_log("Malformed HTML detected: " . print_r($check['errors'], true));
+	$lines = explode("\n", $this->html);
+$problem_lines = [7, 868];  // adjust if line numbers shift with added <?xml...>
+foreach ($problem_lines as $num) {
+    $index = $num - 1;  // 0-based
+    if (isset($lines[$index])) {
+        echo "Line $num: " . htmlspecialchars($lines[$index]) . "\n";
+    }
+}
+    // Optionally throw exception or fix automatically
+    die("Bad HTML - unclosed attribute likely present");
+}
+			echo "Check malformed html finished";
+
+
+
+// Quick scan for suspicious class attributes
+preg_match_all('/class\s*=\s*([\'"])(.*?)(?<!\\\\)\1?/is', $this->html, $matches, PREG_SET_ORDER);
+
+$problems = [];
+foreach ($matches as $m) {
+    $quoteType = $m[1];
+    $value     = $m[2];
+    $count     = substr_count($value, $quoteType);
+    if ($count % 2 !== 0) {
+        $problems[] = "Unbalanced $quoteType quote in class value: '$value'";
+    }
+}
+
+if ($problems) {
+	echo "Unclosed quotes in class attributes:\n" . implode("\n", $problems);
+    error_log("Unclosed quotes in class attributes:\n" . implode("\n", $problems));
+    die("Found potential unclosed class quotes - check logs");
+} else {
+    echo "No obvious unbalanced quotes in class attributes.\n";
+}
+
+
+$dom = new \DOMDocument();
+@$dom->loadHTML('<?xml encoding="UTF-8">' . $this->html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOWARNING | LIBXML_NOERROR);
+$clean_html = $dom->saveHTML();
+
+// Compare lengths or diff for changes
+if (strlen($clean_html) !== strlen($this->html)) {
+    error_log("DOM normalized HTML - length changed from " . strlen($this->html) . " to " . strlen($clean_html));
+}
+			$this->mpdf->WriteHTML( $cleanHtml);
+			//echo "Write html debug 3";
+			//echo $this->html;
+			// only do this for a small size		
+			if ((strlen($this->all_html_ak) > 4137) && $this->blDebugPrintedHTMLOnce == false) {
+				// print it once and no more. 
+				$this->blDebugPrintedHTMLOnce = true;
+				//echo " debugPrint2 HTML Is.... this->blDebugPrintedHTMLOnce is [" . $this->blDebugPrintedHTMLOnce . "] SHOULD BE TRUE NOW";
+				echo "... run file put contents out htmll debug";
+				file_put_contents("output//recalendarForPDF" . $dateNow->format('Y-m-d-H-i-s') . ".html", $this->all_html_ak);
+
+			}
+
+			$this->html = '';
+		} 		catch ( \Exception $e ) {
+			echo "Write html error";
+			echo  $e->getMessage() ;
+		}
+	} //end function
+} // end class

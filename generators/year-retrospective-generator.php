@@ -41,7 +41,7 @@ class YearRetrospectiveGenerator extends Generator {
 		$calendar_html = $this->calendar_generator->generate();
 		$week_start = date( 'd F', $this->week->modify( 'monday this week' )->getTimestamp() );
 		$week_end = date( 'd F', $this->week->modify( 'sunday this week' )->getTimestamp() );
-		$year_overview_anchor = self::get_year_overview_anchor( $this->week );
+		$year_overview_anchor = self::get_year_overview_anchor( );
 		$previous_week_retrospective_anchor = self::get_year_retrospective_anchor( $this->week->modify( 'previous week' ) );
 		$next_week_retrospective_anchor = self::get_year_retrospective_anchor( $this->week->modify( 'next week' ) );
 ?>
@@ -85,7 +85,8 @@ class YearRetrospectiveGenerator extends Generator {
 					$yearly_activites_table = $yearly_activites_table . "</tr><tr>";
 				}
 				
-				$yearly_activites_table = $yearly_activites_table . "<td>";
+				//$yearly_activites_table = $yearly_activites_table . "<td class='smallerText>"; // LINE THAT CRASH|ES SYSTEM JAN 2026 due to unclosed class
+				$yearly_activites_table = $yearly_activites_table . "<td class='smallerText>";
 
 				$yearly_activites_table = $yearly_activites_table . "<b>". $this->convert_month_number_to_name($month) . "</b><br>";
 
@@ -93,14 +94,18 @@ class YearRetrospectiveGenerator extends Generator {
 						$yearly_activites_table = $yearly_activites_table . $each_activity . "<br>";
 
 					}
+				$yearly_activites_table .= "<br>&bsp;<br>"; // break before books
+				if (array_key_exists($month, $reading_list_by_month))	{
 				$this_month_reading = $reading_list_by_month[$month];
-				foreach ($this_month_reading as $book ) {
-					// do not show first entry as this is current reading....
+				if (!($this_month_reading === NULL)) {
+					foreach ($this_month_reading as $book ) {
+						// do not show first entry as this is current reading....
 
-						$yearly_activites_table = $yearly_activites_table . $book . "<br>";
+							$yearly_activites_table = $yearly_activites_table . $book . "<br>";
 
+					}
 				}
-
+				} // if array key exists
 				$yearly_activites_table = $yearly_activites_table . "</td>";
 
 				$month_notes_all_months_without_month_number = array_unique(array_merge($month_notes_all_months_without_month_number, $notes_and_activities));

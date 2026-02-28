@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
 error_reporting(E_ERROR); 
+//error_reporting(E_ALL);
 
 
 // AK VERSION INFO
@@ -157,6 +157,8 @@ try {
 	// creates a calendar and saves it in ReCalendar.pdf
 	$mpdf = new \Mpdf\Mpdf( [
 	    'tempDir' => __DIR__ . '/my-mpdf-temp',
+		'debug'              => true,     // shows more info
+    
 		'fontDir' => array_merge( $fontDirs, [
 			__DIR__ . $config->get( \ReCalendar\Config::FONT_DIR ),
 		] ),

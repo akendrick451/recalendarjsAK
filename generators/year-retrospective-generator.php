@@ -86,7 +86,7 @@ class YearRetrospectiveGenerator extends Generator {
 				}
 				
 				//$yearly_activites_table = $yearly_activites_table . "<td class='smallerText>"; // LINE THAT CRASH|ES SYSTEM JAN 2026 due to unclosed class
-				$yearly_activites_table = $yearly_activites_table . "<td class='smallerText>";
+				$yearly_activites_table = $yearly_activites_table . "<td class='smallerText'>";
 
 				$yearly_activites_table = $yearly_activites_table . "<b>". $this->convert_month_number_to_name($month) . "</b><br>";
 

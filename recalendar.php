@@ -6,7 +6,6 @@ declare(strict_types=1);
 // 2. Can I set my own sections on the day print?
 // 3. How do I run this?
 
-
 namespace ReCalendar;
 
 use setasign\Fpdi\PdfParser\Type\PdfBoolean;
@@ -65,6 +64,9 @@ class ReCalendar {
 		$period = new \DatePeriod( $start, $interval, $end );
 
 		foreach( $period as $week ) {
+
+			$week_number = $this->get_week_number( $week );
+			echo  PHP_EOL. "================== PRINT WEEK NUMBER " . $week_number . "=================================" . PHP_EOL ; 
 			$this->generate_week( $week, $end ); // has generate day, which also has generate month revdiew and year review
 			// if week -  26 0 do summary/year review - generate_year_retrospective
 			$this->write_html(); // is this a debug line?
@@ -175,11 +177,20 @@ public function openPdfAllSystems($filepath) {
 		$this->append_html( $title_page_generator->generate() );
 	}
 
+	private function debugPrintWeek($week) :void  {
+
+		$week_number = $this->get_week_number( $week );
+		echo  PHP_EOL. "================== PRINT WEEK NUMBER " . $week_number . "=================================" . PHP_EOL ; 
+
+	}
+
 	private function generate_week( \DateTimeImmutable $week, \DateTimeImmutable $year_end ) : void {
+		
+	    
 		$this->generate_week_overview( $week );
-
+		
 		$this->generate_days_per_week( $week, $year_end );
-
+		
 		$this->generate_week_retrospective( $week );
 	}
 
@@ -208,7 +219,7 @@ public function openPdfAllSystems($filepath) {
 	private function generate_month_overview( \DateTimeImmutable $month ) : void {
 		$localized_month_name = $this->config->get( Config::MONTHS )[ (int) $month->format( 'n' ) ];
 
-		$this->generate_year_retrospective( $month );
+		// THIS EEMED TO BE BUGGY ATK 3/8/2026 $this->generate_year_retrospective( $month );
 
 		$this->add_page();
 		$this->bookmark( $localized_month_name, 1 );
@@ -223,8 +234,11 @@ public function openPdfAllSystems($filepath) {
 	
 
 	private function generate_week_overview( \DateTimeImmutable $week ) : void {
+
+
 		$this->add_page();
 		$week_number = $this->get_week_number( $week );
+		echo  PHP_EOL. "================== debug week over view " . $week_number . "=================================" . PHP_EOL ; 
 		$this->bookmark( $this->config->get( Config::WEEK_NAME ) . ' ' . $week_number, 0 );
 
 		$calendar_generator = new CalendarGenerator( $week, CalendarGenerator::HIGHLIGHT_WEEK, $this->config );
@@ -238,9 +252,9 @@ public function openPdfAllSystems($filepath) {
 		foreach( $week_period as $week_day ) {
 			if ( (int) $week_day->format( 'j' ) === 1 && $week_day < $year_end ) {
 
-				$this->generate_year_overview(false); // ak add year overview each month to get a good idea of BIG THINGS IN YEAR! - copy and paste data in boox manually each monhth
+				 $this->generate_year_overview(false); // ak add year overview each month to get a good idea of BIG THINGS IN YEAR! - copy and paste data in boox manually each monhth
 				// therefore need link to FIRST year overview
-				$this->generate_month_overview( $week_day ); // includes year retrospective for focus review
+				// $this->generate_month_overview( $week_day ); // includes year retrospective for focus review
 				
 			}
 

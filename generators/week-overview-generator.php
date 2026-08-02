@@ -32,6 +32,7 @@ class WeekOverviewGenerator extends Generator {
 
 		$previous_week_anchor = self::get_week_overview_anchor( $this->week->modify( 'previous week' ) );
 		$next_week_anchor = self::get_week_overview_anchor( $this->week->modify( 'next week' ) );
+		AKDebug(  PHP_EOL. "================== debug week start is " . $week_start . "=================================" . PHP_EOL ); 
 ?>
 		<table width="100%">
 			<tr>

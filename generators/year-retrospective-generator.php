@@ -23,7 +23,6 @@ class YearRetrospectiveGenerator extends Generator {
 	}
 
 
-
 	 function convert_month_number_to_name ($monthNumber) : string {
 
 		// Create a timestamp for the first day of the specified month

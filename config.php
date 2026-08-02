@@ -197,9 +197,9 @@ class Config {
 				 4 => [ 'Pacing ME 30%',  'Couns Business 10%', 'Get Healthy 15%' , 'House Deposit 15%' ], 
 				 5 =>[ 'Jog' ], 
 				 6 =>[ '' ], 
-				 7 =>[ '1. Career Transition.', 2. Stabilise', '3. Self compassion', 'New job','4. Health - Walk 10k', '5. To be where I am', '&nbsp;<br>'], 
-				 8 => [ '1. Career Transition.', 2. Stabilise', '3. Self compassion'],  
-				 9 => [  '1. Make more $.', 2. Meet women', '3. Self compassion', 'Big shoulders' ], 
+				 7 =>[ '1. Career Transition.', '2. Stabilise', '3. Self compassion', 'New job','4. Health - Walk 10k', '5. To be where I am', '&nbsp;<br>'], 
+				 8 => [ '1. Career Transition.', '2. Stabilise', '3. Self compassion', 'Rock climb ind or outd'],  
+				 9 => [  '1. Make more $.', '2. Meet women', '3. Self compassion', 'Big shoulders' ], 
 				 10 =>[ '' ],
 				 11 => [ 'Plan something different for new years or stay home.'] ,  
 				 12 => [ 'Stay in Energy Env.'] , 
@@ -207,7 +207,7 @@ class Config {
 			],
 			self::MONTHLY_NOTES_COMMON => [ //is this included in all notes, or only if specified month is blank- included in ALL MONTHS
 				'<b>Long Term</b>', 'Get Healthy 50%', 
-				'<b>Exciting</b>', '..Build info screen wall'
+				'<b>Exciting</b>', '..Build info screen wall', 'Ask others for help', 'Organise events', 
 			],
 			self::WEEKLY_REPEATS => [
 				/* 1 => ['Focus on Business','Reverse sensor', 'Book Holidays x2!','Book Music and Theatre', 'Sell personal diary service $10',  ] , 
